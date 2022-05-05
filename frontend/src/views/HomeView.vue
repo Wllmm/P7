@@ -121,6 +121,7 @@ a{
   font-weight: bold;
   color: #152545;
   background: #d0575f;
+  cursor: pointer;
 }
 .home__form__input {
   display: flex;
@@ -200,17 +201,6 @@ export default {
         let emailCheck = false;
         let passwordCheck = false;
 
-        // Bouton submit désactiver 
-        function disabledBtn (){
-          let btn = document.getElementById("Check");
-          btn.disabled = true;
-        }
-        // Bouton submit activer
-        function enableBtn (){
-          let btn = document.getElementById("Check");
-          btn.disabled = false;
-        }
-
         username.onkeyup = () =>{
           usernameCheck = regTxt.test(username.value);
 
@@ -244,8 +234,6 @@ export default {
             .innerHTML = ` Email : <i class="fas fa-ban"></i>`;
           }
         }
-
-       
 
         Check.onclick = (event) => {
           event.preventDefault()
