@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Log from '@/components/Button.vue'
+import Log from '@/components/Connexion.vue'
 
 let Token = localStorage.getItem('Token')
 
@@ -111,7 +111,7 @@ export default {
             }
         }
         testAllCheck();
-        setTimeout("location.reload(true);",200)
+        setTimeout("location.reload(true);",400)
 
         }
       },

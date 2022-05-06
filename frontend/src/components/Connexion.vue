@@ -31,6 +31,7 @@
             </form>
         </div>
         <button id="Check"> Inscription </button>
+        <div id="error"></div>
       </section>
 
 </template>
@@ -185,6 +186,7 @@ a{
   height: 90%;
 
 }
+
 /*# sourceMappingURL=style.css.map */
 
 </style>

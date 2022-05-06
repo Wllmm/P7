@@ -31,6 +31,8 @@ sequelize.initDb()
 
 require('./src/routes/createUser')(app)
 require('./src/routes/LoginUsers')(app)
+require('./src/routes/FindUserByPk')(app)
+
 
 
 app.listen(port, () => console.log(`Notre application Node est démarée sur http://localhost:${port}`))

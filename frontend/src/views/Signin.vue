@@ -4,8 +4,15 @@
 
 </template>
 
+<style>
+#error h2{
+  text-decoration: none;
+  color: red;
+}
+</style>
+
 <script>
-import Log from '@/components/Button.vue'
+import Log from '@/components/Connexion.vue'
 
 let Token = localStorage.getItem('Token')
 
@@ -88,9 +95,7 @@ export default {
             if(!usernameCheck ||
               ! passwordCheck ||
               ! emailCheck){
-              alert('Au moins un champ est incorrect')
             } else {
-              alert('Tout est bon')
               let user = { username: username.value, password: password.value, email: email.value}
               console.log(user)
               
@@ -105,17 +110,17 @@ export default {
               .then((res) => {
                 console.log(res)
               })
+              .catch((res) => 
+                document.getElementById('error').innerHTML =`<h2> L'adresse mail est déjà utilisée</h2>`
+              )
             }
-        }
+          }
         
           testAllCheck();
+          setTimeout("location.reload(true);",400)
 
         }
    
-      },
-      logout(){
-        localStorage.clear()
-        location.reload()
       },
     },
 

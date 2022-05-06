@@ -1,1 +1,14 @@
-Besoin de trouver comment éxecuter le script au chargement de la page et pas seulement au click
+Backend : 
+- Connexion / Déconnexion / Inscription -- OK
+
+Attention au TOKEN FAUX qui peuvent accéder a l'accueil
+
+(Peut-être faire une route de vérification de mail en 
+base de donnée avant d'ajouter / 
+Crash de l'api si l'addresse mail n'est pas unique)
+
+Bug un même token peut charger tout les utilisateurs
+
+
+Frontend : 
+- Previsu Connexion / Inscription -- OK
