@@ -1,12 +1,7 @@
 Backend : 
 - Connexion / Déconnexion / Inscription -- OK
 
-Attention au TOKEN FAUX qui peuvent accéder a l'accueil
-Je ferais un message après verif Auth pour le get Post avec une demande de connexion
-
-
-Bug un même token peut charger tout les utilisateurs
-
+Afficher une erreur plus propre sur l'acceuil si token mauvais ou inexistant (avec v-if)
 
 Frontend : 
 - Previsu Connexion / Inscription -- OK

@@ -105,6 +105,7 @@ export default {
                   if (res.token !== undefined){
                   let Connexion = res.token;
                   localStorage.setItem("Token", JSON.stringify(Connexion))
+                  localStorage.setItem("ID", res.data.id)
 
                   }
               })

@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const UserModel = require('../models/user')
+const PostModel = require('../models/post')
+
 const bcrypt = require ('bcrypt')
   
 const sequelize = new Sequelize('groupomania', 'root', '', {
@@ -12,13 +14,14 @@ const sequelize = new Sequelize('groupomania', 'root', '', {
 })
   
 const User = UserModel(sequelize, DataTypes)
+const Post = PostModel(sequelize, DataTypes)
 
 const initDb = () => {
-  return sequelize.sync({force: true}).then(_ => {
+  return sequelize.sync({force: false}).then(_ => {
     console.log('La base de donnée a bien été initialisée !')
   })
 }
   
 module.exports = { 
-  initDb, User
+  initDb, User, Post
 }

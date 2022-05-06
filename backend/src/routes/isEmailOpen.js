@@ -2,7 +2,7 @@ const { User } = require('../db/sequelize')
 
   
 module.exports = (app) => {
-  app.get('/api/:email', (req, res) => {
+  app.get('/api/mail/:email', (req, res) => {
     User.findOne({ where: { email: req.params.email } })
       .then(user => {
         const message = 'Used'

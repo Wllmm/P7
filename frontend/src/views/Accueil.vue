@@ -1,5 +1,5 @@
 <template>
-    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Lato:wght@300&display=swap" rel="stylesheet">    <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Lato:wght@300&display=swap" rel="stylesheet"> 
 
     <section class="accueil">
         <nav>
@@ -57,7 +57,7 @@
 
         <div class="accueil__profil"> 
             <img src="../img/portrait-0360w.jpg" alt="">
-            <p> Username </p>
+            <p id="username"> Username </p>
         </div>
     </section>
     
@@ -212,6 +212,22 @@ if (!Token) {
 setTimeout(function(){location.href="/"} , 0);
 }
 
+// Récupération des données de l'utilisateur 
+let id = localStorage.getItem('ID')
+fetch(`http://localhost:3000/api/user/${id}`, {
+   headers: {
+      Authorization : `Bearer ${JSON.parse(Token)}` 
+    },
+})
+.then((res) => res.json())
+.then((res) => {
+  console.log(res.data)
+  let username = document.getElementById('username')
+  username.innerText = res.data.username
+  
+})
+
+
 export default {
     mounted(){
         this.onLoad();
@@ -230,6 +246,18 @@ export default {
     methods: {
         onLoad(){
           let token = localStorage.getItem('Token');
+          // On récupère tout les posts au passage si le token est mauvais on indique une erreur et demande une reconnexion
+          fetch("http://localhost:3000/api/post", {
+            headers: {
+                Authorization : `Bearer ${JSON.parse(Token)}` 
+            },
+          })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res)
+            // Affichage d'une plus belle erreur
+            if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
+          })
 
         },
         disconnect(){

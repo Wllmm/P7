@@ -28,11 +28,15 @@ app.use((req, res, next) => {
 sequelize.initDb()
 
 // Ici, nous placerons les futurs points de terminaison.
-
+// Connexion
 require('./src/routes/createUser')(app)
 require('./src/routes/LoginUsers')(app)
 require('./src/routes/FindUserByPk')(app)
 require('./src/routes/isEmailOpen')(app)
+// Posts
+require('./src/routes/createPost')(app)
+require('./src/routes/getAllPost')(app)
+
 
 
 

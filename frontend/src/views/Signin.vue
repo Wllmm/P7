@@ -94,7 +94,7 @@ export default {
           console.log(email.value)
 
           // On regarde si le mail n'est pas déjà utilisé pour pas faire planter le backend
-          fetch(`http://localhost:3000/api/${email.value}`,{
+          fetch(`http://localhost:3000/api/mail/${email.value}`,{
             headers: {
                 "Content-type": "application/json",
             },
