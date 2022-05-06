@@ -2,10 +2,8 @@ Backend :
 - Connexion / Déconnexion / Inscription -- OK
 
 Attention au TOKEN FAUX qui peuvent accéder a l'accueil
+Je ferais un message après verif Auth pour le get Post avec une demande de connexion
 
-(Peut-être faire une route de vérification de mail en 
-base de donnée avant d'ajouter / 
-Crash de l'api si l'addresse mail n'est pas unique)
 
 Bug un même token peut charger tout les utilisateurs
 

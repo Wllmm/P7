@@ -32,6 +32,8 @@ sequelize.initDb()
 require('./src/routes/createUser')(app)
 require('./src/routes/LoginUsers')(app)
 require('./src/routes/FindUserByPk')(app)
+require('./src/routes/isEmailOpen')(app)
+
 
 
 

@@ -91,6 +91,27 @@ export default {
         Check.onclick = (event) => {
           event.preventDefault()
 
+          console.log(email.value)
+
+          // On regarde si le mail n'est pas déjà utilisé pour pas faire planter le backend
+          fetch(`http://localhost:3000/api/${email.value}`,{
+            headers: {
+                "Content-type": "application/json",
+            },
+          })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res.error)
+            if (res.error == "Open") {
+              console.log("Le mail est open")
+
+              testAllCheck();
+              setTimeout("location.reload(true);",400)
+
+            } else { console.log('Le mail est déjà utilisé') }
+          })
+
+          // On vérifie si tout les champs sont corrects, si oui on Post le nouvel User
           function testAllCheck(){
             if(!usernameCheck ||
               ! passwordCheck ||
@@ -110,14 +131,11 @@ export default {
               .then((res) => {
                 console.log(res)
               })
-              .catch((res) => 
-                document.getElementById('error').innerHTML =`<h2> L'adresse mail est déjà utilisée</h2>`
-              )
             }
           }
-        
-          testAllCheck();
-          setTimeout("location.reload(true);",400)
+
+
+
 
         }
    

@@ -205,6 +205,7 @@
 
 <script>
 
+// Besoin de faire un truc si TOKEN est mauvais (ne pourras pas Get les posts et affichage d'un bouton pour aller a la page de connexion)
 // Si pas de Token renvoi vers la page de connexion
 let Token = localStorage.getItem('Token')
 if (!Token) {
