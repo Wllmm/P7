@@ -18,5 +18,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.CHAR,
         allowNull: false
       },
+      like: {
+        type: DataTypes.INTEGER,
+      },
+      dislike: {
+        type: DataTypes.INTEGER,
+      },
+      comments: {
+        type: DataTypes.CHAR,
+      },
     })
   }

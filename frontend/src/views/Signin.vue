@@ -108,7 +108,7 @@ export default {
               testAllCheck();
               setTimeout("location.reload(true);",400)
 
-            } else { console.log('Le mail est déjà utilisé') }
+            } else { console.log('Le mail est déjà utilisé'), alert("Le mail est déjà utilisé") }
           })
 
           // On vérifie si tout les champs sont corrects, si oui on Post le nouvel User

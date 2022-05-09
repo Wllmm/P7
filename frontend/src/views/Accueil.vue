@@ -1,5 +1,9 @@
 <template>
     <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Lato:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <div id='hide'></div>
+
 
     <section class="accueil">
         <nav>
@@ -23,38 +27,36 @@
                 </form>
             </div>
 
-            <div class="accueil__post__show">
+            <div id="showPost"></div>
+                                
+
+              <!-- <div class="accueil__post__show">
                 <div class="accueil__post__show__element"> 
                     <img src="../img/portrait-0360w.jpg" alt="">
                     <div class="accueil__post__show__element__content">
                         <div class="accueil__post__show__element__content__text">
                             <h1>Ceci est un post</h1>
-                            <p>Ou l'on raconte ce que l'on veut</p>
+                            <p>Lorem ipsum dolor sit amet. Et itaque commodi aut quisquam omnis et amet accusamus et dolorem eius? Quo nulla unde ex ipsa omnis sit quas exercitationem hic aliquam tenetur. Ut inventore incidunt qui necessitatibus animi aut repudiandae aliquid et voluptatem voluptatem qui perferendis reiciendis. Et magnam error ut dolorem excepturi qui iusto maxime qui dolorem consequatur vel ipsa velit est architecto inventore. Ea error sint sit quos quidem aut internos suscipit sit quisquam soluta. Et aliquid quae ea deleniti quae ut doloremque magnam qui sequi nihil ut nisi ratione sed galisum itaque qui sequi numquam!</p>
+                            <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
                         </div>
                         <div class="accueil__post__show__element__content__comment">
-                            <p>Ici on verra les commentaires</p>
+                            <h3>Commentaires </h3>
+                            <div class="accueil__post__show__element__content__comment__nb">
+                                <p> Nom d'utilisateur </p>
+                                <p>Bonjour c'est pas top ton post</p>
+                                <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                            </div>
+                            <div class="accueil__post__show__element__content__comment__nb">
+                                <p> Nom d'utilisateur </p>
+                                <p>Moi j'aime bcp</p>
+                                <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="accueil__post__show">
-                <div class="accueil__post__show__element"> 
-                    <img src="../img/portrait-0360w.jpg" alt="">
-                    <div class="accueil__post__show__element__content">
-                        <div class="accueil__post__show__element__content__text">
-                            <h1>Ceci est un post</h1>
-                            <p>Ou l'on raconte ce que l'on veut</p>
-                        </div>
-                        <div class="accueil__post__show__element__content__comment">
-                            <p>Ici on verra les commentaires</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              </div> -->
 
         </div>
-
         <div class="accueil__profil"> 
             <img src="../img/portrait-0360w.jpg" alt="">
             <p id="username"> Username </p>
@@ -65,10 +67,24 @@
 </template>
 
 <style>
+body { 
+  margin: 0;
+}
 * {
   font-family: "Lato", sans-serif;
 }
-
+#hide {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 120rem;
+  background-color: #152545;
+  opacity: 70%;
+  display: none;
+}
+button { 
+    all: unset;
+}
 .accueil {
   background-color: #e0e2e5;
   display: flex;
@@ -106,6 +122,7 @@
 .accueil__post {
   margin: 2rem 0 2rem 0;
   width: 50%;
+  cursor: pointer;
 }
 .accueil__post__add {
   display: flex;
@@ -165,8 +182,37 @@
 .accueil__post__show__element__content__text {
   padding-left: 1rem;
 }
+.accueil__post__show__element__content__text i {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+.accueil__post__show__element__content__text i {
+ cursor: pointer;
+}
 .accueil__post__show__element__content__comment {
-  padding-left: 1rem;
+  padding: 0 1rem 0 1rem;
+  margin: 1.5rem 1rem 1rem 0;
+  padding-bottom: 1rem;
+  background-color: #d0575f;
+}
+.accueil__post__show__element__content__comment h3 {
+  text-decoration: overline;
+}
+.accueil__post__show__element__content__comment__nb {
+  border: 1px solid white;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+.accueil__post__show__element__content__comment__nb p {
+  margin-top: 0;
+}
+.accueil__post__show__element__content__comment__nb i {
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+.accueil__post__show__element__content__comment__nb i:hover {
+ cursor: pointer;
 }
 .accueil__profil:hover {
   font-weight: bold;
@@ -197,6 +243,9 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+/*# sourceMappingURL=style.css.map */
+
 
 /*# sourceMappingURL=style.css.map */
 
@@ -257,7 +306,68 @@ export default {
             console.log(res)
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
+            else {
+              let focus = document.getElementById("showPost")
+
+              for (let data of res.data){
+                focus.innerHTML += 
+                  `<div class="accueil__post__show">
+                    <div class="accueil__post__show__element"> 
+                        <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                        <div class="accueil__post__show__element__content">
+                            <div class="accueil__post__show__element__content__text">
+                                <h1>${data.title}</h1>
+                                <p>${data.content}</p>
+                                <span> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button </span>
+                            </div>
+                            <div class="accueil__post__show__element__content__comment">
+                                <h3>Commentaires </h3>
+                                <div class="accueil__post__show__element__content__comment__nb">
+                                    <p> Nom d'utilisateur </p>
+                                    <p>Bonjour c'est pas top ton post</p>
+                                    <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                </div>
+                                <div class="accueil__post__show__element__content__comment__nb">
+                                    <p> Nom d'utilisateur </p>
+                                    <p>Moi j'aime bcp</p>
+                                    <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>`;
+              }
+
+              // On regarde si l'utilisateur a like ou dislike un post 
+              // On affiche le bon resultat et on autorise la modification
+              
+              for (let i in res.data){
+                let likePost = document.getElementsByClassName('like')
+                let dislikePost = document.getElementsByClassName('dislike')
+
+                    likePost[i].onclick = () => {
+                      console.log(res.data[i])
+                    } 
+
+                    dislikePost[i].onclick = () => {
+                      console.log(res.data[i])
+                    } 
+              }
+   
+
+              let createPost = document.getElementsByClassName('accueil__post__add')
+              let hide = document.getElementById('hide')
+              let createPosts = document.getElementsByClassName('createPost')
+              createPost[0].onclick = () => {
+                hide.style.display ="initial";
+                createPosts.style.visibility ="visible";
+              }
+            }
+// Fin else
+
           })
+
+
 
         },
         disconnect(){
