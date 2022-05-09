@@ -18,6 +18,8 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 
 Reste a faire : 
 
+Faire suppression de post(presque fini maanque juste la route sur le bouton)
+
 Suppression de post (utilisateur et modérateur)
 Ajout de commentaire, plus Suppression (idem)
 Ajout de like/dislike (post/commentaire)

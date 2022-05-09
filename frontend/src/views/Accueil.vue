@@ -393,33 +393,68 @@ export default {
               let focus = document.getElementById("showPost")
 
               for (let data of res.data){
-                focus.innerHTML += 
-                  `<div class="accueil__post__show">
-                    <div class="accueil__post__show__element"> 
-                        <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
-                        <div class="accueil__post__show__element__content">
-                            <div class="accueil__post__show__element__content__text">
-                                <h1>${data.title}</h1>
-                                <p>${data.content}</p>
-                                <span> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button </span>
-                            </div>
-                            <div class="accueil__post__show__element__content__comment">
-                                <h3>Commentaires </h3>
-                                <div class="accueil__post__show__element__content__comment__nb">
-                                    <p> Nom d'utilisateur </p>
-                                    <p>Bonjour c'est pas top ton post</p>
-                                    <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                // Affichage des post (avec ou sans trash si c'est le bon utilisateur)
+                  let userId = localStorage.getItem('ID');
+                  if (data.userId == userId){
+                    console.log("C'est le post de cet utilisateur")
+                    focus.innerHTML += 
+                      `<div class="accueil__post__show">
+                        <div class="accueil__post__show__element"> 
+                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                            <div class="accueil__post__show__element__content">
+                                <div class="accueil__post__show__element__content__text">
+                                    <h1>${data.title}</h1>
+                                    <p>${data.content}</p>
+                                    <span class="options"> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button> <i class="fas fa-trash"></i> </span>
                                 </div>
-                                <div class="accueil__post__show__element__content__comment__nb">
-                                    <p> Nom d'utilisateur </p>
-                                    <p>Moi j'aime bcp</p>
-                                    <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                <div class="accueil__post__show__element__content__comment">
+                                    <h3>Commentaires </h3>
+                                    <div class="accueil__post__show__element__content__comment__nb">
+                                        <p> Nom d'utilisateur </p>
+                                        <p>Bonjour c'est pas top ton post</p>
+                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                    </div>
+                                    <div class="accueil__post__show__element__content__comment__nb">
+                                        <p> Nom d'utilisateur </p>
+                                        <p>Moi j'aime bcp</p>
+                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                  </div>`;
+                      </div>`;
+                  } else { 
+                    focus.innerHTML += 
+                      `<div class="accueil__post__show">
+                        <div class="accueil__post__show__element"> 
+                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                            <div class="accueil__post__show__element__content">
+                                <div class="accueil__post__show__element__content__text">
+                                    <h1>${data.title}</h1>
+                                    <p>${data.content}</p>
+                                    <span class="options"> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button> </span>
+                                </div>
+                                <div class="accueil__post__show__element__content__comment">
+                                    <h3>Commentaires </h3>
+                                    <div class="accueil__post__show__element__content__comment__nb">
+                                        <p> Nom d'utilisateur </p>
+                                        <p>Bonjour c'est pas top ton post</p>
+                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                    </div>
+                                    <div class="accueil__post__show__element__content__comment__nb">
+                                        <p> Nom d'utilisateur </p>
+                                        <p>Moi j'aime bcp</p>
+                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>`;
+                  }
               }
+
+
+
 
               // On regarde si l'utilisateur a like ou dislike un post 
               // On affiche le bon resultat et on autorise la modification
@@ -481,6 +516,9 @@ export default {
         setTimeout("location.reload(true);",400)
 
 
+        },
+        delete(){
+          console.log('Je veux supprimer mon post')
         },
         disconnect(){
             localStorage.clear('Token');
