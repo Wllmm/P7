@@ -3,7 +3,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <div id='hide'></div>
+    <div class="createPost">
+        <div class="createPost__head">
+            <img src="../img/portrait-0360w.jpg" alt="">
 
+            <div class="createPost__head__title">
+                <label for="addTitle"> Titre : </label>
+                <input type="text" id="newPostTitle">
+                
+            </div>
+            <i class="fas fa-times"></i>
+
+        </div>
+
+        <div class="createPost__content">
+            <label for="addContent"> Votre texte ici :</label>
+            <textarea rows="10" cols="90" id="newPostContent"></textarea>
+        </div>
+
+        <div class="createPost__files">
+           <a href="#" id="poster" @click="post">Poster !</a>
+        </div>
+      </div>
 
     <section class="accueil">
         <nav>
@@ -28,34 +49,8 @@
             </div>
 
             <div id="showPost"></div>
-                                
 
-              <!-- <div class="accueil__post__show">
-                <div class="accueil__post__show__element"> 
-                    <img src="../img/portrait-0360w.jpg" alt="">
-                    <div class="accueil__post__show__element__content">
-                        <div class="accueil__post__show__element__content__text">
-                            <h1>Ceci est un post</h1>
-                            <p>Lorem ipsum dolor sit amet. Et itaque commodi aut quisquam omnis et amet accusamus et dolorem eius? Quo nulla unde ex ipsa omnis sit quas exercitationem hic aliquam tenetur. Ut inventore incidunt qui necessitatibus animi aut repudiandae aliquid et voluptatem voluptatem qui perferendis reiciendis. Et magnam error ut dolorem excepturi qui iusto maxime qui dolorem consequatur vel ipsa velit est architecto inventore. Ea error sint sit quos quidem aut internos suscipit sit quisquam soluta. Et aliquid quae ea deleniti quae ut doloremque magnam qui sequi nihil ut nisi ratione sed galisum itaque qui sequi numquam!</p>
-                            <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                        </div>
-                        <div class="accueil__post__show__element__content__comment">
-                            <h3>Commentaires </h3>
-                            <div class="accueil__post__show__element__content__comment__nb">
-                                <p> Nom d'utilisateur </p>
-                                <p>Bonjour c'est pas top ton post</p>
-                                <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                            </div>
-                            <div class="accueil__post__show__element__content__comment__nb">
-                                <p> Nom d'utilisateur </p>
-                                <p>Moi j'aime bcp</p>
-                                <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div> -->
-
+            
         </div>
         <div class="accueil__profil"> 
             <img src="../img/portrait-0360w.jpg" alt="">
@@ -67,6 +62,92 @@
 </template>
 
 <style>
+
+.createPost {
+  background-color: #d0575f;
+  border-radius: 0.5rem;
+  visibility: hidden;
+  position: absolute;
+  flex-direction: column;
+  width: 40%;
+  margin: 10rem 30% 0 30%;
+  padding: 1rem;
+}
+.createPost__head {
+  display: flex;
+}
+.createPost__head img {
+  width: 80px;
+  border-radius: 50%;
+}
+.createPost__head i {
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  background-color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: 5%;
+}
+.createPost__head__title {
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.createPost__head__title input {
+  width: 90%;
+  min-width: 10rem;
+  margin-left: 2rem;
+  border-radius: 0.2rem;
+  background-color: #e0e2e5;
+  border: none;
+  height: 1.5rem;
+}
+.createPost__content {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+.createPost__content label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.createPost__content textarea {
+  margin-left: 2rem;
+  width: 35rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  background-color: #e0e2e5;
+  border: none;
+}
+.createPost__files {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.createPost__files a {
+  text-decoration: none;
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  font-weight: bold;
+  background-color: #e0e2e5;
+}
+.createPost__files a:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=style.css.map */
+
 body { 
   margin: 0;
 }
@@ -277,6 +358,8 @@ fetch(`http://localhost:3000/api/user/${id}`, {
 })
 
 
+
+
 export default {
     mounted(){
         this.onLoad();
@@ -354,19 +437,48 @@ export default {
                     } 
               }
    
-
+              // Affichage de la partie CREATE POST 
               let createPost = document.getElementsByClassName('accueil__post__add')
               let hide = document.getElementById('hide')
               let createPosts = document.getElementsByClassName('createPost')
               createPost[0].onclick = () => {
                 hide.style.display ="initial";
-                createPosts.style.visibility ="visible";
+                createPosts[0].style.visibility ="visible";
+              }
+
+              // Hide de la partie CREATE POST
+              let leave = document.getElementsByClassName('fa-times')
+              leave[0].onclick = () => {
+                hide.style.display ="none";
+                createPosts[0].style.visibility ="hidden";
+
               }
             }
 // Fin else
 
           })
 
+
+
+        },
+        post(){
+          let userId = localStorage.getItem('ID')
+          let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
+
+          fetch("http://localhost:3000/api/posts", {
+            method: 'POST',
+            body : JSON.stringify(newPost),
+            headers: {
+                "Content-type": "application/json",
+                Authorization : `Bearer ${JSON.parse(Token)}`
+            },
+          })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res)
+          })
+
+        setTimeout("location.reload(true);",400)
 
 
         },
