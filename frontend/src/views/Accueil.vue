@@ -50,7 +50,7 @@
 
             <div id="showPost"></div>
 
-            
+
         </div>
         <div class="accueil__profil"> 
             <img src="../img/portrait-0360w.jpg" alt="">
@@ -464,7 +464,7 @@ export default {
         post(){
           let userId = localStorage.getItem('ID')
           let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
-
+          let Token = localStorage.getItem('Token')
           fetch("http://localhost:3000/api/posts", {
             method: 'POST',
             body : JSON.stringify(newPost),
