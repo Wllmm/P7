@@ -62,6 +62,32 @@
 </template>
 
 <style>
+.new__comment{
+  border:1px solid white ;
+  margin: 1rem 0 1rem 0;
+  padding: 0 1rem 0 1rem;
+}
+.new__comment h4 {
+  margin: 1rem 0 0.5rem 0;
+}
+.accueil__post__show__element__content__comment__add textarea{
+ resize: none;
+ margin-top: 1rem;
+ outline: none;
+ border: none;
+ border-radius: 0.2rem;
+}
+.fa-trash:hover{
+  color: red;
+}
+.fa-thumbs-up:hover{
+  color: greenyellow;
+  font-weight: bold;
+}
+.fa-thumbs-down:hover{
+  color: red;
+  font-weight: bold;
+}
 
 .createPost {
   background-color: #d0575f;
@@ -122,6 +148,9 @@
   margin-left: 2rem;
   width: 35rem;
   height: 10rem;
+  outline: none;
+  resize: none;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: #e0e2e5;
   border: none;
@@ -281,9 +310,9 @@ button {
   text-decoration: overline;
 }
 .accueil__post__show__element__content__comment__nb {
-  border: 1px solid white;
+  
   margin-top: 1rem;
-  padding: 1rem;
+  
 }
 .accueil__post__show__element__content__comment__nb p {
   margin-top: 0;
@@ -332,7 +361,6 @@ button {
 
 </style>
 
-
 <script>
 
 // Besoin de faire un truc si TOKEN est mauvais (ne pourras pas Get les posts et affichage d'un bouton pour aller a la page de connexion)
@@ -351,10 +379,9 @@ fetch(`http://localhost:3000/api/user/${id}`, {
 })
 .then((res) => res.json())
 .then((res) => {
-  console.log(res.data)
+  // console.log(res.data)
   let username = document.getElementById('username')
   username.innerText = res.data.username
-  
 })
 
 
@@ -373,7 +400,6 @@ export default {
     computed:{
     },
     components: {
- 
     },
     methods: {
         onLoad(){
@@ -386,7 +412,7 @@ export default {
           })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res)
+            // console.log(res)
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
             else {
@@ -395,6 +421,7 @@ export default {
               for (let data of res.data){
                 // Affichage des post 
                   let userId = localStorage.getItem('ID');
+                  let id = data.id
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -407,22 +434,52 @@ export default {
                                 </div>
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
-                                    <div class="accueil__post__show__element__content__comment__nb">
-                                        <p> Nom d'utilisateur </p>
-                                        <p>Bonjour c'est pas top ton post</p>
-                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
+                                    <div class="accueil__post__show__element__content__comment__add">
+                                    <label>Écrire un commentaire :</label>
+                                    <textarea rows="3" cols="90" id="newCommentContent"></textarea>
+
                                     </div>
-                                    <div class="accueil__post__show__element__content__comment__nb">
-                                        <p> Nom d'utilisateur </p>
-                                        <p>Moi j'aime bcp</p>
-                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                                    </div>
+                                      <div class="accueil__post__show__element__content__comment__nb"></div>
+                                       
                                 </div>
                             </div>
                         </div>
                       </div>`;
+
               }
 
+              // Affichage des commentaires avec le nom des utilisateurs
+              let index = 0;
+              let commentAdd = document.getElementsByClassName("accueil__post__show__element__content__comment__nb")
+
+              for (let i = 0; res.data.length>i; i++){
+                index += 1 
+
+                // On récupère le nom des utilisateurs
+                fetch(`http://localhost:3000/api/comment/post/${index}`, {
+                    headers: {
+                      Authorization : `Bearer ${JSON.parse(Token)}` 
+                  },
+                })
+                .then((res) => res.json())
+                .then((res) => {
+                  for (let data of res.data){
+                    fetch(`http://localhost:3000/api/user/${data.userId}`, {
+                      headers: {
+                          Authorization : `Bearer ${JSON.parse(Token)}` 
+                        },
+                      })
+                      .then((res) => res.json())
+                      .then((res) => {
+                         commentAdd[i].innerHTML += 
+                          `<div class='new__comment'>
+                          <h4> ${res.data.username} </h4>
+                          <p>${data.content}</p>
+                          </div>`
+                      })
+                  }  
+                })
+              }
 
               // On regarde si l'utilisateur a like ou dislike un post 
               // On affiche le bon resultat et on autorise la modification

@@ -1,10 +1,10 @@
 Backend : 
-- Connexion / Déconnexion / Inscription/ Création,Suppression de POSTS -- OK
+- Connexion / Déconnexion / Inscription/ Création,Suppression(utilisateur manque modérateur) de POSTS -- OK
 
 Afficher une erreur plus propre sur l'acceuil si token mauvais ou inexistant (avec v-if)
 
 Frontend : 
-- Previsu Connexion / Inscription -- OK
+- Previsu Connexion / Inscription/ Création de posts -- OK
 
 
 Voir comment mettre un objet de tout les utilisateurs qui ont like/dislikes, puis regarder s'ils 
@@ -18,11 +18,14 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 
 Reste a faire : 
 
+Facile : ____________
+- Faire bouton déconnexion plus beau 
+- Peut-être faire la même chose que le delete pour le modify 
+- Espace modification du profil (et suppression)
+- Ajout de photos aussi
 
-Suppression de post (utilisateur et modérateur)
-Ajout de commentaire, plus Suppression (idem)
-Ajout de like/dislike (post/commentaire)
-Espace modification du profil (et suppression)
-Peut-être modification de posts 
-
-
+Moyen : ____________
+- Faire profil modérateur
+- Suppression de post (modérateur)
+- Ajout de commentaire, plus Suppression (idem)
+- Ajout de like/dislike (post)

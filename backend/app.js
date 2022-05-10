@@ -37,6 +37,10 @@ require('./src/routes/isEmailOpen')(app)
 require('./src/routes/createPost')(app)
 require('./src/routes/getAllPost')(app)
 require('./src/routes/deletePost')(app)
+require('./src/routes/createComment')(app)
+require('./src/routes/getForPostComment')(app)
+
+
 
 
 
