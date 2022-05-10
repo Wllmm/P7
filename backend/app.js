@@ -36,6 +36,8 @@ require('./src/routes/isEmailOpen')(app)
 // Posts
 require('./src/routes/createPost')(app)
 require('./src/routes/getAllPost')(app)
+require('./src/routes/deletePost')(app)
+
 
 
 

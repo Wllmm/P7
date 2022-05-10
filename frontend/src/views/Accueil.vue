@@ -393,10 +393,8 @@ export default {
               let focus = document.getElementById("showPost")
 
               for (let data of res.data){
-                // Affichage des post (avec ou sans trash si c'est le bon utilisateur)
+                // Affichage des post 
                   let userId = localStorage.getItem('ID');
-                  if (data.userId == userId){
-                    console.log("C'est le post de cet utilisateur")
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -405,7 +403,7 @@ export default {
                                 <div class="accueil__post__show__element__content__text">
                                     <h1>${data.title}</h1>
                                     <p>${data.content}</p>
-                                    <span class="options"> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button> <i class="fas fa-trash"></i> </span>
+                                    <span class="options"> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button> <button class="delete"><i class="fas fa-trash"></i></button> </span>
                                 </div>
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
@@ -423,45 +421,17 @@ export default {
                             </div>
                         </div>
                       </div>`;
-                  } else { 
-                    focus.innerHTML += 
-                      `<div class="accueil__post__show">
-                        <div class="accueil__post__show__element"> 
-                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
-                            <div class="accueil__post__show__element__content">
-                                <div class="accueil__post__show__element__content__text">
-                                    <h1>${data.title}</h1>
-                                    <p>${data.content}</p>
-                                    <span class="options"> <button class='like'><i class="far fa-thumbs-up"></i></button>  <button class='dislike'><i class="far fa-thumbs-down"></i></button> </span>
-                                </div>
-                                <div class="accueil__post__show__element__content__comment">
-                                    <h3>Commentaires </h3>
-                                    <div class="accueil__post__show__element__content__comment__nb">
-                                        <p> Nom d'utilisateur </p>
-                                        <p>Bonjour c'est pas top ton post</p>
-                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                                    </div>
-                                    <div class="accueil__post__show__element__content__comment__nb">
-                                        <p> Nom d'utilisateur </p>
-                                        <p>Moi j'aime bcp</p>
-                                        <span><i class="far fa-thumbs-up"></i> <i class="far fa-thumbs-down"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                      </div>`;
-                  }
               }
-
-
 
 
               // On regarde si l'utilisateur a like ou dislike un post 
               // On affiche le bon resultat et on autorise la modification
               
               for (let i in res.data){
+                let userId = localStorage.getItem('ID')
                 let likePost = document.getElementsByClassName('like')
                 let dislikePost = document.getElementsByClassName('dislike')
+                let deletePost = document.getElementsByClassName('delete')
 
                     likePost[i].onclick = () => {
                       console.log(res.data[i])
@@ -470,6 +440,27 @@ export default {
                     dislikePost[i].onclick = () => {
                       console.log(res.data[i])
                     } 
+
+                    // Si c'est le post de l'utilisateur on autorise la suppression 
+                    if (res.data[i].userId == userId){
+                      deletePost[i].onclick = () => {
+                      console.log(res.data[i])
+                        fetch(`http://localhost:3000/api/posts/${res.data[i].id}`, {
+                          method: "DELETE",
+                          headers: {
+                              Authorization : `Bearer ${JSON.parse(Token)}` 
+                          },
+                        })
+                        .then((res) => res.json())
+                        .then((res) => {
+                          console.log(res)
+                          setTimeout("location.reload(true);",400)
+                        })
+
+                      }
+                    }
+                    // Si ce n'est pas son post on n'affiche plus la suppression
+                    else { deletePost[i].style.display = "none" }
               }
    
               // Affichage de la partie CREATE POST 
@@ -516,9 +507,6 @@ export default {
         setTimeout("location.reload(true);",400)
 
 
-        },
-        delete(){
-          console.log('Je veux supprimer mon post')
         },
         disconnect(){
             localStorage.clear('Token');

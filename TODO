@@ -1,5 +1,5 @@
 Backend : 
-- Connexion / Déconnexion / Inscription/ Création de POSTS -- OK
+- Connexion / Déconnexion / Inscription/ Création,Suppression de POSTS -- OK
 
 Afficher une erreur plus propre sur l'acceuil si token mauvais ou inexistant (avec v-if)
 
@@ -18,7 +18,6 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 
 Reste a faire : 
 
-Faire suppression de post(presque fini maanque juste la route sur le bouton)
 
 Suppression de post (utilisateur et modérateur)
 Ajout de commentaire, plus Suppression (idem)
