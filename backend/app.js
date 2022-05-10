@@ -41,10 +41,4 @@ require('./src/routes/createComment')(app)
 require('./src/routes/getForPostComment')(app)
 
 
-
-
-
-
-
-
 app.listen(port, () => console.log(`Notre application Node est démarée sur http://localhost:${port}`))

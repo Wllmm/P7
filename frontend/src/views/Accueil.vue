@@ -422,6 +422,7 @@ export default {
                 // Affichage des post 
                   let userId = localStorage.getItem('ID');
                   let id = data.id
+                  // console.log(id)
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -439,7 +440,7 @@ export default {
                                     <textarea rows="3" cols="90" id="newCommentContent"></textarea>
 
                                     </div>
-                                      <div class="accueil__post__show__element__content__comment__nb"></div>
+                                      <div class="accueil__post__show__element__content__comment__nb" id="${id}"></div>
                                        
                                 </div>
                             </div>
@@ -449,37 +450,37 @@ export default {
               }
 
               // Affichage des commentaires avec le nom des utilisateurs
-              let index = 0;
-              let commentAdd = document.getElementsByClassName("accueil__post__show__element__content__comment__nb")
-
-              for (let i = 0; res.data.length>i; i++){
-                index += 1 
-
-                // On récupère le nom des utilisateurs
-                fetch(`http://localhost:3000/api/comment/post/${index}`, {
-                    headers: {
-                      Authorization : `Bearer ${JSON.parse(Token)}` 
+              // console.log(res.data)
+                fetch(`http://localhost:3000/api/comment`, {
+                  headers: {
+                    Authorization : `Bearer ${JSON.parse(Token)}` 
                   },
                 })
-                .then((res) => res.json())
-                .then((res) => {
+                .then((comments) => comments.json())
+                .then((comments) => {
+
                   for (let data of res.data){
-                    fetch(`http://localhost:3000/api/user/${data.userId}`, {
-                      headers: {
-                          Authorization : `Bearer ${JSON.parse(Token)}` 
-                        },
-                      })
-                      .then((res) => res.json())
-                      .then((res) => {
-                         commentAdd[i].innerHTML += 
+                    let commentAdd = document.getElementById(`${data.id}`)
+                    
+                    for (let comment of comments.data){
+                      if (comment.postId === data.id){
+                        fetch(`http://localhost:3000/api/user/${data.userId}`, {
+                            headers: {
+                              Authorization : `Bearer ${JSON.parse(Token)}` 
+                            },
+                        })
+                        .then((res)=>res.json())
+                        .then((res) => {
+                          commentAdd.innerHTML += 
                           `<div class='new__comment'>
-                          <h4> ${res.data.username} </h4>
-                          <p>${data.content}</p>
-                          </div>`
-                      })
-                  }  
+                              <h4> ${res.data.username} </h4>
+                              <p>${comment.content}</p>
+                            </div>`
+                        })
+                      }
+                    }
+                  }
                 })
-              }
 
               // On regarde si l'utilisateur a like ou dislike un post 
               // On affiche le bon resultat et on autorise la modification
