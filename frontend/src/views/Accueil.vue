@@ -412,7 +412,6 @@ export default {
           })
           .then((res) => res.json())
           .then((res) => {
-            // console.log(res)
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
             else {
@@ -420,9 +419,10 @@ export default {
 
               for (let data of res.data){
                 // Affichage des post 
+                // 
+
                   let userId = localStorage.getItem('ID');
                   let id = data.id
-                  // console.log(id)
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -436,9 +436,9 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                    <label>Écrire un commentaire :</label>
-                                    <textarea rows="3" cols="90" id="newCommentContent"></textarea>
-
+                                      <label>Écrire un commentaire :</label>
+                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                      <i class="fas fa-caret-square-right" id="${id}"></i>
                                     </div>
                                       <div class="accueil__post__show__element__content__comment__nb" id="${id}"></div>
                                        
@@ -447,10 +447,12 @@ export default {
                         </div>
                       </div>`;
 
-              }
+              } 
+              // FIN AFFICHAGE DES POSTS
+              // 
 
-              // Affichage des commentaires avec le nom des utilisateurs
-              // console.log(res.data)
+          // Affichage des commentaires avec le nom des utilisateurs
+          // 
                 fetch(`http://localhost:3000/api/comment`, {
                   headers: {
                     Authorization : `Bearer ${JSON.parse(Token)}` 
@@ -481,10 +483,64 @@ export default {
                     }
                   }
                 })
+            // FIN AFFICHAGE COMMENTAIRES 
+            // 
+          
+
+            let test = document.getElementsByClassName("newCommentContent")
+            let btn = document.getElementsByClassName("fas fa-caret-square-right")
+
+            for (let i=0; btn.length >i ;i++){
+              btn[i].onclick = () => {
+                let dataComment = { content : test[i].value }
+                // console.log(dataComment)
+
+                let id = localStorage.getItem('ID')
+                fetch(`http://localhost:3000/api/user/${id}`, {
+                  headers: {
+                      Authorization : `Bearer ${JSON.parse(Token)}` 
+                    },
+                })
+                .then((res) => res.json())
+                .then((res) => {
+                  dataComment = { userId:`${res.data.id}` , content : test[i].value } 
+                  // Une fois l'utilisateur trouvé on envoi le commentaire
+                   fetch(`http://localhost:3000/api/post/${btn[i].id}/comment`, {
+                  method: 'POST',
+                  body: JSON.stringify(dataComment),
+                  headers: {
+                      "Content-type": "application/json",
+                      Authorization : `Bearer ${JSON.parse(token)}` 
+
+                  },
+                })
+                setTimeout("location.reload(true);",200)
+                })
+              }
+            }
+
+
+
+            // btn[0].onclick = () => {
+            //   let dataComment = { userId:"1" , content : test[0].value }
+            //   console.log(dataComment)
+            //   fetch(`http://localhost:3000/api/post/5/comment`, {
+            //     method: 'POST',
+            //     body: JSON.stringify(dataComment),
+            //     headers: {
+            //         "Content-type": "application/json",
+            //         Authorization : `Bearer ${JSON.parse(token)}` 
+
+            //     },
+            //   })
+            //   setTimeout("location.reload(true);",200)
+            // }
+
+            // LIKE
+            // 
 
               // On regarde si l'utilisateur a like ou dislike un post 
               // On affiche le bon resultat et on autorise la modification
-              
               for (let i in res.data){
                 let userId = localStorage.getItem('ID')
                 let likePost = document.getElementsByClassName('like')
@@ -520,8 +576,12 @@ export default {
                     // Si ce n'est pas son post on n'affiche plus la suppression
                     else { deletePost[i].style.display = "none" }
               }
-   
-              // Affichage de la partie CREATE POST 
+            // FIN LIKE 
+            // 
+
+
+          // Affichage de la partie CREATE POST 
+          // 
               let createPost = document.getElementsByClassName('accueil__post__add')
               let hide = document.getElementById('hide')
               let createPosts = document.getElementsByClassName('createPost')
@@ -537,13 +597,11 @@ export default {
                 createPosts[0].style.visibility ="hidden";
 
               }
+
+          // FIN AFFICHAGE CREATE POST
             }
 // Fin else
-
           })
-
-
-
         },
         post(){
           let userId = localStorage.getItem('ID')
@@ -564,6 +622,9 @@ export default {
 
         setTimeout("location.reload(true);",400)
 
+
+        },
+        comment(){
 
         },
         disconnect(){

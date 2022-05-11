@@ -15,8 +15,13 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 
 
 
+Problème : 
+
+- 
 
 Reste a faire : 
+
+- AFFICHER MESSAGE D'ERREUR SI LE GET USER EST MAUVAIS
 
 Facile : ____________
 - Faire bouton déconnexion plus beau 
