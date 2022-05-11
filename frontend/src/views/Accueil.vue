@@ -465,11 +465,12 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                    <label>Écrire un commentaire :</label>
-                                    <textarea rows="3" cols="90" id="newCommentContent"></textarea>
+                                      <label>Écrire un commentaire :</label>
+                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                      <i class="fas fa-caret-square-right" id="${id}"></i>
                                     </div>
                                       <div class="accueil__post__show__element__content__comment__nb" id="${id}"></div>
-                                       
+                                
                                 </div>
                             </div>
                         </div>
