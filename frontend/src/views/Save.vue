@@ -438,19 +438,19 @@ export default {
                         <div class="accueil__post__show__element"> 
                             <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
                             <div class="accueil__post__show__element__content">
-                                <div class="accueil__post__show__element__content__text">
+                                <div class="accueil__post__show__element__content__text" id="${id}">
+                                            
                                     <h1 class="actual__title">${data.title}</h1>
                                     <div class="modify__title">
                                       <label for="addTitle"> Modifier le titre : </label>
                                       <input type="text" class="modifyTitle" value="${data.title}">
                                     </div>
-
+                                    
                                     <p class="actual__content">${data.content}</p>
                                     <div class="modify__content">
                                       <label for="modifyContent"> Modifier votre post :</label>
                                       <textarea rows="10" cols="90" class="modifyContent" >${data.content}</textarea>
                                     </div>
-
                                     <span class="options"> 
                                       <button class='like'> <i class="far fa-thumbs-up"></i> </button> 
                                       <button class='dislike'> <i class="far fa-thumbs-down"></i> </button> 
@@ -460,13 +460,15 @@ export default {
                                       
                                       <button class='cancelModif'> <i class="fas fa-times"></i> </button>
                                       <button class='acceptModif'> <i class="fas fa-check"></i> </button>
+
                                     </span>
                                 </div>
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                    <label>Écrire un commentaire :</label>
-                                    <textarea rows="3" cols="90" id="newCommentContent"></textarea>
+                                      <label>Écrire un commentaire :</label>
+                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                      <i class="fas fa-caret-square-right" id="${id}"></i>
                                     </div>
                                       <div class="accueil__post__show__element__content__comment__nb" id="${id}"></div>
                                        
@@ -560,6 +562,9 @@ export default {
           // LIKE
             // 
             // 
+
+              // On regarde si l'utilisateur a like ou dislike un post 
+              // On affiche le bon resultat et on autorise la modification
               let userId = localStorage.getItem('ID')
               let likePost = document.getElementsByClassName('like')
               let dislikePost = document.getElementsByClassName('dislike')
@@ -572,7 +577,11 @@ export default {
               let actualContent = document.getElementsByClassName('actual__content')
               let actualTitle = document.getElementsByClassName('actual__title')
 
-             for (let i in res.data){
+          
+              // console.log(deletePost[0])
+
+
+              for (let i in res.data){
 
                 cancelModif[i].style.visibility = "hidden"
                 acceptModif[i].style.visibility = "hidden"
@@ -582,6 +591,7 @@ export default {
                     likePost[i].onclick = () => {
                       console.log(res.data[i])
                     } 
+
                     dislikePost[i].onclick = () => {
                       console.log(res.data[i])
                     } 
@@ -589,7 +599,7 @@ export default {
                   // Affichage ou non de la modification
                     // 
                     modifyPost[i].onclick = ()=> {
-                      // console.log(modifContent[i])
+                      console.log(modifContent[i])
 
                       if(cancelModif[i].style.visibility == "visible"){
                         cancelModif[i].style.visibility = "hidden"
@@ -647,7 +657,6 @@ export default {
                     }
                     // 
                   // 
-
 
 
                 // Si c'est le post de l'utilisateur on autorise la suppression et la modification

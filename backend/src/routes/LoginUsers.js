@@ -6,14 +6,18 @@ const privateKey = require('../auth/private_key')
 module.exports = (app) => {
   app.post('/api/login', (req, res) => {
   
-    User.findOne({ where: { username: req.body.username } })
+    User.findOne({ where: {  email: req.body.email} })
     .then(user => { 
         
         if(!user) {
             const message = `L'utilisateur demandé n'existe pas.`
             return res.status(404).json({ message })
         }
-
+        console.log(user)
+        if(user.username != req.body.username){
+            const message = `Le nom d'utilisateur est incorrect.`
+            return res.status(404).json({ message })
+        }
         bcrypt.compare(req.body.password, user.password)
         .then(isPasswordValid => {
 

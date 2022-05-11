@@ -118,7 +118,6 @@ export default {
               ! emailCheck){
             } else {
               let user = { username: username.value, password: password.value, email: email.value}
-              console.log(user)
               
               fetch("http://localhost:3000/api/users", {
                   method: 'POST',

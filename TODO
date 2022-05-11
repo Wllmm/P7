@@ -1,5 +1,5 @@
 Backend : 
-- Connexion / Déconnexion / Inscription/ Création,Suppression(utilisateur manque modérateur) de POSTS -- OK
+- Connexion / Déconnexion / Inscription/ Création, Suppression (utilisateur manque modérateur) de POSTS -- OK
 
 Afficher une erreur plus propre sur l'acceuil si token mauvais ou inexistant (avec v-if)
 
@@ -17,11 +17,13 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 
 Problème : 
 
-- 
+- Commentaire ne s'affiche pas dans l'ordre de création
 
 Reste a faire : 
 
 - AFFICHER MESSAGE D'ERREUR SI LE GET USER EST MAUVAIS
+- Affichage d'une erreur si le nom d'utilisateur est mauvais
+- Ajouter système de vérification du user pour le modify et peut-être le delete du coup
 
 Facile : ____________
 - Faire bouton déconnexion plus beau 

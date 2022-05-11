@@ -39,6 +39,10 @@ require('./src/routes/getAllPost')(app)
 require('./src/routes/deletePost')(app)
 require('./src/routes/createComment')(app)
 require('./src/routes/getForPostComment')(app)
+require('./src/routes/modifyPost')(app)
+require('./src/routes/FindAllUsername')(app)
+
+
 
 
 app.listen(port, () => console.log(`Notre application Node est démarée sur http://localhost:${port}`))
