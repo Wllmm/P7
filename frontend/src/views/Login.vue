@@ -9,6 +9,8 @@ import Log from '@/components/Connexion.vue'
 
 let Token = localStorage.getItem('Token')
 
+
+// Besoin de vérifier si le token est valide
 if (Token) {
   window.location.href = "/accueil"
 
@@ -32,8 +34,27 @@ export default {
     },
     methods: {
       onLoadLogin(){
+        let test = document.getElementsByClassName('home__form')
+        test[0].innerHTML = 
+          `<form action="">
+            <div class="home__form__input">
+                <label for="email" id="errorEmail">Email :</label>
+                <input type="email" name="emaillog" id="emaillog">
+            </div>
+
+            <div class="home__form__input">
+                <label for="password" id="errorPassword">Mot de passe :</label>
+                <input type="password" name="passwordlog" id="passwordlog">
+            </div>
+
+            <div class="home__form__input">
+                <label for="username" id="errorUsername">Choisissez un nom d'utilisateur :</label>
+                <input type="text" name="usernamelog" id="usernamelog">
+            </div>
+        </form>`
+
         document.getElementById('Check').innerText = "Connexion"
-        document.getElementById('errorUsername').innerText = "Nom d'utilisateur"
+        document.getElementById('errorUsername').innerText = "Nom d'utilisateur :"
 
         let regTxt = /^[A-Za-z]+$/;
         let regPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,40}/
@@ -43,19 +64,19 @@ export default {
         let emailCheck = false;
         let passwordCheck = false;
 
-        username.onkeyup = () =>{
-          usernameCheck = regTxt.test(username.value);
+        usernamelog.onkeyup = () =>{
+          usernameCheck = regTxt.test(usernamelog.value);
 
           if (usernameCheck === true){
             document.getElementById("errorUsername")
-            .innerHTML = `Choissisez un nom d'utilisateur : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = `Nom d'utilisateur : <i class="fas fa-lock-open"></i>`;
           }else{
             document.getElementById("errorUsername")
             .innerHTML = ` Nom d'utilisateur : <i class="fas fa-ban"></i>`;
           }
         }
-        password.onkeyup = () =>{
-          passwordCheck = regPassword.test(password.value);
+        passwordlog.onkeyup = () =>{
+          passwordCheck = regPassword.test(passwordlog.value);
 
           if (passwordCheck === true){
             document.getElementById("errorPassword")
@@ -65,8 +86,8 @@ export default {
             .innerHTML = ` Mot de passe : <i class="fas fa-ban"></i>`;
           }
         }
-        email.onkeyup = () =>{
-          emailCheck = regEmail.test(email.value);
+        emaillog.onkeyup = () =>{
+          emailCheck = regEmail.test(emaillog.value);
 
           if (emailCheck === true){
             document.getElementById("errorEmail")
@@ -76,6 +97,7 @@ export default {
             .innerHTML = ` Email : <i class="fas fa-ban"></i>`;
           }
         }
+
         Check.onclick = (event) => {
           event.preventDefault()
 
@@ -85,7 +107,7 @@ export default {
               ! emailCheck){
             } else {
 
-              let user = { username: username.value, password: password.value, email: email.value}
+              let user = { username: usernamelog.value, password: passwordlog.value, email: emaillog.value}
               console.log(user)
 
               fetch("http://localhost:3000/api/login", {
@@ -112,9 +134,12 @@ export default {
             }
         }
         testAllCheck();
-        setTimeout("location.reload(true);",400)
+        setTimeout("location.reload(true);",300)
 
         }
+      },
+      check(){
+        console.log('ok')
       },
     },
 

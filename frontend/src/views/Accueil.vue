@@ -3,6 +3,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <div id='hide'></div>
+
+     <section class="profil">
+        <div class="profil__image">
+            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+            <input type="file" name="image_input" id="image_input">
+            <i class="fas fa-home" @click="returnHome"></i>
+        </div>
+
+        <div class="profil__infoUser">
+            <div class="username">
+                <h2 id="profilUsername"> Nom d'utilisateur </h2>
+                <label for=""> Changer le nom d'utilisateur : </label>
+                <input type="text" id="newUsername">
+                <i class="fas fa-magic" id="usernameValid"></i>
+            </div>
+            <div class="email">
+                <h2 id="profilEmail"> Nom d'utilisateur </h2>
+                <label for=""> Changer l'addresse email : </label>
+                <input type="text" id="newEmail">
+                <i class="fas fa-magic" id="emailValid"></i>
+
+            </div>
+            <div class="password">
+                <h2 id="profilPassword"> Modifier le mot de passe </h2>
+                <label for=""> Changer le mot de passe : </label>
+                <input type="text" id="newPassword">
+                <i class="fas fa-magic" id="passwordValid"></i>
+            </div>
+            <button id="deleteAccount" @click="deleteAccount"> Supprimer le compte (définitif) </button>
+        </div>
+    </section>
+
     <div class="createPost">
         <div class="createPost__head">
             <img src="../img/portrait-0360w.jpg" alt="">
@@ -22,6 +54,8 @@
         </div>
 
         <div class="createPost__files">
+          <label for="image_input">Choissisez votre image</label>
+            <input type="file" name="image_input" id="image_input">
            <a href="#" id="poster" @click="post">Poster !</a>
         </div>
       </div>
@@ -52,16 +86,131 @@
 
 
         </div>
-        <div class="accueil__profil"> 
-            <img src="../img/portrait-0360w.jpg" alt="">
-            <p id="username"> Username </p>
+       <div class="accueil__profil" id="profil"> 
+            <div id="accueil__profil__always"> 
+                <img src="../img/portrait-0360w.jpg" alt="">
+                <p id="username"> Username </p>
+            </div>
+            <div id="accueil_profil__active">
+                <p @click="profilUser" id="profilUser"> Profil </p>
+                <p @click="disconnect" id="disconnect"> Déconnexion </p>
+            </div>
+
         </div>
     </section>
-    
-    <button @click="disconnect" id="disconnect">Déconnexion</button>
 </template>
 
 <style>
+body { 
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+* {
+  font-family: "Lato", sans-serif;
+}
+
+.modifyTitle {
+  margin: 2rem 0 2rem 0;
+  width: 50%;
+  min-width: 10rem;
+  font-weight: bold;
+  margin-left: 2rem;
+  border-radius: 0.2rem;
+  background-color: #e0e2e5;
+  border: none;
+  height: 1.5rem;
+}
+.modifyContent {
+  width: 35rem;
+  margin: 1rem 0 0 0;
+  height: 5rem;
+  outline: none;
+  resize: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #e0e2e5;
+  border: none;
+}
+
+
+.profil {
+  display: flex;
+  position: absolute;
+  height: fit-content;
+  background-color: #e0e2e5;
+  border-radius: 1rem;
+  width: fit-content;
+  margin-top: 10rem;
+  width: 60%;
+  margin-left: 20%;
+  padding: 2rem;
+}
+.profil__image {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 2rem;
+}
+.profil__image img {
+  width: 150px;
+  margin-bottom: 2rem;
+  border-radius: 50%;
+}
+.profil__image i {
+  font-size: 2rem;
+}
+.profil__image i:hover {
+  color: #0e47b9;
+  cursor: pointer;
+}
+.profil__infoUser {
+  border: 2px solid #d0575f;
+  border-radius: 1rem;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
+}
+.profil__infoUser button {
+  all: unset;
+  margin: 1em 0 2rem 0;
+  width: fit-content;
+  cursor: pointer;
+  border: 2px solid white;
+  padding: 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+.profil__infoUser button:hover {
+  background-color: #152545;
+  color: white;
+}
+.profil__infoUser h2 {
+  color: #d0575f;
+  margin: 0 0 0.5rem 0;
+}
+.profil__infoUser input {
+  margin-bottom: 1.5rem;
+}
+.profil__infoUser label {
+  font-weight: bold;
+}
+.profil__infoUser i {
+  font-size: 1rem;
+  margin-left: 1.5rem;
+}
+.profil__infoUser i:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
+
 .fa-times:hover{
   color: red;
 }
@@ -186,12 +335,7 @@
 
 /*# sourceMappingURL=style.css.map */
 
-body { 
-  margin: 0;
-}
-* {
-  font-family: "Lato", sans-serif;
-}
+
 #hide {
   display: block;
   position: absolute;
@@ -335,33 +479,58 @@ button {
 }
 .accueil__profil:hover {
   font-weight: bold;
-  border-color: #152545;
   cursor: pointer;
   border-radius: 1rem;
-  background-color: #152545;
   color: white;
-  padding: 0 0.5rem 0 0.5rem;
 }
+.accueil__profil:hover #accueil__profil__always {
+  background-color: #152545;
+}
+
 .accueil__profil {
-  border: 2px solid white;
   margin: 2rem 2rem 2rem 0;
   height: fit-content;
+  flex-direction: column;
   display: flex;
   border-radius: 1rem;
   align-items: center;
-  padding: 0 0.5rem 0 0.5rem;
   background-color: #d0575f;
 }
+
 .accueil__profil img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 1rem;
 }
+
 .accueil__profil p {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+#accueil__profil__always {
+  display: flex;
+  padding: 1rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+}
+
+#accueil_profil__active {
+  width: 100%;
+  color: white;
+}
+#accueil_profil__active p {
+  padding: 0 1rem 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+#accueil_profil__active p:hover {
+  color: #152545;
+}
+
+/*# sourceMappingURL=style.css.map */
+
 
 /*# sourceMappingURL=style.css.map */
 
@@ -388,9 +557,16 @@ fetch(`http://localhost:3000/api/user/${id}`, {
 })
 .then((res) => res.json())
 .then((res) => {
-  // console.log(res.data)
+  console.log(res.data)
   let username = document.getElementById('username')
   username.innerText = res.data.username
+
+  let profilUsername = document.getElementById('profilUsername')
+  profilUsername.innerText = `${res.data.username}`
+
+  let profilEmail = document.getElementById('profilEmail')
+  profilEmail.innerText = `${res.data.email}`
+
 })
 
 
@@ -481,6 +657,25 @@ export default {
             // 
             // 
           // FIN AFFICHAGE DES POSTS
+
+          // Partie profil
+            // 
+            let profil = document.getElementById("profil")
+            let profilActive = document.getElementById("accueil_profil__active")
+            let profilOn = document.getElementsByClassName("profil")
+            profilOn[0].style.display = "none";
+
+            profilActive.style.display = "none"
+            profil.onmouseover = () => {
+              profilActive.style.display = "block"
+            }
+            profil.onmouseleave = () => {
+              profilActive.style.display = "none"
+            }
+
+            // 
+          // Fin partie profil
+
 
 
 
@@ -710,6 +905,7 @@ export default {
           let userId = localStorage.getItem('ID')
           let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
           let Token = localStorage.getItem('Token')
+          console.log(document.getElementById('image_input').value)
           fetch("http://localhost:3000/api/posts", {
             method: 'POST',
             body : JSON.stringify(newPost),
@@ -726,6 +922,44 @@ export default {
         setTimeout("location.reload(true);",400)
 
 
+        },
+        profilUser(){
+          let profil = document.getElementsByClassName("profil")
+          let hide = document.getElementById('hide')
+
+          hide.style.display ="initial";
+          profil[0].style.display = 'flex'
+
+          let putUsername = document.getElementById('usernameValid')
+          let putEmail = document.getElementById('emailValid')
+          let putPassword = document.getElementById('passwordValid')
+
+          putUsername.onclick = () => {
+            console.log(newUsername.value)
+            // Route PUT (attention refaire validation du username)
+          }
+          putEmail.onclick = () => {
+            console.log(newEmail.value)
+            // Route PUT (attention refaire validation de l'email)
+          }
+          putPassword.onclick = () => {
+            console.log(newPassword.value)
+            // Route PUT (attention refaire validation du password)
+          }
+
+
+        },
+        returnHome(){
+          let profil = document.getElementsByClassName("profil")
+          let hide = document.getElementById('hide')
+
+          hide.style.display ="none";
+
+          profil[0].style.display = 'none'
+
+        },
+        deleteAccount(){
+          console.log("Je veux supprimer le compte")
         },
         disconnect(){
             localStorage.clear('Token');

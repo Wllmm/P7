@@ -30,7 +30,7 @@
                 </div>
             </form>
         </div>
-        <button id="Check"> Inscription </button>
+        <button id="Check" @click="check"> Inscription </button>
         <div id="error"></div>
       </section>
 

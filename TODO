@@ -18,16 +18,17 @@ Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu
 Problème : 
 
 - Commentaire ne s'affiche pas dans l'ordre de création
+- Besoin de vérifier si le token est valide dans le login
 
 Reste a faire : 
 
 - AFFICHER MESSAGE D'ERREUR SI LE GET USER EST MAUVAIS
 - Affichage d'une erreur si le nom d'utilisateur est mauvais
 - Ajouter système de vérification du user pour le modify et peut-être le delete du coup
+- Finaliser l'ajout de photo avec multer etc
 
 Facile : ____________
 - Faire bouton déconnexion plus beau 
-- Peut-être faire la même chose que le delete pour le modify 
 - Espace modification du profil (et suppression)
 - Ajout de photos aussi
 
