@@ -6,6 +6,7 @@ const sequelize = require('./src/db/sequelize')
 const cors = require('cors')
 const multer = require ("multer")
 
+
 const app = express()
 const port = 5000
 
@@ -26,28 +27,21 @@ app.use((req, res, next) => {
   
 // 
   // MULTER
-
-  const fileFilter = (req, file, cb) => {
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
-    if (!allowedTypes.includes(file.mimetype)) {
-      const error = new Error("Incorrect file");
-      error.code = "INCORRECT_FILETYPE";
-      return cb(error, false)
-    }
-    cb(null, true);
-  }
   
-  const upload = multer({
-    dest: './uploads',
-    fileFilter,
-    limits: {
-      fileSize: 5000000
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix + ".png")
     }
-  });
-
-
+  })
+  
+  const upload = multer({ storage: storage })
 
   app.post('/upload', upload.single('file'), (req, res) => {
+    console.log(req.body, req.file)
     res.json({ file: req.file });
   });
   
@@ -61,7 +55,6 @@ app.use((req, res, next) => {
       return;
     }
   });
-
 
   // FIN MULTER
 // 
@@ -85,10 +78,6 @@ require('./src/routes/modifyPost')(app)
 //  Comments
 require('./src/routes/findComment')(app)
 require('./src/routes/createComment')(app)
-
-
-
-
 
 
 

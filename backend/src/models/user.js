@@ -7,8 +7,18 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true
       },
 
-      username: {
+      prenom: {
         type: DataTypes.STRING,
+        allowNull: false
+      },
+
+      nom: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+
+      date: {
+        type: DataTypes.DATE,
         allowNull: false
       },
 
@@ -24,5 +34,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         allowNull: false
       },
+      picturePath: {
+        type: DataTypes.CHAR,
+        allowNull: true
+      }
     })
   }

@@ -7,33 +7,27 @@ Frontend :
 - Previsu Connexion / Inscription/ Création de posts -- OK
 
 
-Voir comment mettre un objet de tout les utilisateurs qui ont like/dislikes, puis regarder s'ils 
-l'ont fait et faire les méthodes en conséquences (peut-être besoin d'une double table)
-
-Voir comment faire une double table pour les commentaires
-Car besoin de l'id de l'utilisateur qui post + les likes dislike + le contenu 
-
-
-
 Problème : 
 
 - Commentaire ne s'affiche pas dans l'ordre de création
-- Besoin de vérifier si le token est valide dans le login
+- Images = besoin de décoder en mettre en png /
+    de renvoyer le lien de l'image dans sql (dans le user si c'est une photo de profil) ou dans le post / 
+    réussir à l'afficher depuis le dossier upload dans le back vers le front /
 
 Reste a faire : 
 
-- AFFICHER MESSAGE D'ERREUR SI LE GET USER EST MAUVAIS
-- Affichage d'une erreur si le nom d'utilisateur est mauvais
-- Ajouter système de vérification du user pour le modify et peut-être le delete du coup
-- Finaliser l'ajout de photo avec multer etc
+- Affichage des erreurs globale meilleurs 
+
 
 Facile : ____________
-- Faire bouton déconnexion plus beau 
-- Espace modification du profil (et suppression)
-- Ajout de photos aussi
+- Modifications des données demandées
 
 Moyen : ____________
 - Faire profil modérateur
 - Suppression de post (modérateur)
-- Ajout de commentaire, plus Suppression (idem)
-- Ajout de like/dislike (post)
+- Ajout de commentaire, plus Suppression (et modérateur )
+- Partage Posts
+- Finition d'ajout de photos 
+
+Final : ____________
+- Refonte graphique globale

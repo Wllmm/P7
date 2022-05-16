@@ -14,10 +14,6 @@ module.exports = (app) => {
             return res.status(404).json({ message })
         }
         console.log(user)
-        if(user.username != req.body.username){
-            const message = `Le nom d'utilisateur est incorrect.`
-            return res.status(404).json({ message })
-        }
         bcrypt.compare(req.body.password, user.password)
         .then(isPasswordValid => {
 

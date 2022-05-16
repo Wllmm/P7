@@ -3,11 +3,7 @@
    <form @submit.prevent="onSubmit" enctype="multipart/form-data">
       <div class="fields">
         <label>Upload File</label><br/>
-        <input 
-          type="file"
-          ref="file"
-          @change="onSelect"
-        />
+        <input type="file" ref="file" @change="onSelect" />
       </div>
       <div class="fields">
         <button>Submit</button>
@@ -33,6 +29,7 @@ export default {
     onSelect(){
       const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
       const file = this.$refs.file.files[0];
+      console.log(file)
       this.file = file;
       if(!allowedTypes.includes(file.type)){
         this.message = "Filetype is wrong!!"

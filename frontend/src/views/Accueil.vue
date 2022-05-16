@@ -7,17 +7,28 @@
      <section class="profil">
         <div class="profil__image">
             <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
-            <input type="file" name="image_input" id="image_input">
+
+
+            <!-- <input type="file" name="image_input" id="image_input"> -->
+            <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+                <div class="fields">
+                  <input type="file" ref="file" @change="onSelect" />
+                </div>
+                <br>
+                <div class="fields">
+                  <button>Valider le changement de photo </button>
+                </div>
+                <div class="message">
+                  <h5>{{message}}</h5>
+                </div>
+            </form>
+
+
             <i class="fas fa-home" @click="returnHome"></i>
         </div>
 
         <div class="profil__infoUser">
-            <div class="username">
-                <h2 id="profilUsername"> Nom d'utilisateur </h2>
-                <label for=""> Changer le nom d'utilisateur : </label>
-                <input type="text" id="newUsername">
-                <i class="fas fa-magic" id="usernameValid"></i>
-            </div>
+
             <div class="email">
                 <h2 id="profilEmail"> Nom d'utilisateur </h2>
                 <label for=""> Changer l'addresse email : </label>
@@ -550,7 +561,7 @@ setTimeout(function(){location.href="/"} , 0);
 
 // Récupération des données de l'utilisateur 
 let id = localStorage.getItem('ID')
-fetch(`http://localhost:3000/api/user/${id}`, {
+fetch(`http://localhost:5000/api/user/${id}`, {
    headers: {
       Authorization : `Bearer ${JSON.parse(Token)}` 
     },
@@ -559,10 +570,10 @@ fetch(`http://localhost:3000/api/user/${id}`, {
 .then((res) => {
   console.log(res.data)
   let username = document.getElementById('username')
-  username.innerText = res.data.username
+  username.innerText = res.data.prenom + "   " + res.data.nom
 
-  let profilUsername = document.getElementById('profilUsername')
-  profilUsername.innerText = `${res.data.username}`
+  // let profilUsername = document.getElementById('profilUsername')
+  // profilUsername.innerText = `${res.data.username}`
 
   let profilEmail = document.getElementById('profilEmail')
   profilEmail.innerText = `${res.data.email}`
@@ -571,7 +582,7 @@ fetch(`http://localhost:3000/api/user/${id}`, {
 
 
 
-
+import axios from 'axios';
 export default {
     mounted(){
         this.onLoad();
@@ -580,6 +591,8 @@ export default {
     props: '',
     data(){
       return { 
+        file:"",
+        message:""
       }
     },
     computed:{
@@ -590,7 +603,7 @@ export default {
         onLoad(){
           let token = localStorage.getItem('Token');
           // On récupère tout les posts au passage si le token est mauvais on indique une erreur et demande une reconnexion
-          fetch("http://localhost:3000/api/post", {
+          fetch("http://localhost:5000/api/post", {
             headers: {
                 Authorization : `Bearer ${JSON.parse(Token)}` 
             },
@@ -682,7 +695,7 @@ export default {
           // Affichage des commentaires avec le nom des utilisateurs
             // 
             // 
-                fetch(`http://localhost:3000/api/comment`, {
+                fetch(`http://localhost:5000/api/comment`, {
                   headers: {
                     Authorization : `Bearer ${JSON.parse(Token)}` 
                   },
@@ -695,12 +708,13 @@ export default {
                     
                     for (let comment of comments.data){
                       if (comment.postId === data.id){
-                        fetch(`http://localhost:3000/api/allUser/${comment.userId}`, {})
+                        fetch(`http://localhost:5000/api/allUser/${comment.userId}`, {})
                         .then((res)=>res.json())
                         .then((res) => {
+                          console.log(res)
                           commentAdd.innerHTML += 
                           `<div class='new__comment'>
-                              <h4> ${res.data.username} </h4>
+                              <h4> ${res.data.prenom}   ${res.data.nom} </h4>
                               <p>${comment.content}</p>
                             </div>`
                         })
@@ -725,7 +739,7 @@ export default {
                 let dataComment = { content : test[i].value }
 
                 let id = localStorage.getItem('ID')
-                fetch(`http://localhost:3000/api/user/${id}`, {
+                fetch(`http://localhost:5000/api/user/${id}`, {
                   headers: {
                       Authorization : `Bearer ${JSON.parse(Token)}` 
                     },
@@ -734,7 +748,7 @@ export default {
                 .then((res) => {
                   dataComment = { userId:`${res.data.id}` , content : test[i].value } 
                   // Une fois l'utilisateur trouvé on envoi le commentaire
-                   fetch(`http://localhost:3000/api/post/${btn[i].id}/comment`, {
+                   fetch(`http://localhost:5000/api/post/${btn[i].id}/comment`, {
                   method: 'POST',
                   body: JSON.stringify(dataComment),
                   headers: {
@@ -817,7 +831,7 @@ export default {
                       let userId = localStorage.getItem('ID')
                       let changePost = { "title": `${newTitle[i].value}`, "content": `${newContent[i].value}` }
                       console.log(changePost)
-                      fetch(`http://localhost:3000/api/post/${res.data[i].id}`, {
+                      fetch(`http://localhost:5000/api/post/${res.data[i].id}`, {
                         method: 'PUT',
                         body: JSON.stringify(changePost),
                         headers: {
@@ -851,7 +865,7 @@ export default {
                     if (res.data[i].userId == userId){
                       deletePost[i].onclick = () => {
                       console.log(res.data[i])
-                        fetch(`http://localhost:3000/api/posts/${res.data[i].id}`, {
+                        fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
                           method: "DELETE",
                           headers: {
                               Authorization : `Bearer ${JSON.parse(Token)}` 
@@ -906,7 +920,7 @@ export default {
           let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
           let Token = localStorage.getItem('Token')
           console.log(document.getElementById('image_input').value)
-          fetch("http://localhost:3000/api/posts", {
+          fetch("http://localhost:5000/api/posts", {
             method: 'POST',
             body : JSON.stringify(newPost),
             headers: {
@@ -930,7 +944,6 @@ export default {
           hide.style.display ="initial";
           profil[0].style.display = 'flex'
 
-          let putUsername = document.getElementById('usernameValid')
           let putEmail = document.getElementById('emailValid')
           let putPassword = document.getElementById('passwordValid')
 
@@ -938,41 +951,17 @@ export default {
           let regPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,40}/;
           let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-          let usernameCheck = false;
           let emailCheck = false;
           let passwordCheck = false;
 
 
-          putUsername.onclick = () => {
-            let newInfo = { username : newUsername.value }
-
-            if (regTxt.test(newUsername.value)){
-              fetch(`http://localhost:3000/api/user/${id}` , { 
-                method: "PUT",
-                body : JSON.stringify(newInfo),
-                headers: {
-                  "Content-type": "application/json",
-                  Authorization : `Bearer ${JSON.parse(Token)}`
-                },
-              })
-              .then((res) => res.json())
-              .then((res) => {
-                console.log(res)
-                setTimeout("location.reload(true);",400)
-            })
-            }
-            else {
-              alert("Nom d'utilisateur non valide afficher une plus belle erreur")
-            }
-            
-          }
           putEmail.onclick = () => {
             console.log(newEmail.value)
             let newInfo = { email : newEmail.value }
             // Besoin de re-crypter le mdp
 
             if (regEmail.test(newEmail.value)){
-              fetch(`http://localhost:3000/api/user/${id}` , { 
+              fetch(`http://localhost:5000/api/user/${id}` , { 
                 method: "PUT",
                 body : JSON.stringify(newInfo),
                 headers: {
@@ -995,7 +984,7 @@ export default {
             let newInfo = { password : newPassword.value }
 
             if (regPassword.test(newPassword.value)){
-              fetch(`http://localhost:3000/api/user/${id}` , { 
+              fetch(`http://localhost:5000/api/user/${id}` , { 
                 method: "PUT",
                 body : JSON.stringify(newInfo),
                 headers: {
@@ -1027,7 +1016,7 @@ export default {
         },
         deleteAccount(){
           console.log("Je veux supprimer le compte")
-          fetch(`http://localhost:3000/api/user/${id}`, {
+          fetch(`http://localhost:5000/api/user/${id}`, {
              method: "DELETE",
                 headers: {
                   Authorization : `Bearer ${JSON.parse(Token)}`
@@ -1042,6 +1031,30 @@ export default {
         disconnect(){
             localStorage.clear('Token');
             location.reload();
+        },
+        onSelect(){
+          const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+          const file = this.$refs.file.files[0];
+          console.log(file)
+          this.file = file;
+          if(!allowedTypes.includes(file.type)){
+            this.message = "Filetype is wrong!!"
+          }
+          if(file.size>500000){
+            this.message = 'Too large, max size allowed is 500kb'
+          }
+        },
+        async onSubmit(){
+          const formData = new FormData();
+          formData.append('file',this.file);
+          try{
+            await axios.post('http://localhost:5000/api/users',formData);
+            this.message = 'Uploaded!!'
+          }
+          catch(err){
+            console.log(err);
+            this.message = err.response.data.error
+          }
         }
     }
 }
