@@ -3,7 +3,7 @@ const { User } = require('../db/sequelize')
 
   
 module.exports = (app) => {
-  app.get('/api/test/:id', (req, res) => {
+  app.get('/api/allUser/:id', (req, res) => {
     User.findByPk(req.params.id)
       .then(user => {
         const message = 'Un utilisateur a bien été trouvé.'

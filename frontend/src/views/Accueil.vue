@@ -695,7 +695,7 @@ export default {
                     
                     for (let comment of comments.data){
                       if (comment.postId === data.id){
-                        fetch(`http://localhost:3000/api/test/${comment.userId}`, {})
+                        fetch(`http://localhost:3000/api/allUser/${comment.userId}`, {})
                         .then((res)=>res.json())
                         .then((res) => {
                           commentAdd.innerHTML += 
@@ -934,17 +934,84 @@ export default {
           let putEmail = document.getElementById('emailValid')
           let putPassword = document.getElementById('passwordValid')
 
+          let regTxt = /^[A-Za-z]+$/;
+          let regPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,40}/;
+          let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+          let usernameCheck = false;
+          let emailCheck = false;
+          let passwordCheck = false;
+
+
           putUsername.onclick = () => {
-            console.log(newUsername.value)
-            // Route PUT (attention refaire validation du username)
+            let newInfo = { username : newUsername.value }
+
+            if (regTxt.test(newUsername.value)){
+              fetch(`http://localhost:3000/api/user/${id}` , { 
+                method: "PUT",
+                body : JSON.stringify(newInfo),
+                headers: {
+                  "Content-type": "application/json",
+                  Authorization : `Bearer ${JSON.parse(Token)}`
+                },
+              })
+              .then((res) => res.json())
+              .then((res) => {
+                console.log(res)
+                setTimeout("location.reload(true);",400)
+            })
+            }
+            else {
+              alert("Nom d'utilisateur non valide afficher une plus belle erreur")
+            }
+            
           }
           putEmail.onclick = () => {
             console.log(newEmail.value)
-            // Route PUT (attention refaire validation de l'email)
+            let newInfo = { email : newEmail.value }
+            // Besoin de re-crypter le mdp
+
+            if (regEmail.test(newEmail.value)){
+              fetch(`http://localhost:3000/api/user/${id}` , { 
+                method: "PUT",
+                body : JSON.stringify(newInfo),
+                headers: {
+                  "Content-type": "application/json",
+                  Authorization : `Bearer ${JSON.parse(Token)}`
+                },
+              })
+              .then((res) => res.json())
+              .then((res) => {
+                console.log(res)
+                setTimeout("location.reload(true);",400)
+            })
+            }
+            else {
+              alert("Email non valide afficher une plus belle erreur")
+            }
           }
           putPassword.onclick = () => {
             console.log(newPassword.value)
-            // Route PUT (attention refaire validation du password)
+            let newInfo = { password : newPassword.value }
+
+            if (regPassword.test(newPassword.value)){
+              fetch(`http://localhost:3000/api/user/${id}` , { 
+                method: "PUT",
+                body : JSON.stringify(newInfo),
+                headers: {
+                  "Content-type": "application/json",
+                  Authorization : `Bearer ${JSON.parse(Token)}`
+                },
+              })
+              .then((res) => res.json())
+              .then((res) => {
+                console.log(res)
+                setTimeout("location.reload(true);",400)
+            })
+            }
+            else {
+              alert("Mot de passe non valide afficher une plus belle erreur")
+            }
           }
 
 
@@ -960,6 +1027,17 @@ export default {
         },
         deleteAccount(){
           console.log("Je veux supprimer le compte")
+          fetch(`http://localhost:3000/api/user/${id}`, {
+             method: "DELETE",
+                headers: {
+                  Authorization : `Bearer ${JSON.parse(Token)}`
+                },
+          })
+          .then((res) => res.json())
+          .then((res) => {
+            setTimeout("location.reload(true);",400)
+            localStorage.clear()
+          })
         },
         disconnect(){
             localStorage.clear('Token');

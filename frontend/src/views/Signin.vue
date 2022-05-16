@@ -59,7 +59,7 @@ export default {
 
           if (usernameCheck === true){
             document.getElementById("errorUsername")
-            .innerHTML = `Choissisez un nom d'utilisateur : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = `Nom d'utilisateur : <i class="fas fa-lock-open"></i>`;
           }else{
             document.getElementById("errorUsername")
             .innerHTML = ` Nom d'utilisateur : <i class="fas fa-ban"></i>`;
