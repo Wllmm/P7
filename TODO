@@ -1,7 +1,6 @@
 Backend : 
 - Connexion / Déconnexion / Inscription/ Création, Suppression (utilisateur manque modérateur) de POSTS -- OK
 
-Afficher une erreur plus propre sur l'acceuil si token mauvais ou inexistant (avec v-if)
 
 Frontend : 
 - Previsu Connexion / Inscription/ Création de posts -- OK
@@ -9,26 +8,24 @@ Frontend :
 
 Problème : 
 
-- Commentaire ne s'affiche pas dans l'ordre de création
-- Images = besoin de décoder en mettre en png /
-    de renvoyer le lien de l'image dans sql (dans le user si c'est une photo de profil) ou dans le post / 
-    réussir à l'afficher depuis le dossier upload dans le back vers le front /
-- Problème comment envoyer le token en même temps que l'image.
+
 
 Reste a faire : 
 
 - Affichage des erreurs globale meilleurs 
+- Commentaire, afficher dans l'ordre de création
 
 
 Facile : ____________
-- Modifications des données demandées
+- Faire module d'ajout d'image à la première connexion (si pas de picturePath)
+- Ajout d'image dans les posts
+- Réussir a afficher les images depuis le dossier upload backend avec le path sotcker dans la BDD
 
 Moyen : ____________
 - Faire profil modérateur
-- Suppression de post (modérateur)
-- Ajout de commentaire, plus Suppression (et modérateur )
+- Suppression de post et de commentaire pour le modérateur.
 - Partage Posts
-- Finition d'ajout de photos 
+
 
 Final : ____________
 - Refonte graphique globale

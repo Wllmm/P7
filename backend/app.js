@@ -81,6 +81,8 @@ require('./src/routes/modifyPost')(app)
 //  Comments
 require('./src/routes/findComment')(app)
 require('./src/routes/createComment')(app)
+require('./src/routes/deleteComment')(app)
+
 
 require('./src/routes/test')(app)
 

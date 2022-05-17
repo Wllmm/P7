@@ -567,7 +567,7 @@ fetch(`http://localhost:5000/api/user/${id}`, {
 })
 .then((res) => res.json())
 .then((res) => {
-  console.log(res.data)
+  // console.log(res.data)
   let username = document.getElementById('username')
   username.innerText = res.data.prenom + "   " + res.data.nom
 
@@ -576,7 +576,7 @@ fetch(`http://localhost:5000/api/user/${id}`, {
 
   let profilImage = document.getElementById('profilImage')
   let path = "../../../backend/" + res.data.picturePath
-  console.log(path)
+  // console.log(path)
   // profilImage.innerHTML += `<img id="profilImage" src="${res.data.picturePath}" alt="">`
   // profilImage.src=`${path}`
 
@@ -660,8 +660,7 @@ export default {
                                       <textarea rows="3" cols="90" class="newCommentContent"></textarea>
                                       <i class="fas fa-caret-square-right" id="${id}"></i>
                                     </div>
-                                      <div class="accueil__post__show__element__content__comment__nb" id="${id}"></div>
-                                
+                                    <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
                                 </div>
                             </div>
                         </div>
@@ -704,22 +703,46 @@ export default {
                 })
                 .then((comments) => comments.json())
                 .then((comments) => {
+                  // console.log(comments.data)
+                  let commentId = "";
 
+                  // Dans les posts
                   for (let data of res.data){
-                    let commentAdd = document.getElementById(`${data.id}`)
+                    let commentAdd = document.getElementById(`comment${data.id}`)
                     
+                    // Dans les commentaires
                     for (let comment of comments.data){
                       if (comment.postId === data.id){
                         fetch(`http://localhost:5000/api/allUser/${comment.userId}`, {})
                         .then((res)=>res.json())
                         .then((res) => {
-                          console.log(res)
                           commentAdd.innerHTML += 
                           `<div class='new__comment'>
                               <h4> ${res.data.prenom}   ${res.data.nom} </h4>
                               <p>${comment.content}</p>
+                              <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
                             </div>`
+                           isFinishComment()
                         })
+                      }
+                    }
+                  }
+                  function isFinishComment () {
+                  let commentId = document.getElementsByClassName('deleteComment')
+                    for (let i in comments.data){
+                      commentId[i].onclick = () => {
+                        // console.log(comments.data[i].id)
+                        fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
+                          method: 'DELETE',
+                          headers: {
+                              Authorization : `Bearer ${JSON.parse(Token)}` 
+                          },
+                        })
+                        .then((res) => res.json())
+                        .then((res) => {
+                          setTimeout("location.reload(true);",200)
+                        })
+                        
                       }
                     }
                   }
@@ -735,7 +758,7 @@ export default {
             // 
             let test = document.getElementsByClassName("newCommentContent")
             let btn = document.getElementsByClassName("fas fa-caret-square-right")
-
+            
             for (let i=0; btn.length >i ;i++){
               btn[i].onclick = () => {
                 let dataComment = { content : test[i].value }
@@ -783,7 +806,7 @@ export default {
               let modifContent = document.getElementsByClassName('modify__content')
               let actualContent = document.getElementsByClassName('actual__content')
               let actualTitle = document.getElementsByClassName('actual__title')
-
+              // console.log(res.data)
              for (let i in res.data){
 
                 cancelModif[i].style.visibility = "hidden"
