@@ -6,7 +6,7 @@
 
      <section class="profil">
         <div class="profil__image">
-            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+            <img src="../../../backend/uploads\\file-1652777147506-719565919.png" alt="">
 
 
             <!-- <input type="file" name="image_input" id="image_input"> -->
@@ -16,7 +16,7 @@
                 </div>
                 <br>
                 <div class="fields">
-                  <button>Valider le changement de photo </button>
+                  <button id="putPicture">Valider le changement de photo </button>
                 </div>
                 <div class="message">
                   <h5>{{message}}</h5>
@@ -1048,8 +1048,9 @@ export default {
           const formData = new FormData();
           formData.append('file',this.file);
           try{
-            await axios.post('http://localhost:5000/api/users',formData);
-            this.message = 'Uploaded!!'
+            await axios.put(`http://localhost:5000/api/user/${id}`, formData, { headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
+            this.message = 'Modifiée !!'
+
           }
           catch(err){
             console.log(err);

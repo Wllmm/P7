@@ -13,6 +13,7 @@ Problème :
 - Images = besoin de décoder en mettre en png /
     de renvoyer le lien de l'image dans sql (dans le user si c'est une photo de profil) ou dans le post / 
     réussir à l'afficher depuis le dossier upload dans le back vers le front /
+- Problème comment envoyer le token en même temps que l'image.
 
 Reste a faire : 
 

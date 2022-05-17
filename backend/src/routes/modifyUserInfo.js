@@ -3,10 +3,11 @@ const auth = require('../auth/auth')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 const bcrypt = require('bcrypt')
+const multer = require('../middleware/multer')
 
   
 module.exports = (app) => {
-  app.put('/api/user/:id', auth, (req, res) => {
+  app.put('/api/user/:id', auth, multer,(req, res) => {
 
     // On regarde si l'id dans le TOKEN est le même que celui de la requête 
     const authorizationHeader = req.headers.authorization
@@ -24,6 +25,15 @@ module.exports = (app) => {
     // Si c'est bon on continue :
     if (userParams == userId){
       const id = req.params.id
+
+      // Si changement d'image : 
+      if (req.file !== undefined){
+        console.log(req.file)
+
+        
+        res.json({ file: req.file });
+        return
+      }
 
       // Besoin de crypter si changement de mdp 
       if (!req.body.password){
