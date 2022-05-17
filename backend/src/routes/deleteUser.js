@@ -2,10 +2,12 @@ const { User } = require('../db/sequelize')
 const auth = require('../auth/auth')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
+const fs = require('fs')
+const multer = require('../middleware/multer')
 
   
 module.exports = (app) => {
-  app.delete('/api/user/:id', auth, (req, res) => {
+  app.delete('/api/user/:id', auth, multer, (req, res) => {
     User.findByPk(req.params.id).then(user => {
       const userDeleted = user;
       console.log(user)
@@ -22,6 +24,13 @@ module.exports = (app) => {
       })
       
       if(userId == userParams){
+
+        User.findByPk(req.params.id)
+        .then((res) => {
+          console.log(res.dataValues.picturePath)
+          fs.unlinkSync(`uploads/${res.dataValues.picturePath}`)
+        })
+
         User.destroy({
             where: { id: user.id }
           })
