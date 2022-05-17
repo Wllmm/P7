@@ -322,7 +322,7 @@ export default {
               console.log("Le mail est open")
 
               testAllCheck();
-              // setTimeout("location.reload(true);",400)
+              setTimeout("location.reload(true);",400)
 
             } else { console.log('Le mail est déjà utilisé'), alert("Le mail est déjà utilisé") }
           })

@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false
       },
+      idAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
 
       password: {
         type: DataTypes.CHAR,
