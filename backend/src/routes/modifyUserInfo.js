@@ -1,5 +1,6 @@
 const { User } = require('../db/sequelize')
 const auth = require('../auth/auth')
+const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 const bcrypt = require('bcrypt')
@@ -29,6 +30,18 @@ module.exports = (app) => {
       // Si changement d'image : 
       if (req.file !== undefined){
         console.log(req.file)
+
+        User.findByPk(req.params.id)
+        .then((res) => {
+          console.log(res.dataValues.picturePath)
+          fs.unlinkSync(`uploads/${res.dataValues.picturePath}`)
+        })
+
+
+        const path = req.file.filename
+        User.update({picturePath : path}, {
+          where: { id: id }
+        })
 
         
         res.json({ file: req.file });

@@ -5,11 +5,10 @@
     <div id='hide'></div>
 
      <section class="profil">
-        <div class="profil__image">
-            <img src="../../../backend/uploads\\file-1652777147506-719565919.png" alt="">
+        <div class="profil__image" >
+            <img id="profilImage" src="" alt="">
+            <!-- src="../../../backend/uploads\\file-1652777147506-719565919.png" -->
 
-
-            <!-- <input type="file" name="image_input" id="image_input"> -->
             <form @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="fields">
                   <input type="file" ref="file" @change="onSelect" />
@@ -572,11 +571,14 @@ fetch(`http://localhost:5000/api/user/${id}`, {
   let username = document.getElementById('username')
   username.innerText = res.data.prenom + "   " + res.data.nom
 
-  // let profilUsername = document.getElementById('profilUsername')
-  // profilUsername.innerText = `${res.data.username}`
-
   let profilEmail = document.getElementById('profilEmail')
   profilEmail.innerText = `${res.data.email}`
+
+  let profilImage = document.getElementById('profilImage')
+  let path = "../../../backend/" + res.data.picturePath
+  console.log(path)
+  // profilImage.innerHTML += `<img id="profilImage" src="${res.data.picturePath}" alt="">`
+  // profilImage.src=`${path}`
 
 })
 

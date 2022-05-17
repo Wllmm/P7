@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const sequelize = require('./src/db/sequelize')
 const cors = require('cors')
 const multer = require ("multer")
+const path = require('path');
 
 const app = express()
 const port = 5000
@@ -44,6 +45,9 @@ app.use((req, res, next) => {
   //   res.json({ file: req.file });
   // });
   
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
   app.use((err, req, res, next) => {
     if (err.code === "INCORRECT_FILETYPE") {
       res.status(422).json({ error: 'Only images are allowed' });

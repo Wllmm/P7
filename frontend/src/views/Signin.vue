@@ -41,10 +41,6 @@
                     <input type="password" name="password" id="password">
                 </div>
 
-                <!-- <div class="home__form__input">
-                    <label for="photo" id="errorPhoto">Photo de profil :</label>
-                    <input type="file" ref="file" />
-                </div> -->
             </form>
         </div>
         <button id="Check" > Inscription </button>
