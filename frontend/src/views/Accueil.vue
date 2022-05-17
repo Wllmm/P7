@@ -740,7 +740,7 @@ export default {
                         })
                         .then((res) => res.json())
                         .then((res) => {
-                          setTimeout("location.reload(true);",200)
+                          setTimeout("location.reload(true);",400)
                         })
                         
                       }
@@ -782,6 +782,7 @@ export default {
 
                   },
                 })
+                setTimeout("location.reload(true);",100)
                 setTimeout("location.reload(true);",200)
                 })
               }
