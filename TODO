@@ -1,5 +1,5 @@
 Backend : 
-- Connexion / Déconnexion / Inscription/ Création, Suppression (utilisateur manque modérateur) de POSTS -- OK
+- Connexion / Déconnexion / Inscription/ Création, Suppression  de POSTS et commentaires -- OK
 
 
 Frontend : 
@@ -21,8 +21,7 @@ Facile : ____________
 - Réussir a afficher les images depuis le dossier upload backend avec le path sotcker dans la BDD
 
 Moyen : ____________
-- Faire profil modérateur
-- Suppression de post et de commentaire pour le modérateur.
+- Affichage de la suppression des post et des commentaires pour le modérateur (route créer)
 - Partage Posts
 
 

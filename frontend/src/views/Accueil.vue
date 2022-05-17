@@ -643,8 +643,6 @@ export default {
                                     </div>
 
                                     <span class="options"> 
-                                      <button class='like'> <i class="far fa-thumbs-up"></i> </button> 
-                                      <button class='dislike'> <i class="far fa-thumbs-down"></i> </button> 
                                       <button class="modify"> <i class="fas fa-pen-alt"></i> </button>  
                                       <button class="delete"> <i class="fas fa-trash"></i> </button> 
 
@@ -797,8 +795,6 @@ export default {
             // 
             // 
               let userId = localStorage.getItem('ID')
-              let likePost = document.getElementsByClassName('like')
-              let dislikePost = document.getElementsByClassName('dislike')
               let deletePost = document.getElementsByClassName('delete')
               let modifyPost = document.getElementsByClassName('modify')
               let acceptModif = document.getElementsByClassName('acceptModif')
@@ -814,13 +810,6 @@ export default {
                 acceptModif[i].style.visibility = "hidden"
                 modifTile[i].style.display = "none"
                 modifContent[i].style.display = "none"
-
-                    likePost[i].onclick = () => {
-                      console.log(res.data[i])
-                    } 
-                    dislikePost[i].onclick = () => {
-                      console.log(res.data[i])
-                    } 
 
                   // Affichage ou non de la modification
                     // 
