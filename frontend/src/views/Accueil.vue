@@ -46,7 +46,7 @@
     </section>
 
     <div class="createPost">
-        <!-- <div class="createPost__head">
+        <div class="createPost__head">
             <img src="../img/portrait-0360w.jpg" alt="">
 
             <div class="createPost__head__title">
@@ -56,9 +56,9 @@
             </div>
             <i class="fas fa-times"></i>
 
-        </div> -->
+        </div>
 
-        <!-- <div class="createPost__content">
+        <div class="createPost__content">
             <label for="addContent"> Votre texte ici :</label>
             <textarea rows="10" cols="90" id="newPostContent"></textarea>
         </div>
@@ -68,8 +68,9 @@
             <input type="file" name="image_input" id="image_input">
            <a href="#" id="poster" @click="post">Poster !</a>
         </div>
-         -->
-          <form @submit.prevent="onSubmitPost" enctype="multipart/form-data">
+        
+
+          <!-- <form @submit.prevent="onSubmitPost" enctype="multipart/form-data">
 
               <div class="createPost__head">
                 <img src="../img/portrait-0360w.jpg" alt="">
@@ -98,7 +99,7 @@
                 <button id="postPicture" @click="post">Valider le changement de photo </button>
               </div>
 
-            </form>
+          </form> -->
 
 
       </div>
@@ -665,7 +666,7 @@ export default {
             fetch("http://localhost:5000/api/allUser", {})
             .then((res) => res.json())
             .then((allUser) => {
-              console.log(allUser.data)
+              // console.log(allUser.data)
 
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
@@ -683,8 +684,8 @@ export default {
                     // console.log(data)
                     let  userWhoRepost = allUser.data.find(el => el.id == data.userId)
                     let userOfPost = allUser.data.find(el => el.id == data.initialUser)
-                    console.log(userOfPost)
-                    console.log(userWhoRepost)
+                    // console.log(userOfPost)
+                    // console.log(userWhoRepost)
 
                     focus.innerHTML += 
                       `<div class="accueil__post__show">

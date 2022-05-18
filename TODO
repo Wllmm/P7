@@ -13,10 +13,10 @@ Reste a faire :
 
 - Affichage des erreurs globale meilleurs 
 - Commentaire, afficher dans l'ordre de création
+- Peut-être suppression des post à la suppression du compte car sinon log une erreur (ou alors afficher utilisateur désinscrit)
 
 
 Facile : ____________
-- Partage Posts (cacher l'affichage si c'est notre post et afficher plus d'informations si c'est un post partager)
 
 Moyen : ____________
 - Ajout d'image dans les posts (problème multer supprime le body et je n'ai donc plus accès aux infos)

@@ -25,19 +25,56 @@ module.exports = (app) => {
       
       if(userId == userParams){
 
-        User.findByPk(req.params.id)
-        .then((res) => {
-          console.log(res.dataValues.picturePath)
-          fs.unlinkSync(`uploads/${res.dataValues.picturePath}`)
-        })
+        console.log(userDeleted)
 
-        User.destroy({
+        if (userDeleted.dataValues.picturePath === null){
+          console.log("Pas d'image")
+
+          User.destroy({
             where: { id: user.id }
-          })
-          .then(_ => {
-            const message = `Le user ${user} a bien été supprimé.`
-            res.json({message, data: userDeleted })
-          })
+            })  
+          message = `Le compte a bien été supprimer.`
+          return res.status(200).json({ message })
+
+        }
+        else{
+          console.log("Il y a une image a delete")
+
+          fs.unlinkSync(`uploads/${userDeleted.dataValues.picturePath}`),
+            User.destroy({
+            where: { id: user.id }
+            })  
+          message = `Le compte a bien été supprimer.`
+          return res.status(200).json({ message })
+
+        }
+
+        // User.findByPk(req.params.id)
+        // .then((res) => {
+          // console.log(res.dataValues)
+
+          // if (res.dataValues.picturePath === null){
+          //   console.log("Pas de photo a delete")
+          //   User.destroy({
+          //         where: { id: user.id }
+          //       })
+          // }
+          // else { 
+          //   fs.unlinkSync(`uploads/${res.dataValues.picturePath}`),
+          //   User.destroy({
+          //   where: { id: user.id }
+          //   })  
+          // }
+        // })
+
+        // User.destroy({
+        //     where: { id: user.id }
+        //   })
+        //   .then(_ => {
+        //     const message = `Le user ${user} a bien été supprimé.`
+        //     res.json({message, data: userDeleted })
+        //     return
+        //   })
       }
       else{
         const message = `Problème d'authentification veuillez vous re-connecter.`
