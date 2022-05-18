@@ -605,6 +605,14 @@ fetch(`http://localhost:5000/api/user/${id}`, {
 .then((res) => res.json())
 .then((res) => {
   // console.log(res.data)
+
+  // Si le token ne correspond pas à l'id déconnexion + retour a la page d'accueil
+  if (res.data == "Problème d'authentification veuillez vous reconnecter."){
+    alert("Problème d'authentification veuillez vous reconnecter.")
+    localStorage.clear()
+    location.reload()
+  }
+
   let username = document.getElementById('username')
   username.innerText = res.data.prenom + "   " + res.data.nom
 
@@ -653,6 +661,8 @@ export default {
           })
           .then((res) => res.json())
           .then((res) => {
+
+
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
             else {
@@ -665,7 +675,8 @@ export default {
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
-                  
+                  // console.log(data)
+                  if (data.reposted === true){
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -673,6 +684,7 @@ export default {
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
                                     <h1 class="actual__title">${data.title}</h1>
+                                    <h3> <em>respost de </em> </h3>
                                     <div class="modify__title">
                                       <label for="addTitle"> Modifier le titre : </label>
                                       <input type="text" class="modifyTitle" value="${data.title}">
@@ -708,6 +720,50 @@ export default {
                         </div>
                       </div>`;
 
+                  }else {
+                    focus.innerHTML += 
+                      `<div class="accueil__post__show">
+                        <div class="accueil__post__show__element"> 
+                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                            <div class="accueil__post__show__element__content">
+                                <div class="accueil__post__show__element__content__text">
+                                    <h4> NAME </h4>
+                                    <h1 class="actual__title">${data.title}</h1>
+                                    <div class="modify__title">
+                                      <label for="addTitle"> Modifier le titre : </label>
+                                      <input type="text" class="modifyTitle" value="${data.title}">
+                                    </div>
+
+                                    <p class="actual__content">${data.content}</p>
+                                    <div class="modify__content">
+                                      <label for="modifyContent"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" class="modifyContent" >${data.content}</textarea>
+                                    </div>
+
+                                    <span class="options"> 
+                                      <button class="share"> <i class="fas fa-share"></i> </button> 
+
+                                      <button class="modify"> <i class="fas fa-pen-alt"></i> </button>  
+                                      <button class="delete"> <i class="fas fa-trash"></i> </button> 
+
+                                      
+                                      <button class='cancelModif'> <i class="fas fa-times"></i> </button>
+                                      <button class='acceptModif'> <i class="fas fa-check"></i> </button>
+                                    </span>
+                                </div>
+                                <div class="accueil__post__show__element__content__comment">
+                                    <h3>Commentaires </h3>
+                                    <div class="accueil__post__show__element__content__comment__add">
+                                      <label>Écrire un commentaire :</label>
+                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                      <i class="fas fa-caret-square-right" id="${id}"></i>
+                                    </div>
+                                    <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>`;
+                  }
 
               } 
             // 
@@ -813,7 +869,7 @@ export default {
                       })
                       .then((res) => res.json())
                       .then((user) => { 
-                        console.log(comments.data[i])
+                        // console.log(comments.data[i])
                         if (user.data.idAdmin === true) {
                           return
                         }                    
@@ -890,6 +946,20 @@ export default {
               let actualTitle = document.getElementsByClassName('actual__title')
               // console.log(res.data)
              for (let i in res.data){
+
+              //  Si le post est un repost :
+                if ( res.data[i].reposted === true) {
+                  modifyPost[i].style.display = "none"
+                  // console.log(res.data[i].userId)
+                  if (res.data[i].userId == id){
+                    sharePost[i].style.display = "none"
+                  }
+                  // RETURN ?
+                }
+                
+                if (res.data[i].userId == id){
+                  sharePost[i].style.display = "none"
+                }
 
                 cancelModif[i].style.visibility = "hidden"
                 acceptModif[i].style.visibility = "hidden"
