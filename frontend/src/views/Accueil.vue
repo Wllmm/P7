@@ -662,6 +662,10 @@ export default {
           .then((res) => res.json())
           .then((res) => {
 
+            fetch("http://localhost:5000/api/allUser", {})
+            .then((res) => res.json())
+            .then((allUser) => {
+              console.log(allUser.data)
 
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
@@ -675,16 +679,22 @@ export default {
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
-                  // console.log(data)
                   if (data.reposted === true){
+                    // console.log(data)
+                    let  userWhoRepost = allUser.data.find(el => el.id == data.userId)
+                    let userOfPost = allUser.data.find(el => el.id == data.initialUser)
+                    console.log(userOfPost)
+                    console.log(userWhoRepost)
+
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
                             <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
+                                    <h4> ${userWhoRepost.prenom}  ${userWhoRepost.nom} </h4>
                                     <h1 class="actual__title">${data.title}</h1>
-                                    <h3> <em>respost de </em> </h3>
+                                    <h3> <em>respost de ${userOfPost.prenom}   ${userOfPost.nom}</em> </h3>
                                     <div class="modify__title">
                                       <label for="addTitle"> Modifier le titre : </label>
                                       <input type="text" class="modifyTitle" value="${data.title}">
@@ -721,13 +731,16 @@ export default {
                       </div>`;
 
                   }else {
+                    // console.log(data)
+                    let userOfPost = allUser.data.find(el => el.id == data.userId)
+
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
                             <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
-                                    <h4> NAME </h4>
+                                    <h4> ${userOfPost.prenom}  ${userOfPost.nom} </h4>
                                     <h1 class="actual__title">${data.title}</h1>
                                     <div class="modify__title">
                                       <label for="addTitle"> Modifier le titre : </label>
@@ -1133,6 +1146,10 @@ export default {
             // 
             // 
           // FIN AFFICHAGE CREATE POST
+              
+            })
+
+           
           })
         },
         post(){
