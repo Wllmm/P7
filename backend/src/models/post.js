@@ -18,14 +18,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.CHAR,
         allowNull: false
       },
-      like: {
-        type: DataTypes.INTEGER,
+      reposted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
       },
-      dislike: {
+      initialUser: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
-      comments: {
+      picturePath: {
         type: DataTypes.CHAR,
-      },
+        allowNull: true
+      }
     })
   }

@@ -1,5 +1,5 @@
 Backend : 
-- Connexion / Déconnexion / Inscription/ Création, Suppression  de POSTS et commentaires -- OK
+- Connexion / Déconnexion / Inscription/ Création, Suppression  de POSTS et commentaires/ Ajout, suppression, modification d'images  -- OK
 
 
 Frontend : 
@@ -16,14 +16,14 @@ Reste a faire :
 
 
 Facile : ____________
-- Faire module d'ajout d'image à la première connexion (si pas de picturePath)
-- Ajout d'image dans les posts
-- Réussir a afficher les images depuis le dossier upload backend avec le path sotcker dans la BDD
+- Partage Posts (cacher l'affichage si c'est notre post et afficher plus d'informations si c'est un post partager)
 
 Moyen : ____________
-- Affichage de la suppression des post et des commentaires pour le modérateur (route créer)
-- Partage Posts
+- Ajout d'image dans les posts (problème multer supprime le body et je n'ai donc plus accès aux infos)
+- Réussir a afficher les images depuis le dossier upload backend avec le path sotcker dans la BDD
 
 
 Final : ____________
 - Refonte graphique globale
+
+

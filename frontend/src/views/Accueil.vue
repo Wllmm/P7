@@ -46,7 +46,7 @@
     </section>
 
     <div class="createPost">
-        <div class="createPost__head">
+        <!-- <div class="createPost__head">
             <img src="../img/portrait-0360w.jpg" alt="">
 
             <div class="createPost__head__title">
@@ -56,9 +56,9 @@
             </div>
             <i class="fas fa-times"></i>
 
-        </div>
+        </div> -->
 
-        <div class="createPost__content">
+        <!-- <div class="createPost__content">
             <label for="addContent"> Votre texte ici :</label>
             <textarea rows="10" cols="90" id="newPostContent"></textarea>
         </div>
@@ -68,7 +68,42 @@
             <input type="file" name="image_input" id="image_input">
            <a href="#" id="poster" @click="post">Poster !</a>
         </div>
+         -->
+          <form @submit.prevent="onSubmitPost" enctype="multipart/form-data">
+
+              <div class="createPost__head">
+                <img src="../img/portrait-0360w.jpg" alt="">
+
+                <div class="createPost__head__title">
+                    <label for="addTitle"> Titre : </label>
+                    <input type="text" id="newPostTitle">
+                    
+                </div>
+                <i class="fas fa-times"></i>
+              </div>
+              
+              <div class="createPost__content">
+                  <label for="addContent"> Votre texte ici :</label>
+                  <textarea rows="10" cols="90" id="newPostContent"></textarea>
+              </div>
+
+              <div class="createPost__files">
+                <label for="image_input">Choissisez votre image</label>
+                  <input type="file" ref="file" @change="onSelectPost" />
+              </div>
+              
+                <br><br>
+
+              <div class="fields">
+                <button id="postPicture" @click="post">Valider le changement de photo </button>
+              </div>
+
+            </form>
+
+
       </div>
+
+      
 
     <section class="accueil">
         <nav>
@@ -119,7 +154,9 @@ body {
 * {
   font-family: "Lato", sans-serif;
 }
-
+.fa-share:hover {
+  color: blue;
+}
 .modifyTitle {
   margin: 2rem 0 2rem 0;
   width: 50%;
@@ -580,6 +617,10 @@ fetch(`http://localhost:5000/api/user/${id}`, {
   // profilImage.innerHTML += `<img id="profilImage" src="${res.data.picturePath}" alt="">`
   // profilImage.src=`${path}`
 
+  if (res.data.picturePath === null){
+    // Affichage d'une erreur pas de photo
+  }
+
 })
 
 
@@ -624,6 +665,7 @@ export default {
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
+                  
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -643,6 +685,8 @@ export default {
                                     </div>
 
                                     <span class="options"> 
+                                      <button class="share"> <i class="fas fa-share"></i> </button> 
+
                                       <button class="modify"> <i class="fas fa-pen-alt"></i> </button>  
                                       <button class="delete"> <i class="fas fa-trash"></i> </button> 
 
@@ -738,7 +782,7 @@ export default {
                   }
 
                   let commentId = document.getElementsByClassName('deleteComment')
-                  console.log(commentId)
+                  // console.log(commentId)
                      
                   for (let i in comments.data){
                     commentId[i].onclick = () => {
@@ -835,6 +879,7 @@ export default {
             // 
             // 
               let userId = localStorage.getItem('ID')
+              let sharePost = document.getElementsByClassName('share')
               let deletePost = document.getElementsByClassName('delete')
               let modifyPost = document.getElementsByClassName('modify')
               let acceptModif = document.getElementsByClassName('acceptModif')
@@ -850,6 +895,32 @@ export default {
                 acceptModif[i].style.visibility = "hidden"
                 modifTile[i].style.display = "none"
                 modifContent[i].style.display = "none"
+
+
+                  // Créer un RePost
+                  // 
+                  sharePost[i].onclick = () => {
+                    // console.log(res.data[i])
+                    let repost = res.data[i]
+                    repost = { title : res.data[i].title, content: res.data[i].content, reposted : true, userId: id, initialUser: res.data[i].userId }
+                    console.log(repost)
+                    fetch("http://localhost:5000/api/posts", {
+                      method: 'POST',
+                      body : JSON.stringify(repost),
+                      headers: {
+                          "Content-type": "application/json",
+                          Authorization : `Bearer ${JSON.parse(Token)}`
+                      },
+                    })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      console.log(res)
+                    })
+
+                    setTimeout("location.reload(true);",400)
+                  }
+                  // FIN REPOST
+                  // 
 
                   // Affichage ou non de la modification
                     // 
@@ -995,10 +1066,11 @@ export default {
           })
         },
         post(){
+          console.log("Aussi j'envoie les données du post")
           let userId = localStorage.getItem('ID')
           let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
           let Token = localStorage.getItem('Token')
-          console.log(document.getElementById('image_input').value)
+          // console.log(document.getElementById('image_input').value)
           fetch("http://localhost:5000/api/posts", {
             method: 'POST',
             body : JSON.stringify(newPost),
@@ -1013,7 +1085,6 @@ export default {
           })
 
         setTimeout("location.reload(true);",400)
-
 
         },
         profilUser(){
@@ -1135,7 +1206,42 @@ export default {
             console.log(err);
             this.message = err.response.data.error
           }
-        }
+        },
+
+        // onSelectPost(){
+        //   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+        //   const file = this.$refs.file.files[0];
+        //   console.log(file)
+        //   this.file = file;
+        //   if(!allowedTypes.includes(file.type)){
+        //     this.message = "Filetype is wrong!!"
+        //   }
+        //   if(file.size>500000){
+        //     this.message = 'Too large, max size allowed is 500kb'
+        //   }
+        // },
+        // async onSubmitPost(){
+        //   let userId = localStorage.getItem('ID')
+        //   let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
+        //   let Token = localStorage.getItem('Token')
+        //   console.log(newPost)
+
+
+        //   const formData = new FormData();
+        //   formData.append('file',this.file);
+        //   try{
+        //     await axios.post(`http://localhost:5000/api/posts`, formData,
+        //     {body : JSON.stringify(newPost)}
+        //     ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
+
+        //     this.message = 'Modifiée !!'
+
+        //   }
+        //   catch(err){
+        //     console.log(err);
+        //     this.message = err.response.data.error
+        //   }
+        // }
     }
 }
 </script>
