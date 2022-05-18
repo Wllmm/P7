@@ -736,153 +736,55 @@ export default {
                         }
                       } 
                   }
+
                   let commentId = document.getElementsByClassName('deleteComment')
                   console.log(commentId)
                      
-                    for (let i in comments.data){
-                      commentId[i].onclick = () => {
-                        // console.log(comments.data[i].id)
-                        fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
-                          method: 'DELETE',
-                          headers: {
-                              Authorization : `Bearer ${JSON.parse(Token)}` 
-                          },
-                        })
-                        .then((res) => res.json())
-                        .then((res) => {
-                          setTimeout("location.reload(true);",400)
-                        })
-                        
-                      }
+                  for (let i in comments.data){
+                    commentId[i].onclick = () => {
+                      // console.log(comments.data[i].id)
+                      fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            Authorization : `Bearer ${JSON.parse(Token)}` 
+                        },
+                      })
+                      .then((res) => res.json())
+                      .then((res) => {
+                        setTimeout("location.reload(true);",400)
+                      })
+                      
                     }
-
-                })
-            })
-
-
-                          // console.log(comment)
-                          // for (let i in users.data){
-                          //   console.log(users.data[i])
-                          // }
-
-                          // if ( users.data.id === comment.userId){
-                          //   console.log(users.data.id)
-                          // }
-                          // console.log(users.data)
-
-
-                // fetch(`http://localhost:5000/api/comment`, {
-                //   headers: {
-                //     Authorization : `Bearer ${JSON.parse(Token)}` 
-                //   },
-                // })
-                // .then((comments) => comments.json())
-                // .then((comments) => {
-                //   // console.log(comments.data)
-                //   let commentId = "";
-
-                //   // Dans les posts
-                //   for (let data of res.data){
-                //     let commentAdd = document.getElementById(`comment${data.id}`)
-                    
-                //     // Dans les commentaires
-                //     for (let comment of comments.data){
-                //       if (comment.postId === data.id){
-                //         fetch(`http://localhost:5000/api/allUser/${comment.userId}`, {})
-                //         .then((res)=>res.json())
-                //         .then((res) => {
-                //           commentAdd.innerHTML += 
-                //           `<div class='new__comment'>
-                //               <h4> ${res.data.prenom}   ${res.data.nom} </h4>
-                //               <p>${comment.content}</p>
-                //               <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
-                //             </div>`
-                //            isFinishComment()
-                //           //  isFinishDeleteComment()
-                //         })
-                //       }
-                //     }
-                //   }
-                //   function isFinishComment () {
-                //   let commentId = document.getElementsByClassName('deleteComment')
-                //     for (let i in comments.data){
-                //       commentId[i].onclick = () => {
-                //         // console.log(comments.data[i].id)
-                //         fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
-                //           method: 'DELETE',
-                //           headers: {
-                //               Authorization : `Bearer ${JSON.parse(Token)}` 
-                //           },
-                //         })
-                //         .then((res) => res.json())
-                //         .then((res) => {
-                //           setTimeout("location.reload(true);",400)
-                //         })
-                        
-                //       }
-                //     }
-                //   }
+                  }
 
                   // Affichage de la possibilité de supprimé le commentaire
-                  // function isFinishDeleteComment () {
-                  // console.log(commentId)
+                
+                  for (let i in comments.data){
+                    // console.log(comments.data[i])
 
-                  // // for (let i in comments.data){
-                  // //   // console.log(comments.data[i])
+                      fetch(`http://localhost:5000/api/user/${id}`, {
+                        headers: {
+                            Authorization : `Bearer ${JSON.parse(Token)}` 
+                          },
+                      })
+                      .then((res) => res.json())
+                      .then((user) => { 
+                        console.log(comments.data[i])
+                        if (user.data.idAdmin === true) {
+                          return
+                        }                    
+                        if (comments.data[i].userId == user.data.id){
+                          
+                        }
+                        else {
+                          commentId[i].style.display = "none" 
+                        }
+                      }) 
+                    }
+                    // Fin affichage suppression commentaires
 
-                  // //     fetch(`http://localhost:5000/api/user/${id}`, {
-                  // //       headers: {
-                  // //           Authorization : `Bearer ${JSON.parse(Token)}` 
-                  // //         },
-                  // //     })
-                  // //     .then((res) => res.json())
-                  // //     .then((user) => { 
-                  // //       if (user.data.idAdmin === true) {
-                  // //         // DELETE COMMENT
-                  // //         deletePost[i].onclick = () => {
-                  // //           fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
-                  // //             method: "DELETE",
-                  // //             headers: {
-                  // //                 Authorization : `Bearer ${JSON.parse(Token)}` 
-                  // //             },
-                  // //           })
-                  // //           .then((res) => res.json())
-                  // //           .then((res) => {
-                  // //             console.log(res)
-                  // //             setTimeout("location.reload(true);",400)
-                  // //           })
-                  // //         }
-                  // //         return
-                  // //       }                    
-                  // //       if (res.data[i].userId == user.data.id){
-                  // //         deletePost[i].onclick = () => {
-                  // //           fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
-                  // //             method: "DELETE",
-                  // //             headers: {
-                  // //                 Authorization : `Bearer ${JSON.parse(Token)}` 
-                  // //             },
-                  // //           })
-                  // //           .then((res) => res.json())
-                  // //           .then((res) => {
-                  // //             console.log(res)
-                  // //             setTimeout("location.reload(true);",400)
-                  // //           })
-                  // //         }
-                  // //       }
-                  // //       else {
-                  // //         deletePost[i].style.display = "none" 
-                  // //         modifyPost[i].style.display = 'none'
-                  // //       }
-                  // //     })
-
-                  // //     // Fin affichage suppression commentaires 
-
-                  // // }
-                  // }
-              
-
-
-                // })
+                })
+            })      
               // 
               //
             // FIN AFFICHAGE COMMENTAIRES 
