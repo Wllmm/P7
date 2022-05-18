@@ -694,7 +694,17 @@ export default {
           // Affichage des commentaires avec le nom des utilisateurs
             // 
             // 
-                fetch(`http://localhost:5000/api/comment`, {
+
+            // On charge les noms de tout le monde 
+            fetch(`http://localhost:5000/api/allUser`, {
+
+            })
+            .then((res)=>res.json())
+            .then((users) => {
+              // console.log(users)
+
+              // On charge les commentaires
+              fetch(`http://localhost:5000/api/comment`, {
                   headers: {
                     Authorization : `Bearer ${JSON.parse(Token)}` 
                   },
@@ -702,32 +712,33 @@ export default {
                 .then((comments) => comments.json())
                 .then((comments) => {
                   // console.log(comments.data)
-                  let commentId = "";
 
-                  // Dans les posts
+                  // Dans les posts :
                   for (let data of res.data){
+                    // console.log(data)
                     let commentAdd = document.getElementById(`comment${data.id}`)
-                    
-                    // Dans les commentaires
-                    for (let comment of comments.data){
-                      if (comment.postId === data.id){
-                        fetch(`http://localhost:5000/api/allUser/${comment.userId}`, {})
-                        .then((res)=>res.json())
-                        .then((res) => {
+
+                    // Dans les commentaires : 
+                     for (let comment of comments.data){
+                      //  console.log(comment)
+                        if (comment.postId === data.id){
+
+                          // console.log(comment.userId)
+                          // console.log(users.data)
+                          let commentUser = users.data.find(el => el.id == comment.userId)
+
                           commentAdd.innerHTML += 
                           `<div class='new__comment'>
-                              <h4> ${res.data.prenom}   ${res.data.nom} </h4>
+                              <h4> ${commentUser.prenom}   ${commentUser.nom} </h4>
                               <p>${comment.content}</p>
                               <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
                             </div>`
-                           isFinishComment()
-                          //  isFinishDeleteComment()
-                        })
-                      }
-                    }
+                        }
+                      } 
                   }
-                  function isFinishComment () {
                   let commentId = document.getElementsByClassName('deleteComment')
+                  console.log(commentId)
+                     
                     for (let i in comments.data){
                       commentId[i].onclick = () => {
                         // console.log(comments.data[i].id)
@@ -744,7 +755,73 @@ export default {
                         
                       }
                     }
-                  }
+
+                })
+            })
+
+
+                          // console.log(comment)
+                          // for (let i in users.data){
+                          //   console.log(users.data[i])
+                          // }
+
+                          // if ( users.data.id === comment.userId){
+                          //   console.log(users.data.id)
+                          // }
+                          // console.log(users.data)
+
+
+                // fetch(`http://localhost:5000/api/comment`, {
+                //   headers: {
+                //     Authorization : `Bearer ${JSON.parse(Token)}` 
+                //   },
+                // })
+                // .then((comments) => comments.json())
+                // .then((comments) => {
+                //   // console.log(comments.data)
+                //   let commentId = "";
+
+                //   // Dans les posts
+                //   for (let data of res.data){
+                //     let commentAdd = document.getElementById(`comment${data.id}`)
+                    
+                //     // Dans les commentaires
+                //     for (let comment of comments.data){
+                //       if (comment.postId === data.id){
+                //         fetch(`http://localhost:5000/api/allUser/${comment.userId}`, {})
+                //         .then((res)=>res.json())
+                //         .then((res) => {
+                //           commentAdd.innerHTML += 
+                //           `<div class='new__comment'>
+                //               <h4> ${res.data.prenom}   ${res.data.nom} </h4>
+                //               <p>${comment.content}</p>
+                //               <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
+                //             </div>`
+                //            isFinishComment()
+                //           //  isFinishDeleteComment()
+                //         })
+                //       }
+                //     }
+                //   }
+                //   function isFinishComment () {
+                //   let commentId = document.getElementsByClassName('deleteComment')
+                //     for (let i in comments.data){
+                //       commentId[i].onclick = () => {
+                //         // console.log(comments.data[i].id)
+                //         fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
+                //           method: 'DELETE',
+                //           headers: {
+                //               Authorization : `Bearer ${JSON.parse(Token)}` 
+                //           },
+                //         })
+                //         .then((res) => res.json())
+                //         .then((res) => {
+                //           setTimeout("location.reload(true);",400)
+                //         })
+                        
+                //       }
+                //     }
+                //   }
 
                   // Affichage de la possibilité de supprimé le commentaire
                   // function isFinishDeleteComment () {
@@ -805,7 +882,7 @@ export default {
               
 
 
-                })
+                // })
               // 
               //
             // FIN AFFICHAGE COMMENTAIRES 

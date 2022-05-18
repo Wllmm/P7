@@ -3,20 +3,24 @@ const { User } = require('../db/sequelize')
 
   
 module.exports = (app) => {
-  app.get('/api/allUser/:id', (req, res) => {
-    User.findByPk(req.params.id)
+  app.get('/api/allUser', (req, res) => {
+    User.findAll()
       .then(user => {
         const message = 'Un utilisateur a bien été trouvé.'
 
         if (user === null){
             const error = 'Aucun utilisateur a été trouvé.'
             res.json({ error })
-            return
         }
-        
-        // On vérifie si l'utilisateur est le bon
+
         else {
-             res.json({ message, data: user })
+          let users = [];
+          for (let account of user){
+            // console.log(account.dataValues)
+            let test = { "id" : account.dataValues.id, "prenom" : account.dataValues.prenom, "nom" : account.dataValues.nom }
+            users.push(test) 
+          }
+             res.json({ message, data: users })
         }
      })
   })
