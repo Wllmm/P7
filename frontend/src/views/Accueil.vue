@@ -721,6 +721,7 @@ export default {
                               <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
                             </div>`
                            isFinishComment()
+                          //  isFinishDeleteComment()
                         })
                       }
                     }
@@ -744,6 +745,66 @@ export default {
                       }
                     }
                   }
+
+                  // Affichage de la possibilité de supprimé le commentaire
+                  // function isFinishDeleteComment () {
+                  // console.log(commentId)
+
+                  // // for (let i in comments.data){
+                  // //   // console.log(comments.data[i])
+
+                  // //     fetch(`http://localhost:5000/api/user/${id}`, {
+                  // //       headers: {
+                  // //           Authorization : `Bearer ${JSON.parse(Token)}` 
+                  // //         },
+                  // //     })
+                  // //     .then((res) => res.json())
+                  // //     .then((user) => { 
+                  // //       if (user.data.idAdmin === true) {
+                  // //         // DELETE COMMENT
+                  // //         deletePost[i].onclick = () => {
+                  // //           fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
+                  // //             method: "DELETE",
+                  // //             headers: {
+                  // //                 Authorization : `Bearer ${JSON.parse(Token)}` 
+                  // //             },
+                  // //           })
+                  // //           .then((res) => res.json())
+                  // //           .then((res) => {
+                  // //             console.log(res)
+                  // //             setTimeout("location.reload(true);",400)
+                  // //           })
+                  // //         }
+                  // //         return
+                  // //       }                    
+                  // //       if (res.data[i].userId == user.data.id){
+                  // //         deletePost[i].onclick = () => {
+                  // //           fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
+                  // //             method: "DELETE",
+                  // //             headers: {
+                  // //                 Authorization : `Bearer ${JSON.parse(Token)}` 
+                  // //             },
+                  // //           })
+                  // //           .then((res) => res.json())
+                  // //           .then((res) => {
+                  // //             console.log(res)
+                  // //             setTimeout("location.reload(true);",400)
+                  // //           })
+                  // //         }
+                  // //       }
+                  // //       else {
+                  // //         deletePost[i].style.display = "none" 
+                  // //         modifyPost[i].style.display = 'none'
+                  // //       }
+                  // //     })
+
+                  // //     // Fin affichage suppression commentaires 
+
+                  // // }
+                  // }
+              
+
+
                 })
               // 
               //
@@ -877,28 +938,52 @@ export default {
 
                 // Si c'est le post de l'utilisateur on autorise la suppression et la modification
                   // 
-                    if (res.data[i].userId == userId){
-                      deletePost[i].onclick = () => {
-                      console.log(res.data[i])
-                        fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
-                          method: "DELETE",
-                          headers: {
-                              Authorization : `Bearer ${JSON.parse(Token)}` 
-                          },
-                        })
-                        .then((res) => res.json())
-                        .then((res) => {
-                          console.log(res)
-                          setTimeout("location.reload(true);",400)
-                        })
+                  
+                    fetch(`http://localhost:5000/api/user/${id}`, {
+                      headers: {
+                          Authorization : `Bearer ${JSON.parse(Token)}` 
+                        },
+                    })
+                    .then((res) => res.json())
+                    .then((user) => { 
+                      if (user.data.idAdmin === true) {
+                        modifyPost[i].style.display = 'none'
 
+                        deletePost[i].onclick = () => {
+                          fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
+                            method: "DELETE",
+                            headers: {
+                                Authorization : `Bearer ${JSON.parse(Token)}` 
+                            },
+                          })
+                          .then((res) => res.json())
+                          .then((res) => {
+                            console.log(res)
+                            setTimeout("location.reload(true);",400)
+                          })
+                        }
+                        return
+                      }                    
+                      if (res.data[i].userId == user.data.id){
+                        deletePost[i].onclick = () => {
+                          fetch(`http://localhost:5000/api/posts/${res.data[i].id}`, {
+                            method: "DELETE",
+                            headers: {
+                                Authorization : `Bearer ${JSON.parse(Token)}` 
+                            },
+                          })
+                          .then((res) => res.json())
+                          .then((res) => {
+                            console.log(res)
+                            setTimeout("location.reload(true);",400)
+                          })
+                        }
                       }
-                    }
-                    // Si ce n'est pas son post on n'affiche plus la suppression
-                    else { 
-                      deletePost[i].style.display = "none" 
-                      modifyPost[i].style.display = 'none'
-                    }
+                      else {
+                        deletePost[i].style.display = "none" 
+                        modifyPost[i].style.display = 'none'
+                      }
+                    })
               }
               // 
               // 
