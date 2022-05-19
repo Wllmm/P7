@@ -17,7 +17,7 @@ module.exports = (app) => {
           let users = [];
           for (let account of user){
             // console.log(account.dataValues)
-            let test = { "id" : account.dataValues.id, "prenom" : account.dataValues.prenom, "nom" : account.dataValues.nom }
+            let test = { "id" : account.dataValues.id, "prenom" : account.dataValues.prenom, "nom" : account.dataValues.nom, "picture" : account.dataValues.picturePath }
             users.push(test) 
           }
              res.json({ message, data: users })

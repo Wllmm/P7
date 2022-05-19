@@ -132,7 +132,7 @@
         </div>
        <div class="accueil__profil" id="profil"> 
             <div id="accueil__profil__always"> 
-                <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
+                <!-- <img class="imageProfil" src="../img/portrait-0360w.jpg" alt=""> -->
                 <p id="username"> Username </p>
             </div>
             <div id="accueil_profil__active">
@@ -153,6 +153,48 @@ body {
 * {
   font-family: "Lato", sans-serif;
 }
+
+/* Image création de post  */
+.createPost__head img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+/* Image ajout de post */
+.accueil__post__add img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 1rem;
+}
+/* Image POST */
+.accueil__post__show__element img {
+  margin-top: 0.2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 1rem;
+}
+/* Image profil */
+.accueil__profil img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+/* Image dans la modif profil */
+.profil__image img {
+    width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
 .fa-share:hover {
   color: blue;
 }
@@ -199,7 +241,7 @@ body {
   align-items: center;
   margin-right: 2rem;
 }
-.profil__image img {
+.profilImage {
   width: 150px;
   margin-bottom: 2rem;
   border-radius: 50%;
@@ -306,10 +348,7 @@ body {
 .createPost__head {
   display: flex;
 }
-.createPost__head img {
-  width: 80px;
-  border-radius: 50%;
-}
+
 .createPost__head i {
   border: 2px solid red;
   display: flex;
@@ -442,11 +481,7 @@ button {
   color: white;
   background-color: #4c5c6d;
 }
-.accueil__post__add img {
-  width: 60px;
-  border-radius: 50%;
-  padding: 1rem;
-}
+
 .accueil__post__add form {
   display: flex;
   flex: 1;
@@ -476,13 +511,7 @@ button {
 .accueil__post__show__element {
   display: flex;
 }
-.accueil__post__show__element img {
-  margin-top: 0.2rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding: 1rem;
-}
+
 .accueil__post__show__element__content {
   flex: 1;
   display: flex;
@@ -543,12 +572,6 @@ button {
   background-color: #d0575f;
 }
 
-.accueil__profil img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 1rem;
-}
 
 .accueil__profil p {
   font-weight: bold;
@@ -660,7 +683,6 @@ export default {
         let path = "http://localhost:5000/uploads/" + res.data.picturePath
 
         for(let profil of profilImage){
-          console.log(profil)
           profil.src=`${path}`
         }
 
@@ -682,7 +704,7 @@ export default {
             fetch("http://localhost:5000/api/allUser", {})
             .then((res) => res.json())
             .then((allUser) => {
-              // console.log(allUser.data)
+              console.log(allUser.data)
 
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
@@ -706,7 +728,7 @@ export default {
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
-                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                            <img src="http://localhost:5000/uploads/${userWhoRepost.picture}" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
                                     <h4> ${userWhoRepost.prenom}  ${userWhoRepost.nom} </h4>
@@ -750,11 +772,12 @@ export default {
                   }else {
                     // console.log(data)
                     let userOfPost = allUser.data.find(el => el.id == data.userId)
+                    console.log(userOfPost)
 
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
-                            <img src="/img/portrait-0360w.a3b4ee86.jpg" alt="">
+                            <img src="http://localhost:5000/uploads/${userOfPost.picture}" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
                                     <h4> ${userOfPost.prenom}  ${userOfPost.nom} </h4>
@@ -1307,7 +1330,7 @@ export default {
           try{
             await axios.put(`http://localhost:5000/api/user/${id}`, formData, { headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
             this.message = 'Modifiée !!'
-
+            location.reload()
           }
           catch(err){
             console.log(err);
