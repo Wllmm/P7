@@ -6,8 +6,8 @@
 
      <section class="profil">
         <div class="profil__image" >
-            <img id="profilImage" src="" alt="">
-            <!-- src="../../../backend/uploads\\file-1652777147506-719565919.png" -->
+            <img class="imageProfil" src="localhost:5000/uploads/" alt="">
+            
 
             <form @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="fields">
@@ -47,7 +47,7 @@
 
     <div class="createPost">
         <div class="createPost__head">
-            <img src="../img/portrait-0360w.jpg" alt="">
+            <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
 
             <div class="createPost__head__title">
                 <label for="addTitle"> Titre : </label>
@@ -102,9 +102,7 @@
           </form> -->
 
 
-      </div>
-
-      
+    </div>
 
     <section class="accueil">
         <nav>
@@ -120,7 +118,7 @@
 
         <div class="accueil__post"> 
             <div class="accueil__post__add">
-                <img src="../img/portrait-0360w.jpg" alt="">
+                <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
                 <form action="post">
                     <label for="addPost">Create post</label>
                     <input type="text">
@@ -134,7 +132,7 @@
         </div>
        <div class="accueil__profil" id="profil"> 
             <div id="accueil__profil__always"> 
-                <img src="../img/portrait-0360w.jpg" alt="">
+                <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
                 <p id="username"> Username </p>
             </div>
             <div id="accueil_profil__active">
@@ -620,11 +618,6 @@ fetch(`http://localhost:5000/api/user/${id}`, {
   let profilEmail = document.getElementById('profilEmail')
   profilEmail.innerText = `${res.data.email}`
 
-  let profilImage = document.getElementById('profilImage')
-  let path = "../../../backend/" + res.data.picturePath
-  // console.log(path)
-  // profilImage.innerHTML += `<img id="profilImage" src="${res.data.picturePath}" alt="">`
-  // profilImage.src=`${path}`
 
   if (res.data.picturePath === null){
     // Affichage d'une erreur pas de photo
@@ -644,7 +637,7 @@ export default {
     data(){
       return { 
         file:"",
-        message:""
+        message:"",
       }
     },
     computed:{
@@ -653,6 +646,29 @@ export default {
     },
     methods: {
         onLoad(){
+
+        // Affichage de l'image de l'utilisateur : 
+        fetch(`http://localhost:5000/api/user/${id}`, {
+          headers: {
+              Authorization : `Bearer ${JSON.parse(Token)}` 
+            },
+        })
+        .then((res) => res.json())
+        .then((res) => {
+          
+        let profilImage = document.getElementsByClassName("imageProfil")
+        let path = "http://localhost:5000/uploads/" + res.data.picturePath
+
+        for(let profil of profilImage){
+          console.log(profil)
+          profil.src=`${path}`
+        }
+
+
+        })
+
+
+
           let token = localStorage.getItem('Token');
           // On récupère tout les posts au passage si le token est mauvais on indique une erreur et demande une reconnexion
           fetch("http://localhost:5000/api/post", {
@@ -883,6 +899,7 @@ export default {
                       })
                       .then((res) => res.json())
                       .then((user) => { 
+
                         // console.log(comments.data[i])
                         if (user.data.idAdmin === true) {
                           return
@@ -1080,6 +1097,8 @@ export default {
                     })
                     .then((res) => res.json())
                     .then((user) => { 
+
+
                       if (user.data.idAdmin === true) {
                         modifyPost[i].style.display = 'none'
 
