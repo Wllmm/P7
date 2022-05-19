@@ -50,7 +50,7 @@
           <form id="createPost" @submit.prevent="onSubmitPost" enctype="multipart/form-data">
 
               <div class="createPost__head">
-                <img src="../img/portrait-0360w.jpg" alt="">
+                <img class="" src="../img/portrait-0360w.jpg" alt="">
 
                 <div class="createPost__head__title">
                     <label for="addTitle"> Titre : </label>
@@ -716,6 +716,7 @@ export default {
                                       <input type="text" class="modifyTitle" value="${data.title}">
                                     </div>
 
+                                    <img src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
                                     <div class="modify__content">
                                       <label for="modifyContent"> Modifier votre post :</label>
@@ -747,7 +748,7 @@ export default {
                       </div>`;
 
                   }else {
-                    // console.log(data)
+                    console.log(data)
                     let userOfPost = allUser.data.find(el => el.id == data.userId)
                     // console.log(userOfPost)
 
@@ -764,6 +765,7 @@ export default {
                                       <input type="text" class="modifyTitle" value="${data.title}">
                                     </div>
 
+                                    <img class="postImages" src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
                                     <div class="modify__content">
                                       <label for="modifyContent"> Modifier votre post :</label>
