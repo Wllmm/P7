@@ -1003,7 +1003,7 @@ export default {
                   sharePost[i].onclick = () => {
                     // console.log(res.data[i])
                     let repost = res.data[i]
-                    repost = { title : res.data[i].title, content: res.data[i].content, reposted : true, userId: id, initialUser: res.data[i].userId }
+                    repost = { title : res.data[i].title, content: res.data[i].content, reposted : true, userId: id, initialUser: res.data[i].userId, picturePath: res.data[i].picturePath }
                     console.log(repost)
                     fetch("http://localhost:5000/api/posts", {
                       method: 'POST',
@@ -1172,28 +1172,28 @@ export default {
            
           })
         },
-        post(){
-          console.log("Aussi j'envoie les données du post")
-          let userId = localStorage.getItem('ID')
-          let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
-          let Token = localStorage.getItem('Token')
-          // console.log(document.getElementById('image_input').value)
-          fetch("http://localhost:5000/api/posts", {
-            method: 'POST',
-            body : JSON.stringify(newPost),
-            headers: {
-                "Content-type": "application/json",
-                Authorization : `Bearer ${JSON.parse(Token)}`
-            },
-          })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res)
-          })
+        // post(){
+        //   console.log("Aussi j'envoie les données du post")
+        //   let userId = localStorage.getItem('ID')
+        //   let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
+        //   let Token = localStorage.getItem('Token')
+        //   // console.log(document.getElementById('image_input').value)
+        //   fetch("http://localhost:5000/api/posts", {
+        //     method: 'POST',
+        //     body : JSON.stringify(newPost),
+        //     headers: {
+        //         "Content-type": "application/json",
+        //         Authorization : `Bearer ${JSON.parse(Token)}`
+        //     },
+        //   })
+        //   .then((res) => res.json())
+        //   .then((res) => {
+        //     console.log(res)
+        //   })
 
-        setTimeout("location.reload(true);",400)
+        // setTimeout("location.reload(true);",400)
 
-        },
+        // },
         profilUser(){
           let profil = document.getElementsByClassName("profil")
           let hide = document.getElementById('hide')
