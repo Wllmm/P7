@@ -9,7 +9,7 @@
             <img class="imageProfil" src="localhost:5000/uploads/" alt="">
             
 
-            <form @submit.prevent="onSubmit" enctype="multipart/form-data">
+            <form id="profils" @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="fields">
                   <input type="file" ref="file" @change="onSelect" />
                 </div>
@@ -46,31 +46,8 @@
     </section>
 
     <div class="createPost">
-        <div class="createPost__head">
-            <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
-
-            <div class="createPost__head__title">
-                <label for="addTitle"> Titre : </label>
-                <input type="text" id="newPostTitle">
-                
-            </div>
-            <i class="fas fa-times"></i>
-
-        </div>
-
-        <div class="createPost__content">
-            <label for="addContent"> Votre texte ici :</label>
-            <textarea rows="10" cols="90" id="newPostContent"></textarea>
-        </div>
-
-        <div class="createPost__files">
-          <label for="image_input">Choissisez votre image</label>
-            <input type="file" name="image_input" id="image_input">
-           <a href="#" id="poster" @click="post">Poster !</a>
-        </div>
-        
-
-          <!-- <form @submit.prevent="onSubmitPost" enctype="multipart/form-data">
+      
+          <form id="createPost" @submit.prevent="onSubmitPost" enctype="multipart/form-data">
 
               <div class="createPost__head">
                 <img src="../img/portrait-0360w.jpg" alt="">
@@ -90,16 +67,16 @@
 
               <div class="createPost__files">
                 <label for="image_input">Choissisez votre image</label>
-                  <input type="file" ref="file" @change="onSelectPost" />
+                  <input type="file" ref="filePost" @change="onSelectPost" />
               </div>
               
                 <br><br>
 
-              <div class="fields">
-                <button id="postPicture" @click="post">Valider le changement de photo </button>
+              <div class="button">
+                <button>Valider le changement de photo </button>
               </div>
 
-          </form> -->
+          </form>
 
 
     </div>
@@ -704,7 +681,7 @@ export default {
             fetch("http://localhost:5000/api/allUser", {})
             .then((res) => res.json())
             .then((allUser) => {
-              console.log(allUser.data)
+              // console.log(allUser.data)
 
             // Affichage d'une plus belle erreur
             if (res.data.message === "invalid token"){ console.log("Erreur d'authentification")}
@@ -772,7 +749,7 @@ export default {
                   }else {
                     // console.log(data)
                     let userOfPost = allUser.data.find(el => el.id == data.userId)
-                    console.log(userOfPost)
+                    // console.log(userOfPost)
 
                     focus.innerHTML += 
                       `<div class="accueil__post__show">
@@ -1337,41 +1314,41 @@ export default {
             this.message = err.response.data.error
           }
         },
+        onSelectPost(){
 
-        // onSelectPost(){
-        //   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
-        //   const file = this.$refs.file.files[0];
-        //   console.log(file)
-        //   this.file = file;
-        //   if(!allowedTypes.includes(file.type)){
-        //     this.message = "Filetype is wrong!!"
-        //   }
-        //   if(file.size>500000){
-        //     this.message = 'Too large, max size allowed is 500kb'
-        //   }
-        // },
-        // async onSubmitPost(){
-        //   let userId = localStorage.getItem('ID')
-        //   let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
-        //   let Token = localStorage.getItem('Token')
-        //   console.log(newPost)
+          const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+          const file = this.$refs.filePost.files[0];
+          console.log(file)
+          this.file = file;
+          if(!allowedTypes.includes(file.type)){
+            this.message = "Filetype is wrong!!"
+          }
+          if(file.size>500000){
+            this.message = 'Too large, max size allowed is 500kb'
+          }
+        },
+        async onSubmitPost(){
+          let userId = localStorage.getItem('ID')
+          let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}`}
+          let Token = localStorage.getItem('Token')
+          console.log(newPost)
 
 
-        //   const formData = new FormData();
-        //   formData.append('file',this.file);
-        //   try{
-        //     await axios.post(`http://localhost:5000/api/posts`, formData,
-        //     {body : JSON.stringify(newPost)}
-        //     ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
+          const formData = new FormData();
+          formData.append('file',this.file);
+          formData.append('body', JSON.stringify(newPost));
+          try{
+            await axios.post(`http://localhost:5000/api/posts`, formData
+            ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
 
-        //     this.message = 'Modifiée !!'
+            this.message = 'Modifiée !!'
 
-        //   }
-        //   catch(err){
-        //     console.log(err);
-        //     this.message = err.response.data.error
-        //   }
-        // }
+          }
+          catch(err){
+            console.log(err);
+            this.message = err.response.data.error
+          }
+        }
     }
 }
 </script>
