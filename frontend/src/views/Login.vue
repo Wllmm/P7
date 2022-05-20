@@ -3,8 +3,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- icones font awesome -->
 
+        <header><img src="../img/icon-left-font-monochrome-black.svg"  class="logo" alt="logo">
+        </header>
+
       <section class="home">
-        <h1>Groupomania</h1>
+        <h1>Bienvenue</h1>
         <div>
             <ul>
                 <li><router-link to="/">Inscription</router-link></li>
@@ -17,18 +20,21 @@
             <form action="">
 
                 <div class="home__form__input">
-                    <label for="email" id="errorEmail">Email :</label>
+                    <label id="labelEmail" for="email">            Email  </label>
                     <input type="email" name="email" id="email">
+                    <p id="errorEmail"></p>
                 </div>
 
                 <div class="home__form__input">
-                    <label for="password" id="errorPassword">Mot de passe :</label>
+                    <label id="labelPassword" for="password" >Mot de passe  </label>
                     <input type="password" name="password" id="password">
+                    <p id="errorPassword"></p>
                 </div>
+                
+                <button id="Check" @click="check"> Connexion </button>
 
             </form>
         </div>
-        <button id="Check" @click="check"> Connexion </button>
         <div id="error"></div>
       </section>
 
@@ -36,61 +42,40 @@
 </template>
 
 
-<style scoped>
-* {
+<style>
+*{
   font-family: "Lato", sans-serif;
 }
 
 body {
-  margin: 0%;
+  margin: 0;
 }
 
-.home {
-  border-radius: 1rem;
-  width: 80%;
-  margin: 10% 0 10% 10%;
+header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #e0e2e5;
+  justify-content: center;
+  margin: 2rem 0 0 0;
 }
-.home h1 {
-  font-size: 2rem;
-  margin-bottom: 0;
-  margin-top: 1rem;
-  color: #152545;
-  text-decoration: underline;
-  text-decoration-color: #d0575f;
+header img {
+  width: 20%;
+  object-fit: cover;
 }
-.home h2 {
-  color: #626e81;
-  font-size: 1.5rem;
-  text-decoration: overline;
+
+.fa-check {
+  color: rgb(8, 234, 4);
 }
-.home ul {
+.fa-times {
+  color: red;
+}
+
+#error{
+  color: red;
+  font-size: 125%;
   display: flex;
-  padding: 0%;
+  justify-content: center;
+  margin: 0 0 1rem 0;
 }
-.home ul li {
-  list-style: none;
-  margin: 1rem 2rem 0 2rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
-  background-color: #152545;
-  border-radius: 0.5rem;
-}
-.home ul li:visited {
-  list-style: none;
-  margin: 1rem 2rem 0 2rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
-  background-color: #152545;
-  border-radius: 0.5rem;
-}
+
 a.router-link-exact-active {
   color: rgb(208,87,95);
   text-decoration: none;
@@ -100,73 +85,206 @@ a{
   text-decoration: none;
 
 }
-.home button {
+
+
+.home {
+  border: 1px solid black;
+  width: 70%;
+  margin: 3% 15% 3% 15%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f8;
+}
+.home h1 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 250%;
+  color: #152545;
+  text-decoration: underline;
+  text-decoration-color: #d0575f;
+}
+.home ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+.home ul li {
+  border: 1px solid black;
+  padding: 1% 2% 1% 2%;
+  border-radius: 0.5rem;
+  width: fit-content;
+  background-color: #152545;
+  color: white;
+  margin: 0 5% 0 5%;
+  font-size: 200%;
+}
+.home h2 {
+  display: flex;
+  margin-left: 5%;
+  justify-content: center;
+  width: 90%;
+  justify-content: center;
+  font-size: 200%;
+  border-bottom: 2px solid black;
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+}
+.home__form {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+.home__form #Check {
+  display: flex;
   all: unset;
   color: #d0575f;
   background: #152545;
   padding: 0.5rem 1rem 0.5rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 1rem;
-  margin-top: 2rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0 0 35%;
   font-size: 1.2rem;
   font-weight: bold;
   transition: background 0.5s;
-}
-.home button:hover {
-  font-weight: bold;
-  color: #152545;
-  background: #d0575f;
   cursor: pointer;
 }
 .home__form__input {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  /* border: 1px solid black; */
+  margin: 1rem 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 1%;
 }
 .home__form__input label {
-  margin-right: 1.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  color: #d0575f;
-  font-weight: bolder;
+  font-size: 125%;
 }
 .home__form__input input {
+  height: 20px;
+  font-size: 125%;
+  color: black;
+  padding: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #4c5c6d;
-  color: white;
-  padding: 0.5rem;
-  font-size: 1rem;
-  width: 15rem;
+  border: 2px solid #4c5c6d;
 }
-
-.home__form i {
-  color: rgb(29, 168, 45);
-  font-weight: bold;
-  /* border: 1px solid black; */
-  margin: 0;
+.home__form__input p {
   display: flex;
-  margin: 0.6rem 0 0.1rem 0;
-  align-content: center;
-  margin-left: 1rem;
-  font-size: 1.2rem;
-  height: 90%;
-}
-.home__form .fa-ban{
+  justify-content: center;
+  font-size: 100%;
+  font-style: italic;
   color: red;
-  font-weight: bold;
-  /* border: 1px solid black; */
-  margin: 0;
-  display: flex;
-  margin: 0.3rem 0 0.1rem 0;
-  align-content: center;
-  margin-left: 1rem;
-  font-size: 1.5rem;
-  height: 90%;
-
+  margin: 1.5%;
 }
+
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 0 0;
+  }
+  header img {
+    width: 50%;
+    object-fit: cover;
+  }
+
+  .home {
+    border: 1px solid black;
+    width: 70%;
+    margin: 3% 15% 3% 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f8;
+  }
+  .home h1 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 250%;
+    color: #152545;
+    text-decoration: underline;
+    text-decoration-color: #d0575f;
+  }
+  .home ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+  .home ul li {
+    border: 1px solid black;
+    padding: 1% 2% 1% 2%;
+    border-radius: 0.5rem;
+    width: fit-content;
+    background-color: #152545;
+    color: white;
+    margin: 0 5% 0 5%;
+    font-size: 150%;
+  }
+  .home h2 {
+    display: flex;
+    margin-left: 5%;
+    justify-content: center;
+    width: 90%;
+    justify-content: center;
+    font-size: 150%;
+    border-bottom: 2px solid black;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+  }
+  .home__form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+  .home__form #Check {
+    display: flex;
+    all: unset;
+    color: #d0575f;
+    background: #152545;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0 0 35%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background 0.5s;
+    cursor: pointer;
+  }
+  .home__form__input {
+    margin: 1rem 0 1rem 0;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 1%;
+  }
+  .home__form__input label {
+    font-size: 125%;
+  }
+  .home__form__input input {
+    height: 20px;
+    font-size: 125%;
+    color: black;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    border: 2px solid #4c5c6d;
+  }
+  .home__form__input p {
+    display: flex;
+    justify-content: center;
+    font-size: 100%;
+    font-style: italic;
+    color: red;
+    margin: 1.5%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
+
 
 /*# sourceMappingURL=style.css.map */
 </style>
@@ -212,45 +330,59 @@ export default {
           passwordCheck = regPassword.test(password.value);
 
           if (passwordCheck === true){
+            document.getElementById("labelPassword")
+            .innerHTML = `Mot de passe  <i class="fas fa-check"></i>  `
             document.getElementById("errorPassword")
-            .innerHTML = `Mot de passe : <i class="fas fa-check"></i>`;
+            .innerHTML = "";
           }else{
+            document.getElementById("labelPassword")
+            .innerHTML = `Mot de passe  <i class="fas fa-times"></i>  `
             document.getElementById("errorPassword")
-            .innerHTML = ` Mot de passe : <i class="fas fa-times"></i>`;
+            .innerHTML = "Le mot de pass doit contenir : Maj, Min, Chiffre, Caractère spécial, Min 8 caractères .";
+
           }
         }
         email.onkeyup = () =>{
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
+            document.getElementById('labelEmail')
+            .innerHTML = `             Email  <i class="fas fa-check"></i>  `
             document.getElementById("errorEmail")
-            .innerHTML = `Email : <i class="fas fa-check"></i>`;
+            .innerHTML = "";
           }else{
+            document.getElementById('labelEmail')
+            .innerHTML = `             Email  <i class="fas fa-times"></i>  `
             document.getElementById("errorEmail")
-            .innerHTML = ` Email : <i class="fas fa-times"></i>`;
+            .innerHTML = "L'adresse email saisie n'est pas valide.";
           }
         }
 
         Check.onclick = (event) => {
           event.preventDefault()
 
-          function testAllCheck(){
-            if(! passwordCheck || ! emailCheck){
-            } else {
+          if(! passwordCheck || ! emailCheck){
+            document.getElementById("error")
+            .innerHTML = "Les champs ne sont pas remplis correctement."
 
-              let user = { password: password.value, email: email.value}
-              console.log(user)
+          } else {
+            let user = { password: password.value, email: email.value}
+            console.log(user)
 
-              fetch("http://localhost:5000/api/login", {
-                  method: 'POST',
-                  body: JSON.stringify(user),
-                  headers: {
-                      "Content-type": "application/json",
-                  },
-              })
-              .then((res) => res.json())
-              .then((res) => {
-                  console.log(res);
+            fetch("http://localhost:5000/api/login", {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    "Content-type": "application/json",
+                },
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                if (res.message === "Le mot de passe est incorrect."){
+                  document.getElementById("error")
+                  .innerHTML = "Le mot de passe est incorrect."
+                }else {
                   let token = res.token;
                   console.log(token)
 
@@ -260,18 +392,22 @@ export default {
                   localStorage.setItem("Token", JSON.stringify(Connexion))
                   localStorage.setItem("ID", res.data.id)
 
-                  }
-              })
-            }
-        }
-        testAllCheck();
-        setTimeout("location.reload(true);",300)
+                  document.getElementById("error")
+                  .innerHTML = "<span style='color: rgb(8, 234, 4); '>Connexion en cours...</span>"
+                  
 
+
+                  setTimeout("location.reload(true);",1000)
+
+                  }
+                }
+            })
+
+
+          }
         }
       },
-      check(){
-        console.log('ok')
-      },
+     
     },
 
 }

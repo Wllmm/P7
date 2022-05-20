@@ -75,6 +75,13 @@ header img {
   width: 20%;
   object-fit: cover;
 }
+.fa-check {
+  color: rgb(8, 234, 4);
+}
+.fa-times {
+  color: red;
+}
+
 #error{
   color: red;
   font-size: 125%;
@@ -447,7 +454,11 @@ export default {
                 .then((res) => res.json())
                 .then((res) => {
                   console.log(res)
-                  setTimeout("location.reload(true);",400)
+
+                  document.getElementById("error")
+                  .innerHTML = "<span style='color: rgb(8, 234, 4); '>Inscription réussie !!!<span>"
+
+                  setTimeout("location.reload(true);",1500)
                 })
             }
             
