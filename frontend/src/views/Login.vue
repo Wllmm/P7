@@ -35,7 +35,8 @@
 
 </template>
 
-<style>
+
+<style scoped>
 * {
   font-family: "Lato", sans-serif;
 }
@@ -212,10 +213,10 @@ export default {
 
           if (passwordCheck === true){
             document.getElementById("errorPassword")
-            .innerHTML = `Mot de passe : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = `Mot de passe : <i class="fas fa-check"></i>`;
           }else{
             document.getElementById("errorPassword")
-            .innerHTML = ` Mot de passe : <i class="fas fa-ban"></i>`;
+            .innerHTML = ` Mot de passe : <i class="fas fa-times"></i>`;
           }
         }
         email.onkeyup = () =>{
@@ -223,10 +224,10 @@ export default {
 
           if (emailCheck === true){
             document.getElementById("errorEmail")
-            .innerHTML = `Email : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = `Email : <i class="fas fa-check"></i>`;
           }else{
             document.getElementById("errorEmail")
-            .innerHTML = ` Email : <i class="fas fa-ban"></i>`;
+            .innerHTML = ` Email : <i class="fas fa-times"></i>`;
           }
         }
 

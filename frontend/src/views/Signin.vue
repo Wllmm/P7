@@ -3,112 +3,119 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- icones font awesome -->
 
-      <section class="home">
-        <h1>Groupomania</h1>
-        <div>
-            <ul>
-                <li><router-link to="/">Inscription</router-link></li>
-                <li><router-link to="/login">Connexion</router-link></li>
+        <header><img src="../img/icon-left-font-monochrome-black.svg"  class="logo" alt="logo">
+        </header>
 
-            </ul>
-        </div>
-        <h2>Veuillez remplir les champs ci-dessous :</h2>
-        <div class="home__form">
-            <form>
-
-              <div class="home__form__input">
-                    <label for="prenom" id="errorPrenom">Prénom :</label>
-                    <input type="text" name="prenom" id="prenom">
-                </div>
-
+        <section class="home">
+          <h1>Bienvenue</h1>
+          <div>
+              <ul>
+                  <li><router-link to="/">Inscription</router-link></li>
+                  <li><router-link to="/login">Connexion</router-link></li>
+  
+              </ul>
+          </div>
+          <h2>Veuillez remplir les champs ci-dessous </h2>
+          <div class="home__form">
+              <form>
+  
                 <div class="home__form__input">
-                    <label for="nom" id="errorNom">Nom :</label>
-                    <input type="text" name="nom" id="nom">
-                </div>
+                      <label id="labelPrenom" for="prenom" >Prénom   </label>
+                      <input type="text" name="prenom" id="prenom" required="required">
+                      <p id="errorPrenom"></p>
+                  </div>
+  
+                  <div class="home__form__input">
+                      <label id="labelNom" for="nom">Nom       </label>
+                      <input type="text" name="nom" id="nom" required="required">
+                      <p id="errorNom"></p>
+                  </div>
+  
+                  <div class="home__form__input">
+                      <label id="labelDate" for="date" >Date de naissance  </label>
+                      <input type="date" name="date" id="date" required="required">
+                      <p id="errorDate"></p>
+                  </div>
+  
+                  <div class="home__form__input">
+                      <label id="labelEmail" for="email">Email     </label>
+                      <input type="email" name="email" id="email" required="required">
+                      <p id="errorEmail"></p>
+                  </div>
+  
+                  <div class="home__form__input">
+                      <label id="labelPassword" for="password" >Mot de passe  </label>
+                      <input type="password" name="password" id="password" required="required">
+                      <p id="errorPassword"></p>
+                  </div>
 
-                <div class="home__form__input">
-                    <label for="date" id="errorDate">Date de naissance :</label>
-                    <input type="date" name="date" id="date">
-                </div>
+                  <button id="Check" > Inscription </button>
 
-                <div class="home__form__input">
-                    <label for="email" id="errorEmail">Email :</label>
-                    <input type="email" name="email" id="email">
-                </div>
-
-                <div class="home__form__input">
-                    <label for="password" id="errorPassword">Mot de passe :</label>
-                    <input type="password" name="password" id="password">
-                </div>
-
-            </form>
-        </div>
-        <button id="Check" > Inscription </button>
-        <div id="error"></div>
-
-      </section>
-
+              </form>
+          </div>
+          <div id="error"></div>
+  
+        </section>
 </template>
 
 <style>
-#error h2{
-  text-decoration: none;
-  color: red;
-}
-
-* {
+*{
   font-family: "Lato", sans-serif;
 }
-
 body {
-  margin: 0%;
+  margin: 0;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+}
+header img {
+  width: 20%;
+  object-fit: cover;
+}
+#error{
+  color: red;
+  font-size: 125%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 1rem 0;
+}
 .home {
-  border-radius: 1rem;
-  width: 80%;
-  margin: 10% 0 10% 10%;
+  border: 1px solid black;
+  width: 70%;
+  margin: 3% 15% 3% 15%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #e0e2e5;
+  background-color: #f7f7f8;
 }
 .home h1 {
-  font-size: 2rem;
-  margin-bottom: 0;
-  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 250%;
   color: #152545;
   text-decoration: underline;
   text-decoration-color: #d0575f;
 }
-.home h2 {
-  color: #626e81;
-  font-size: 1.5rem;
-  text-decoration: overline;
-}
 .home ul {
   display: flex;
-  padding: 0%;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 .home ul li {
-  list-style: none;
-  margin: 1rem 2rem 0 2rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
-  background-color: #152545;
+  border: 1px solid black;
+  padding: 1% 2% 1% 2%;
   border-radius: 0.5rem;
-}
-.home ul li:visited {
-  list-style: none;
-  margin: 1rem 2rem 0 2rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
+  width: fit-content;
   background-color: #152545;
-  border-radius: 0.5rem;
+  color: white;
+  margin: 0 5% 0 5%;
+  font-size: 200%;
 }
 a.router-link-exact-active {
   color: rgb(208,87,95);
@@ -119,76 +126,168 @@ a{
   text-decoration: none;
 
 }
-.home button {
+.home h2 {
+  display: flex;
+  margin-left: 5%;
+  justify-content: center;
+  width: 90%;
+  justify-content: center;
+  font-size: 200%;
+  border-bottom: 2px solid black;
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+}
+.home__form {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+.home__form #Check {
+  display: flex;
   all: unset;
   color: #d0575f;
   background: #152545;
   padding: 0.5rem 1rem 0.5rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 1rem;
-  margin-top: 2rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0 0 35%;
   font-size: 1.2rem;
   font-weight: bold;
   transition: background 0.5s;
-}
-.home button:hover {
-  font-weight: bold;
-  color: #152545;
-  background: #d0575f;
   cursor: pointer;
 }
 .home__form__input {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  /* border: 1px solid black; */
+  margin: 1rem 0 1rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 1%;
 }
 .home__form__input label {
-  margin-right: 1.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  color: #d0575f;
-  font-weight: bolder;
+  font-size: 125%;
 }
 .home__form__input input {
+  height: 20px;
+  font-size: 125%;
+  color: black;
+  padding: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #4c5c6d;
-  color: white;
-  padding: 0.5rem;
-  font-size: 1rem;
-  width: 15rem;
+  border: 2px solid #4c5c6d;
 }
-
-.home__form i {
-  color: rgb(29, 168, 45);
-  font-weight: bold;
-  /* border: 1px solid black; */
-  margin: 0;
+.home__form__input p {
   display: flex;
-  margin: 0.6rem 0 0.1rem 0;
-  align-content: center;
-  margin-left: 1rem;
-  font-size: 1.2rem;
-  height: 90%;
-}
-.home__form .fa-ban{
+  justify-content: center;
+  font-size: 100%;
+  font-style: italic;
   color: red;
-  font-weight: bold;
-  /* border: 1px solid black; */
-  margin: 0;
-  display: flex;
-  margin: 0.3rem 0 0.1rem 0;
-  align-content: center;
-  margin-left: 1rem;
-  font-size: 1.5rem;
-  height: 90%;
-
+  margin: 1.5%;
 }
 
-/*# sourceMappingURL=style.css.map */
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 0 0;
+  }
+  header img {
+    width: 50%;
+    object-fit: cover;
+  }
+
+  .home {
+    border: 1px solid black;
+    width: 70%;
+    margin: 3% 15% 3% 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f8;
+  }
+  .home h1 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 250%;
+    color: #152545;
+    text-decoration: underline;
+    text-decoration-color: #d0575f;
+  }
+  .home ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+  .home ul li {
+    border: 1px solid black;
+    padding: 1% 2% 1% 2%;
+    border-radius: 0.5rem;
+    width: fit-content;
+    background-color: #152545;
+    color: white;
+    margin: 0 5% 0 5%;
+    font-size: 150%;
+  }
+  .home h2 {
+    display: flex;
+    margin-left: 5%;
+    justify-content: center;
+    width: 90%;
+    justify-content: center;
+    font-size: 150%;
+    border-bottom: 2px solid black;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+  }
+  .home__form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+  .home__form #Check {
+    display: flex;
+    all: unset;
+    color: #d0575f;
+    background: #152545;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0 0 35%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background 0.5s;
+    cursor: pointer;
+  }
+  .home__form__input {
+    margin: 1rem 0 1rem 0;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 1%;
+  }
+  .home__form__input label {
+    font-size: 125%;
+  }
+  .home__form__input input {
+    height: 20px;
+    font-size: 125%;
+    color: black;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    border: 2px solid #4c5c6d;
+  }
+  .home__form__input p {
+    display: flex;
+    justify-content: center;
+    font-size: 100%;
+    font-style: italic;
+    color: red;
+    margin: 1.5%;
+  }
+}
 </style>
+
 
 <script>
 let Token = localStorage.getItem('Token')
@@ -226,66 +325,108 @@ export default {
         let regTxt = /^[A-Za-z]+$/;
         let regPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,40}/
         let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let regDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/
 
         let prenomCheck = false;
         let nomCheck = false;
-        // let dateCheck = false;
+        let dateCheck = false;
         let emailCheck = false;
         let passwordCheck = false;
 
-
+        let error = document.getElementById('error')
 
         prenom.onkeyup = () =>{
           prenomCheck = regTxt.test(prenom.value);
 
           if (prenomCheck === true){
+            document.getElementById('labelPrenom')
+            .innerHTML = `Prénom  <i class="fas fa-check"></i>  `
             document.getElementById("errorPrenom")
-            .innerHTML = `Prénom : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = ""
           }else{
+            document.getElementById('labelPrenom')
+            .innerHTML = `Prénom  <i class="fas fa-times"></i>  `
             document.getElementById("errorPrenom")
-            .innerHTML = ` Prénom : <i class="fas fa-ban"></i>`;
+            .innerHTML = "Le prenom ne doit contenir que des lettres."
           }
         }
         nom.onkeyup = () =>{
           nomCheck = regTxt.test(nom.value);
 
           if (nomCheck === true){
+            document.getElementById('labelNom')
+            .innerHTML = `Nom  <i class="fas fa-check"></i>  `
             document.getElementById("errorNom")
-            .innerHTML = `Nom : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = "";
           }else{
-            document.getElementById("errorPrenom")
-            .innerHTML = ` Nom : <i class="fas fa-ban"></i>`;
+            document.getElementById('labelNom')
+            .innerHTML = `Nom  <i class="fas fa-times"></i>  `
+            document.getElementById("errorNom")
+            .innerHTML = "Le nom ne doit contenir que des lettres.";
+          }
+        }
+        date.onkeyup = () =>{
+          dateCheck = regDate.test(date.value);
+
+          if (dateCheck === true){
+            document.getElementById('labelDate')
+            .innerHTML = `Date de naissance  <i class="fas fa-check"></i>  `
+            document.getElementById("errorDate")
+            .innerHTML = "";
+          }else{
+            document.getElementById('labelDate')
+            .innerHTML = `Date de naissance  <i class="fas fa-times"></i>  `
+            document.getElementById("errorDate")
+            .innerHTML = "La date n'est pas remplie correctement.";
           }
         }
         password.onkeyup = () =>{
           passwordCheck = regPassword.test(password.value);
 
           if (passwordCheck === true){
+            document.getElementById("labelPassword")
+            .innerHTML = `Mot de passe  <i class="fas fa-check"></i>  `
             document.getElementById("errorPassword")
-            .innerHTML = `Mot de passe : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = "";
           }else{
+            document.getElementById("labelPassword")
+            .innerHTML = `Mot de passe  <i class="fas fa-times"></i>  `
             document.getElementById("errorPassword")
-            .innerHTML = ` Mot de passe : <i class="fas fa-ban"></i>`;
+            .innerHTML = "Le mot de pass doit contenir : Maj, Min, Chiffre, Caractère spécial, Min 8 caractères .";
+
           }
         }
         email.onkeyup = () =>{
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
+            document.getElementById('labelEmail')
+            .innerHTML = `Email  <i class="fas fa-check"></i>  `
             document.getElementById("errorEmail")
-            .innerHTML = `Email : <i class="fas fa-lock-open"></i>`;
+            .innerHTML = "";
           }else{
+            document.getElementById('labelEmail')
+            .innerHTML = `Email  <i class="fas fa-times"></i>  `
             document.getElementById("errorEmail")
-            .innerHTML = ` Email : <i class="fas fa-ban"></i>`;
+            .innerHTML = "L'adresse email saisie n'est pas valide.";
           }
         }
 
         Check.onclick = (event) => {
           event.preventDefault()
 
-          console.log(email.value)
+          if (regDate.test(date.value) === false 
+          || regTxt.test(prenom.value) === false
+          || regTxt.test(nom.value) === false
+          || regPassword.test(password.value) === false 
+          || regEmail.test(email.value) === false){
 
-          // On regarde si le mail n'est pas déjà utilisé pour pas faire planter le backend
+              document.getElementById("error")
+              .innerHTML = "Tous les champs ne sont pas remplis correctement."
+
+            
+          }
+          else{
           fetch(`http://localhost:5000/api/mail/${email.value}`,{
             headers: {
                 "Content-type": "application/json",
@@ -293,14 +434,8 @@ export default {
           })
           .then((res) => res.json())
           .then((res) => {
-
-            // On vérifie si tout les champs sont corrects, si oui on Post le nouvel User
-            function testAllCheck(){
-              if(!prenomCheck || ! passwordCheck || ! emailCheck || !nomCheck){
-
-              } 
-              else {
-                let user = { prenom: prenom.value, nom: nom.value, date: date.value,  password: password.value, email: email.value}
+            if(res.error === "Open"){
+               let user = { prenom: prenom.value, nom: nom.value, date: date.value,  password: password.value, email: email.value}
                 console.log(user)
                 fetch("http://localhost:5000/api/users", {
                     method: 'POST',
@@ -312,20 +447,17 @@ export default {
                 .then((res) => res.json())
                 .then((res) => {
                   console.log(res)
+                  setTimeout("location.reload(true);",400)
                 })
-              }
             }
-
-            console.log(res.error)
-
-            if (res.error == "Open") {
-              console.log("Le mail est open")
-
-              testAllCheck();
-              setTimeout("location.reload(true);",400)
-
-            } else { console.log('Le mail est déjà utilisé'), alert("Le mail est déjà utilisé") }
+            
+            // LOG ERREUR MAIL DÉJA PRIS
+            else{
+              document.getElementById("error")
+              .innerHTML = "L'adresse email est déjà associée à un compte"
+            }
           })
+          }
         }
    
       },
