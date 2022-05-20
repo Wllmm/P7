@@ -20,31 +20,31 @@
               <form>
   
                 <div class="home__form__input">
-                      <label id="labelPrenom" for="prenom" >Prénom   </label>
+                      <label id="labelPrenom" for="prenom" >        Prénom   </label>
                       <input type="text" name="prenom" id="prenom" required="required">
                       <p id="errorPrenom"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelNom" for="nom">Nom       </label>
+                      <label id="labelNom" for="nom">             Nom   </label>
                       <input type="text" name="nom" id="nom" required="required">
                       <p id="errorNom"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelDate" for="date" >Date de naissance  </label>
+                      <label id="labelDate" for="date" >Date de naissance   </label>
                       <input type="date" name="date" id="date" required="required">
                       <p id="errorDate"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelEmail" for="email">Email     </label>
+                      <label id="labelEmail" for="email">            Email   </label>
                       <input type="email" name="email" id="email" required="required">
                       <p id="errorEmail"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelPassword" for="password" >Mot de passe  </label>
+                      <label id="labelPassword" for="password" >Mot de passe   </label>
                       <input type="password" name="password" id="password" required="required">
                       <p id="errorPassword"></p>
                   </div>
@@ -340,12 +340,12 @@ export default {
 
           if (prenomCheck === true){
             document.getElementById('labelPrenom')
-            .innerHTML = `Prénom  <i class="fas fa-check"></i>  `
+            .innerHTML = `        Prénom  <i class="fas fa-check"></i>  `
             document.getElementById("errorPrenom")
             .innerHTML = ""
           }else{
             document.getElementById('labelPrenom')
-            .innerHTML = `Prénom  <i class="fas fa-times"></i>  `
+            .innerHTML = `        Prénom  <i class="fas fa-times"></i>  `
             document.getElementById("errorPrenom")
             .innerHTML = "Le prenom ne doit contenir que des lettres."
           }
@@ -355,12 +355,12 @@ export default {
 
           if (nomCheck === true){
             document.getElementById('labelNom')
-            .innerHTML = `Nom  <i class="fas fa-check"></i>  `
+            .innerHTML = `             Nom  <i class="fas fa-check"></i>  `
             document.getElementById("errorNom")
             .innerHTML = "";
           }else{
             document.getElementById('labelNom')
-            .innerHTML = `Nom  <i class="fas fa-times"></i>  `
+            .innerHTML = `             Nom  <i class="fas fa-times"></i>  `
             document.getElementById("errorNom")
             .innerHTML = "Le nom ne doit contenir que des lettres.";
           }
@@ -401,12 +401,12 @@ export default {
 
           if (emailCheck === true){
             document.getElementById('labelEmail')
-            .innerHTML = `Email  <i class="fas fa-check"></i>  `
+            .innerHTML = `             Email  <i class="fas fa-check"></i>  `
             document.getElementById("errorEmail")
             .innerHTML = "";
           }else{
             document.getElementById('labelEmail')
-            .innerHTML = `Email  <i class="fas fa-times"></i>  `
+            .innerHTML = `             Email  <i class="fas fa-times"></i>  `
             document.getElementById("errorEmail")
             .innerHTML = "L'adresse email saisie n'est pas valide.";
           }
