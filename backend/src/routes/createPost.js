@@ -7,7 +7,7 @@ const fs = require('fs')
 module.exports = (app) => {
   app.post('/api/posts', auth, multer, (req, res) => {
 
-    // console.log(req.file)
+    console.log(req.file)
     console.log(req.body)
     
 
@@ -22,6 +22,8 @@ module.exports = (app) => {
     else { 
     let newPost = JSON.parse(req.body.body)
       console.log("ce n'est pas un repost")
+      console.log(newPost)
+
       Post.create({ userId: newPost.userId, title: newPost.title, content: newPost.content, picturePath : req.file.filename})
       const message = `Post créer !.`
       res.json({ message, data: req.body })

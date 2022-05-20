@@ -1367,7 +1367,7 @@ export default {
         },
         async onSubmitPost(){
           let userId = localStorage.getItem('ID')
-          let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}`}
+          let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}`, "reposted": false}
           let Token = localStorage.getItem('Token')
           console.log(newPost)
 
@@ -1380,7 +1380,7 @@ export default {
             ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
 
             this.message = 'Modifiée !!'
-
+            location.reload()
           }
           catch(err){
             console.log(err);
