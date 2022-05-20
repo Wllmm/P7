@@ -2,6 +2,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Lato:wght@300&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <header> <img src="../img/icon-left-font-monochrome-black.svg" alt=""></header>
+
+
     <div id='hide'></div>
 
 
@@ -82,8 +85,34 @@
 
 
     </div>
-
+    
     <section class="accueil">
+        <div class="accueil__post"> 
+            <div class="accueil__post__add">
+                <img class="imageProfil" src="" alt="">
+                <form action="post">
+                    <label for="addPost">Créer un Post</label>
+                    <input type="text" id="addPost">
+                    <button><i class="far fa-plus-square"></i></button>
+                </form>
+            </div>
+
+            <div id="showPost"></div>
+
+
+        </div>
+       <div class="accueil__profil" id="profil"> 
+            <div id="accueil__profil__always"> 
+                <h1 id="username"> Usernames </h1>
+            </div>
+            <div id="accueil_profil__active">
+                <h2 @click="profilUser" id="profilUser"> Profil </h2>
+                <h2 @click="disconnect" id="disconnect"> Déconnexion </h2>
+            </div>
+
+        </div>
+    </section>
+    <!-- <section class="accueil">
         <nav>
             <h2>Navigation</h2>
             <ul>
@@ -119,19 +148,18 @@
             </div>
 
         </div>
-    </section>
+    </section> -->
+    
 </template>
 
-<style>
-body { 
-  margin: 0;
-  display: flex;
-  justify-content: center;
-}
+<style scoped>
 * {
   font-family: "Lato", sans-serif;
 }
-
+body{
+  margin: 0;
+  width: 100%;
+}
 /* Image création de post  */
 .createPost__head img {
   width: 100px;
@@ -156,14 +184,7 @@ body {
   object-fit: cover;
   padding: 1rem;
 }
-/* Image profil */
-.accueil__profil img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
-}
+
 /* Image dans la modif profil */
 .profil__image img {
     width: 150px;
@@ -396,8 +417,9 @@ body {
   font-weight: bold;
 }
 
-/*# sourceMappingURL=style.css.map */
 
+/* PARTIE ACCUEIL !!! */
+/*  */
 
 #hide {
   display: block;
@@ -408,178 +430,191 @@ body {
   opacity: 70%;
   display: none;
 }
-button { 
-    all: unset;
-}
-.accueil {
-  background-color: #e0e2e5;
+
+@media screen and (min-width: 768px) {
+header {
   display: flex;
-  justify-content: space-between;
-  color: #152545;
+  justify-content: center;
+  border-bottom: 2px solid black;
+  padding-bottom: 1.5rem;
 }
-.accueil nav {
-  border: 2px solid white;
-  background-color: #d0575f;
-  margin: 2rem 0 2rem 1rem;
-  padding: 1rem;
-  height: fit-content;
-  border-radius: 1rem;
+header img {
+  margin-top: 1%;
+  object-fit: cover;
+  height: 5rem;
 }
-.accueil nav h2 {
-  margin-top: 0;
-  text-decoration: overline;
-}
-.accueil nav ul {
-  margin-top: 3rem;
-  padding: 0;
-}
-.accueil nav li {
-  list-style: none;
-  color: white;
-  margin-top: 1rem;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-.accueil nav li:hover {
-  color: #203868;
-  font-weight: bold;
-  cursor: pointer;
+
+.accueil {
+  margin: 3% 0 0 0;
+  display: flex;
+  justify-content: flex-end;
 }
 .accueil__post {
-  margin: 2rem 0 2rem 0;
-  width: 50%;
-  cursor: pointer;
+  max-width: 800px;
+  flex: 1;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 .accueil__post__add {
   display: flex;
   align-items: center;
-  border: 2px solid white;
-  margin-bottom: 5rem;
   border-radius: 0.5rem;
   color: white;
   background-color: #4c5c6d;
+  cursor: pointer;
 }
-
+.accueil__post__add img {
+  object-fit: cover;
+  width: 80px;
+  height: 80px;
+  border-radius: 2rem;
+  padding: 1rem;
+  justify-self: flex-start;
+  margin-right: 5%;
+}
 .accueil__post__add form {
   display: flex;
+  align-items: center;
   flex: 1;
   justify-content: space-around;
-}
-.accueil__post__add form label {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-}
-.accueil__post__add form input {
-  flex: 1;
-  margin: 0 2rem 0 2rem;
-  height: 30px;
+  margin: 0 5% 0 0;
 }
 .accueil__post__add form button {
   all: unset;
-  margin-right: 2rem;
-  cursor: pointer;
-}
-.accueil__post__show {
-  margin-top: 2rem;
-  color: white;
-  background-color: #4c5c6d;
-  box-shadow: 0px 0px 5px 0px #000;
-}
-.accueil__post__show__element {
-  display: flex;
-}
-
-.accueil__post__show__element__content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.accueil__post__show__element__content__text {
-  padding-left: 1rem;
-}
-.accueil__post__show__element__content__text i {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
-}
-.accueil__post__show__element__content__text i {
- cursor: pointer;
-}
-.accueil__post__show__element__content__comment {
-  padding: 0 1rem 0 1rem;
-  margin: 1.5rem 1rem 1rem 0;
-  padding-bottom: 1rem;
-  background-color: #d0575f;
-}
-.accueil__post__show__element__content__comment h3 {
-  text-decoration: overline;
-}
-.accueil__post__show__element__content__comment__nb {
-  
-  margin-top: 1rem;
-  
-}
-.accueil__post__show__element__content__comment__nb p {
-  margin-top: 0;
-}
-.accueil__post__show__element__content__comment__nb i {
-  margin-right: 1rem;
-  font-size: 1rem;
-}
-.accueil__post__show__element__content__comment__nb i:hover {
- cursor: pointer;
-}
-.accueil__profil:hover {
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 1rem;
+  font-size: 150%;
   color: white;
 }
-.accueil__profil:hover #accueil__profil__always {
-  background-color: #152545;
+.accueil__post__add form input {
+  width: 40%;
+  height: 22px;
 }
-
+.accueil__post__add form label {
+  font-size: 130%;
+}
 .accueil__profil {
-  margin: 2rem 2rem 2rem 0;
+  border-radius: 0.5rem;
+  margin-right: 2.5%;
+  width: 175px;
   height: fit-content;
-  flex-direction: column;
   display: flex;
-  border-radius: 1rem;
+  flex-direction: column;
   align-items: center;
   background-color: #d0575f;
-}
-
-
-.accueil__profil p {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-#accueil__profil__always {
-  display: flex;
+  padding: 0.5 1rem 0.5rem 1rem;
   padding: 1rem;
-  border: 2px solid white;
-  border-radius: 1rem;
+  cursor: pointer;
 }
-
-#accueil_profil__active {
-  width: 100%;
-  color: white;
+.accueil__profil #accueil_profil__active {
+  display: none;
 }
-#accueil_profil__active p {
-  padding: 0 1rem 0 1rem;
+.accueil__profil:hover #accueil_profil__active {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 100%;
 }
-#accueil_profil__active p:hover {
+.accueil__profil:hover #accueil_profil__active h2:hover {
   color: #152545;
 }
+.accueil__profil h1 {
+  font-weight: bold;
+  font-size: 150%;
+  color: #152545;
+}
+}
 
-/*# sourceMappingURL=style.css.map */
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: center; 
+    border-bottom: 2px solid black;
+    padding-bottom: 1.5rem;
 
+  }
+  header img {
+    margin-top: 1%;
+    object-fit: cover;
+    width: fit-content;
+    height: 3rem;
+  }
 
-/*# sourceMappingURL=style.css.map */
+  .accueil {
+    margin: 3% 0 0 0;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: flex-end;
+  }
+  .accueil__post {
+    flex: 1;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+  .accueil__post__add {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: #4c5c6d;
+    cursor: pointer;
+  }
+  .accueil__post__add img {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    justify-self: flex-start;
+    margin-right: 1%;
+  }
+  .accueil__post__add form {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-around;
+    margin: 0 2% 0 0;
+  }
+  .accueil__post__add form button {
+    all: unset;
+    font-size: 100%;
+    color: white;
+  }
+  .accueil__post__add form input {
+    width: 40%;
+    height: 15px;
+  }
+  .accueil__post__add form label {
+    font-size: 80%;
+  }
+  .accueil__profil {
+    border-radius: 0.5rem;
+    margin-right: 1.5%;
+    width: 60px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #d0575f;
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+    cursor: pointer;
+  }
+  .accueil__profil #accueil_profil__active {
+    display: none;
+  }
+  .accueil__profil:hover #accueil_profil__active {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 60%;
+  }
+  .accueil__profil:hover #accueil_profil__active h2:hover {
+    color: #152545;
+  }
+  .accueil__profil h1 {
+    font-weight: bold;
+    font-size: 100%;
+    color: #152545;
+  }
+}
 
 
 /*# sourceMappingURL=style.css.map */

@@ -203,8 +203,8 @@ a{
 
   .home {
     border: 1px solid black;
-    width: 70%;
-    margin: 3% 15% 3% 15%;
+    width: 90%;
+    margin: 3% 5% 3% 5%;
     display: flex;
     flex-direction: column;
     background-color: #f7f7f8;
@@ -273,7 +273,7 @@ a{
     padding: 1%;
   }
   .home__form__input label {
-    font-size: 125%;
+    font-size: 100%;
   }
   .home__form__input input {
     height: 20px;
