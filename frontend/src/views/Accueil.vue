@@ -4,21 +4,23 @@
 
     <div id='hide'></div>
 
-     <section class="profil">
+
+    <section class="profil">
         <div class="profil__image" >
             <img class="imageProfil" src="localhost:5000/uploads/" alt="">
             
 
             <form id="profils" @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="fields">
-                  <input type="file" ref="file" @change="onSelect" />
+                  <label for="file">Changer de photo de profil</label>
+                  <input id="file" type="file" ref="file" @change="onSelect" />
                 </div>
                 <br>
                 <div class="fields">
                   <button id="putPicture">Valider le changement de photo </button>
                 </div>
                 <div class="message">
-                  <h5>{{message}}</h5>
+                  <h5>{{message}} Statut du changement ( OK )</h5>
                 </div>
             </form>
 
@@ -30,14 +32,14 @@
 
             <div class="email">
                 <h2 id="profilEmail"> Nom d'utilisateur </h2>
-                <label for=""> Changer l'addresse email : </label>
+                <label for="newEmail"> Changer l'addresse email : </label>
                 <input type="text" id="newEmail">
                 <i class="fas fa-magic" id="emailValid"></i>
 
             </div>
             <div class="password">
                 <h2 id="profilPassword"> Modifier le mot de passe </h2>
-                <label for=""> Changer le mot de passe : </label>
+                <label for="newPassword"> Changer le mot de passe : </label>
                 <input type="text" id="newPassword">
                 <i class="fas fa-magic" id="passwordValid"></i>
             </div>
@@ -53,7 +55,7 @@
                 <img class="" src="../img/portrait-0360w.jpg" alt="">
 
                 <div class="createPost__head__title">
-                    <label for="addTitle"> Titre : </label>
+                    <label for="newPostTitle"> Titre : </label>
                     <input type="text" id="newPostTitle">
                     
                 </div>
@@ -61,13 +63,13 @@
               </div>
               
               <div class="createPost__content">
-                  <label for="addContent"> Votre texte ici :</label>
+                  <label for="newPostContent"> Votre texte ici :</label>
                   <textarea rows="10" cols="90" id="newPostContent"></textarea>
               </div>
 
               <div class="createPost__files">
                 <label for="image_input">Choissisez votre image</label>
-                  <input type="file" ref="filePost" @change="onSelectPost" />
+                  <input id="image_input" type="file" ref="filePost" @change="onSelectPost" />
               </div>
               
                 <br><br>
@@ -98,7 +100,7 @@
                 <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
                 <form action="post">
                     <label for="addPost">Create post</label>
-                    <input type="text">
+                    <input type="text" id="addPost">
                     <button>Send</button>
                 </form>
             </div>
@@ -109,12 +111,11 @@
         </div>
        <div class="accueil__profil" id="profil"> 
             <div id="accueil__profil__always"> 
-                <!-- <img class="imageProfil" src="../img/portrait-0360w.jpg" alt=""> -->
-                <p id="username"> Username </p>
+                <h1 id="username"> Username </h1>
             </div>
             <div id="accueil_profil__active">
-                <p @click="profilUser" id="profilUser"> Profil </p>
-                <p @click="disconnect" id="disconnect"> Déconnexion </p>
+                <h2 @click="profilUser" id="profilUser"> Profil </h2>
+                <h2 @click="disconnect" id="disconnect"> Déconnexion </h2>
             </div>
 
         </div>
