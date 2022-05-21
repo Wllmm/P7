@@ -112,49 +112,23 @@
 
         </div>
     </section>
-    <!-- <section class="accueil">
-        <nav>
-            <h2>Navigation</h2>
-            <ul>
-                <li>Accueil</li>
-                <li>Populaires</li>
-                <li>Messages</li>
-                <li>Profil</li>
-                <li>Notifications</li>
-            </ul>
-        </nav>
-
-        <div class="accueil__post"> 
-            <div class="accueil__post__add">
-                <img class="imageProfil" src="../img/portrait-0360w.jpg" alt="">
-                <form action="post">
-                    <label for="addPost">Create post</label>
-                    <input type="text" id="addPost">
-                    <button>Send</button>
-                </form>
-            </div>
-
-            <div id="showPost"></div>
-
-
-        </div>
-       <div class="accueil__profil" id="profil"> 
-            <div id="accueil__profil__always"> 
-                <h1 id="username"> Username </h1>
-            </div>
-            <div id="accueil_profil__active">
-                <h2 @click="profilUser" id="profilUser"> Profil </h2>
-                <h2 @click="disconnect" id="disconnect"> Déconnexion </h2>
-            </div>
-
-        </div>
-    </section> -->
     
 </template>
 
 <style lang="css">
 
-
+.fa-times:hover{
+  color: red;
+}
+.fa-check:hover{
+  color: rgb(5, 198, 18);
+}
+.fa-pen-alt:hover{
+  color: #0e47b9;
+}
+.fa-trash:hover{
+  color: red;
+}
 .new__comment {
   border: 1px solid black;
   margin: 1rem 0 1rem 0;
@@ -179,7 +153,7 @@
 }
 
 .accueil__post__show {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 0.2rem;
   margin-top: 3rem;
   background-color: #15254533;
@@ -252,6 +226,7 @@
   font-size: 1.5rem;
   margin-left: 1rem;
   color: #152545;
+  cursor: pointer;
 }
 .accueil__post__show__element__content__comment__add span {
   display: flex;
@@ -290,7 +265,7 @@
   }
 
   .accueil__post__show {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 0.2rem;
     margin-top: 3rem;
     background-color: #15254533;
