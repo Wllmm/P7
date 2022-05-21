@@ -152,6 +152,234 @@
     
 </template>
 
+<style lang="css">
+
+
+.new__comment {
+  border: 1px solid black;
+  margin: 1rem 0 1rem 0;
+  padding: 0 1rem 0 1rem;
+}
+.new__comment h4 {
+  color: #152545;
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #d0575f;
+}
+.new__comment p {
+  font-size: 100%;
+  margin-top: 1rem;
+}
+.new__comment button {
+  all: unset;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.accueil__post__show {
+  border: 2px solid black;
+  border-radius: 0.2rem;
+  margin-top: 3rem;
+  background-color: #15254533;
+}
+.accueil__post__show__element {
+  display: flex;
+  padding: 0.5rem;
+}
+.accueil__post__show__element img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+.accueil__post__show__element__content__text {
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #eaeaea;
+}
+.accueil__post__show__element__content__text h4 {
+  margin-top: 0;
+  font-size: 120%;
+}
+.accueil__post__show__element__content__text h1 {
+  margin-bottom: 0;
+  padding: 0 1rem 0 1rem;
+  width: fit-content;
+  color: #d0575f;
+  font-weight: bold;
+}
+.accueil__post__show__element__content__text h3 {
+  margin-top: 0.5rem;
+  font-size: 100%;
+}
+.accueil__post__show__element__content__text img {
+  width: 100%;
+  height: max-content;
+  max-height: 20rem;
+  object-fit: cover;
+}
+.accueil__post__show__element__content__text button {
+  all: unset;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+.accueil__post__show__element__content__comment {
+  border: 1px solid white;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #eaeaea;
+}
+.accueil__post__show__element__content__comment h3 {
+  margin-top: 0;
+}
+.accueil__post__show__element__content__comment__add {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+.accueil__post__show__element__content__comment__add label {
+  margin-bottom: 1rem;
+}
+.accueil__post__show__element__content__comment__add i {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  color: #152545;
+}
+.accueil__post__show__element__content__comment__add span {
+  display: flex;
+  align-items: center;
+}
+.accueil__post__show__element__content__comment textarea {
+  outline: none;
+  resize: none;
+  width: 50%;
+  height: 2rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  .new__comment {
+    border: 1px solid black;
+    margin: 1rem 0 1rem 0;
+    padding: 0 1rem 0 1rem;
+  }
+  .new__comment h4 {
+    color: #152545;
+    font-size: 120%;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid #d0575f;
+  }
+  .new__comment p {
+    font-size: 100%;
+    margin-top: 1rem;
+  }
+  .new__comment button {
+    all: unset;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  .accueil__post__show {
+    border: 2px solid black;
+    border-radius: 0.2rem;
+    margin-top: 3rem;
+    background-color: #15254533;
+  }
+  .accueil__post__show__element {
+    display: flex;
+    padding: 0.5rem;
+  }
+  .accueil__post__show__element img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+   margin-top: 1rem;
+  }
+  .accueil__post__show__element__content__text {
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: #eaeaea;
+  }
+  .accueil__post__show__element__content__text h4 {
+    margin-top: 0;
+    font-size: 120%;
+  }
+  .accueil__post__show__element__content__text h1 {
+    margin-bottom: 0;
+    padding: 0 1rem 0 1rem;
+    width: fit-content;
+    color: #d0575f;
+    font-weight: bold;
+  }
+  .accueil__post__show__element__content__text h3 {
+    margin-top: 0.5rem;
+    font-size: 100%;
+  }
+  .accueil__post__show__element__content__text img {
+    width: 100%;
+    height: max-content;
+    max-height: 20rem;
+    object-fit: cover;
+  }
+  .accueil__post__show__element__content__text button {
+    all: unset;
+    cursor: pointer;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+  .accueil__post__show__element__content__comment {
+    border: 1px solid white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #eaeaea;
+  }
+  .accueil__post__show__element__content__comment h3 {
+    margin-top: 0;
+  }
+  .accueil__post__show__element__content__comment__add {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 0.5rem;
+  }
+  .accueil__post__show__element__content__comment__add label {
+    margin-bottom: 1rem;
+  }
+  .accueil__post__show__element__content__comment__add i {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    color: #152545;
+  }
+  .accueil__post__show__element__content__comment__add span {
+    display: flex;
+    align-items: center;
+  }
+  .accueil__post__show__element__content__comment textarea {
+    outline: none;
+    resize: none;
+    width: 70%;
+    height: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
+
+</style>
+
 <style scoped>
 * {
   font-family: "Lato", sans-serif;
@@ -431,7 +659,14 @@ body{
   display: none;
 }
 
+
+.accueil__post__show__element img{
+  border: 3px solid red;
+}
+
+
 @media screen and (min-width: 768px) {
+  
 header {
   display: flex;
   justify-content: center;
@@ -443,7 +678,6 @@ header img {
   object-fit: cover;
   height: 5rem;
 }
-
 .accueil {
   margin: 3% 0 0 0;
   display: flex;
@@ -522,14 +756,12 @@ header img {
   color: #152545;
 }
 }
-
 @media screen and (max-width: 768px) {
   header {
     display: flex;
     justify-content: center; 
     border-bottom: 2px solid black;
     padding-bottom: 1.5rem;
-
   }
   header img {
     margin-top: 1%;
@@ -537,7 +769,6 @@ header img {
     width: fit-content;
     height: 3rem;
   }
-
   .accueil {
     margin: 3% 0 0 0;
     /* border: 1px solid black; */
@@ -615,6 +846,7 @@ header img {
     color: #152545;
   }
 }
+
 
 
 /*# sourceMappingURL=style.css.map */
@@ -774,8 +1006,10 @@ export default {
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
                                       <label>Écrire un commentaire :</label>
-                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
-                                      <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      <span>
+                                        <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                        <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      </span>
                                     </div>
                                     <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
                                 </div>
@@ -823,8 +1057,10 @@ export default {
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
                                       <label>Écrire un commentaire :</label>
-                                      <textarea rows="3" cols="90" class="newCommentContent"></textarea>
-                                      <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      <span>
+                                        <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                        <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      </span>
                                     </div>
                                     <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
                                 </div>
