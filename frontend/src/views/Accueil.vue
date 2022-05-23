@@ -122,8 +122,9 @@ body {
 }
 
 #app {
-  border: 1px solid black;
-  min-height: 100%;
+  /* border: 1px solid black; */
+  /* min-height: 100%; */
+  min-height: 70rem;
   position: relative;
 }
 #hide {
