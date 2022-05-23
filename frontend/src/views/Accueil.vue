@@ -22,9 +22,6 @@
                 <div class="fields">
                   <button id="putPicture">Valider le changement de photo </button>
                 </div>
-                <div class="message">
-                  <h5>{{message}} Statut du changement ( OK )</h5>
-                </div>
             </form>
 
 
@@ -46,7 +43,8 @@
                 <input type="text" id="newPassword">
                 <i class="fas fa-magic" id="passwordValid"></i>
             </div>
-            <button id="deleteAccount" @click="deleteAccount"> Supprimer le compte (définitif) </button>
+            <span> <button id="deleteAccount" @click="deleteAccount"> Supprimer le compte </button> </span>
+
         </div>
     </section>
 
@@ -438,13 +436,6 @@ body {
 }
 
 /* Image dans la modif profil */
-.profil__image img {
-    width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
-}
 
 .fa-share:hover {
   color: blue;
@@ -472,80 +463,663 @@ body {
   border: none;
 }
 
+/* Partie profil */
+/*  */
+@media screen and (min-width: 1410px) {
+  .profil {
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    border: 1px solid black;
+    background-color: #e0e2e5;
+    border-radius: 1rem;
+    width: fit-content;
+    margin-top: 10rem;
+    width: 60%;
+    margin-left: 20%;
+    padding: 2rem;
+  }
+  .profil__image {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 2rem;
+  }
+  .profil__image i {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+  .profil__image i:hover {
+    color: #0e47b9;
+    cursor: pointer;
+  }
+  .profil__image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 2rem;
+    border: 2px solid white;
+    object-fit: cover;
+    margin-bottom: 2rem;
+  }
+  .profil__image .fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profil__image .fields label {
+    font-size: 120%;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+  }
+  .profil__image .fields input {
+    border: 2px dashed black;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: blue;
+  }
+  .profil__image .fields #putPicture {
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: #152545;
+    border-radius: 0.5rem;
+    color: white;
+    padding: 0.5rem 0 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__image .fields #putPicture:hover {
+    border-color: white;
+    background-color: #d0575f;
+  }
+  .profil__infoUser {
+    border: 2px solid #d0575f;
+    flex: 1;
+    border-radius: 1rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
+  }
+  .profil__infoUser .email {
+    margin-top: 2rem;
+  }
+  .profil__infoUser .email h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .email label {
+    font-size: 120%;
+  }
+  .profil__infoUser .email input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 100%;
+  }
+  .profil__infoUser .email i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .email i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser .password {
+    margin-top: 3rem;
+  }
+  .profil__infoUser .password h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .password label {
+    font-size: 120%;
+  }
+  .profil__infoUser .password input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 100%;
+  }
+  .profil__infoUser .password i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .password i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser span {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+  .profil__infoUser span button {
+    all: unset;
+    margin: 1em 0 2rem 0;
+    width: fit-content;
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__infoUser span button:hover {
+    background-color: #152545;
+    color: white;
+  }
+}
+@media screen and (max-width: 1410px) {
+  .profil {
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    border: 1px solid black;
+    background-color: #e0e2e5;
+    border-radius: 1rem;
+    width: fit-content;
+    flex-direction: column;
+    margin-top: 10rem;
+    width: 60%;
+    margin-left: 20%;
+    padding: 2rem;
+  }
+  .profil__image {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .profil__image i {
+    align-self: flex-start;
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+  .profil__image i:hover {
+    color: #0e47b9;
+    cursor: pointer;
+  }
+  .profil__image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 2rem;
+    border: 2px solid white;
+    object-fit: cover;
+  }
+  .profil__image .fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .profil__image .fields label {
+    font-size: 120%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+  }
+  .profil__image .fields input {
+    border: 2px dashed black;
+    padding: 0.5rem;
+    display: flex;
+    overflow: hidden;
+    height: 20px;
+    width: 111px;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: blue;
+  }
+  .profil__image .fields #putPicture {
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: #152545;
+    border-radius: 0.5rem;
+    color: white;
+    padding: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__image .fields #putPicture:hover {
+    border-color: white;
+    background-color: #d0575f;
+  }
+  .profil__infoUser {
+    border: 2px solid #d0575f;
+    flex: 1;
+    border-radius: 1rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .profil__infoUser .email {
+    margin-top: 2rem;
+  }
+  .profil__infoUser .email h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .email label {
+    font-size: 100%;
+  }
+  .profil__infoUser .email input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 90%;
+  }
+  .profil__infoUser .email i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .email i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser .password {
+    margin-top: 3rem;
+  }
+  .profil__infoUser .password h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .password label {
+    font-size: 100%;
+  }
+  .profil__infoUser .password input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 90%;
+  }
+  .profil__infoUser .password i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .password i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser span {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .profil__infoUser span button {
+    all: unset;
+    margin: 1rem 0 2rem 0;
+    width: fit-content;
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__infoUser span button:hover {
+    background-color: #152545;
+    color: white;
+  }
+}
+@media screen and (max-width: 820px) {
+  .profil {
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    border: 1px solid black;
+    background-color: #e0e2e5;
+    border-radius: 1rem;
+    width: fit-content;
+    flex-direction: column;
+    margin-top: 10rem;
+    width: 60%;
+    margin-left: 20%;
+    padding: 2rem;
+  }
+  .profil__image {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .profil__image i {
+    align-self: flex-start;
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+  .profil__image i:hover {
+    color: #0e47b9;
+    cursor: pointer;
+  }
+  .profil__image img {
+    width: 90px;
+    height: 90px;
+    border-radius: 2rem;
+    border: 2px solid white;
+    object-fit: cover;
+  }
+  .profil__image .fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .profil__image .fields label {
+    font-size: 120%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+  }
+  .profil__image .fields input {
+    border: 2px dashed black;
+    padding: 0.5rem;
+    display: flex;
+    overflow: hidden;
+    height: 20px;
+    width: 111px;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: blue;
+  }
+  .profil__image .fields #putPicture {
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: #152545;
+    border-radius: 0.5rem;
+    color: white;
+    padding: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__image .fields #putPicture:hover {
+    border-color: white;
+    background-color: #d0575f;
+  }
+  .profil__infoUser {
+    border: 2px solid #d0575f;
+    flex: 1;
+    border-radius: 1rem;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .profil__infoUser .email {
+    margin-top: 2rem;
+  }
+  .profil__infoUser .email h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .email label {
+    font-size: 120%;
+  }
+  .profil__infoUser .email input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    min-width: 210px;
+    font-size: 90%;
+  }
+  .profil__infoUser .email i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .email i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser .password {
+    margin-top: 3rem;
+  }
+  .profil__infoUser .password h2 {
+    color: #d0575f;
+    margin: 0.5rem 0 0.5rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .password label {
+    font-size: 120%;
+  }
+  .profil__infoUser .password input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    min-width: 210px;
+    font-size: 90%;
+  }
+  .profil__infoUser .password i {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .profil__infoUser .password i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser span {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .profil__infoUser span button {
+    all: unset;
+    margin: 1rem 0 2rem 0;
+    width: fit-content;
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__infoUser span button:hover {
+    background-color: #152545;
+    color: white;
+  }
+}
+@media screen and (max-width: 580px) {
+  .profil {
+    display: flex;
+    position: absolute;
+    height: fit-content;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #e0e2e5;
+    border-radius: 1rem;
+    width: fit-content;
+    flex-direction: column;
+    margin-top: 10rem;
+    width: 80%;
+    margin-left: 7.5%;
+    padding: 1rem;
+  }
+  .profil__image {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .profil__image i {
+    align-self: flex-start;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+  .profil__image i:hover {
+    color: #0e47b9;
+    cursor: pointer;
+  }
+  .profil__image img {
+    width: 70px;
+    height: 70px;
+    border-radius: 1.5rem;
+    border: 2px solid white;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  .profil__image .fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .profil__image .fields label {
+    font-size: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+  }
+  .profil__image .fields input {
+    border: 2px dashed black;
+    padding: 0.5rem;
+    display: flex;
+    overflow: hidden;
+    height: 20px;
+    width: 111px;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: blue;
+  }
+  .profil__image .fields #putPicture {
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: #152545;
+    border-radius: 0.5rem;
+    color: white;
+    padding: 0rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__image .fields #putPicture:hover {
+    border-color: white;
+    background-color: #d0575f;
+  }
+  .profil__infoUser {
+    border: 2px solid #d0575f;
+    flex: 1;
+    width: 80%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .profil__infoUser .email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .profil__infoUser .email h2 {
+    font-size: 110%;
+    color: #d0575f;
+    margin: 0.5rem 0 1rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .email label {
+    font-size: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .profil__infoUser .email input {
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+    font-size: 70%;
+  }
+  .profil__infoUser .email i {
+    font-size: 1.5rem;
+    margin-left: 0.2rem;
+  }
+  .profil__infoUser .email i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser .password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  .profil__infoUser .password h2 {
+    font-size: 110%;
+    color: #d0575f;
+    margin: 0.5rem 0 1rem 0;
+    text-decoration: overline;
+    text-decoration-color: #152545;
+  }
+  .profil__infoUser .password label {
+    font-size: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .profil__infoUser .password input {
+    margin-bottom: 1rem;
+    border: none;
+    outline: none;
+    font-size: 70%;
+  }
+  .profil__infoUser .password i {
+    font-size: 1.5rem;
+    margin-left: 0.2rem;
+  }
+  .profil__infoUser .password i:hover {
+    color: red;
+    cursor: pointer;
+  }
+  .profil__infoUser span {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .profil__infoUser span button {
+    all: unset;
+    margin: 1rem 0 2rem 0;
+    width: fit-content;
+    cursor: pointer;
+    border: 2px solid white;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .profil__infoUser span button:hover {
+    background-color: #152545;
+    color: white;
+  }
+}
+/*# sourceMappingURL=style.css.map */
 
-.profil {
-  display: flex;
-  position: absolute;
-  height: fit-content;
-  background-color: #e0e2e5;
-  border-radius: 1rem;
-  width: fit-content;
-  margin-top: 10rem;
-  width: 60%;
-  margin-left: 20%;
-  padding: 2rem;
-}
-.profil__image {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-right: 2rem;
-}
-.profilImage {
-  width: 150px;
-  margin-bottom: 2rem;
-  border-radius: 50%;
-}
-.profil__image i {
-  font-size: 2rem;
-}
-.profil__image i:hover {
-  color: #0e47b9;
-  cursor: pointer;
-}
-.profil__infoUser {
-  border: 2px solid #d0575f;
-  border-radius: 1rem;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 2rem;
-  padding-top: 2rem;
-  padding-right: 2rem;
-}
-.profil__infoUser button {
-  all: unset;
-  margin: 1em 0 2rem 0;
-  width: fit-content;
-  cursor: pointer;
-  border: 2px solid white;
-  padding: 1rem;
-  font-weight: bold;
-  border-radius: 1rem;
-}
-.profil__infoUser button:hover {
-  background-color: #152545;
-  color: white;
-}
-.profil__infoUser h2 {
-  color: #d0575f;
-  margin: 0 0 0.5rem 0;
-}
-.profil__infoUser input {
-  margin-bottom: 1.5rem;
-}
-.profil__infoUser label {
-  font-weight: bold;
-}
-.profil__infoUser i {
-  font-size: 1rem;
-  margin-left: 1.5rem;
-}
-.profil__infoUser i:hover {
-  color: red;
-  cursor: pointer;
+
+
+.accueil__post__show__element__content__comment__add textarea{
+ resize: none;
+ margin-top: 1rem;
+ outline: none;
+ border: none;
+ border-radius: 0.2rem;
 }
 
 .new__comment{
@@ -556,19 +1130,10 @@ body {
 .new__comment h4 {
   margin: 1rem 0 0.5rem 0;
 }
-.accueil__post__show__element__content__comment__add textarea{
- resize: none;
- margin-top: 1rem;
- outline: none;
- border: none;
- border-radius: 0.2rem;
-}
 
 
 /* Création de post : */
 /*  */
-
-
 @media screen and (min-width: 850px){
 .createPost {
   background-color: #cb656b;
@@ -662,10 +1227,8 @@ body {
   border: 2px dashed black;
   padding: 0.5rem;
   margin-top: 1rem;
+  font-weight: bold;
   color: blue;
-}
-.createPost__files input[type=file] {
-  cursor: pointer;
 }
 
 .button {
@@ -688,7 +1251,6 @@ body {
   border-color: white;
 }
 }
-
 @media screen and (max-width: 850px) {
   .createPost {
   background-color: #cb656b;
@@ -789,6 +1351,7 @@ body {
     font-size: 70%;
     margin-top: 1rem;
     color: blue;
+    font-weight: bold;
   }
 
   .button {
@@ -811,8 +1374,6 @@ body {
     border-color: white;
   }
 }
-
-/*# sourceMappingURL=style.css.map */
 
 
 /* PARTIE ACCUEIL !!! */
