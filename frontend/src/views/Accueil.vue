@@ -117,6 +117,29 @@
 
 <style lang="css">
 
+body {
+  margin: 0;
+}
+
+#app {
+  border: 1px solid black;
+  min-height: 100%;
+  position: relative;
+}
+#hide {
+  display: block;
+  position: absolute;
+  background-color: #152545;
+  opacity: 70%;
+  display: none;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+}
+
+
 .fa-times:hover{
   color: red;
 }
@@ -288,6 +311,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  body {
+    border: 2px solid red;
+    width: max-content;
+  }
+
+
   .new__comment {
     border: 1px solid black;
     margin: 1rem 0 1rem 0;
@@ -406,10 +435,11 @@
 * {
   font-family: "Lato", sans-serif;
 }
-body{
+/* body{
   margin: 0;
+  border: 1px solid black;
   width: 100%;
-}
+} */
 /* Image création de post  */
 .createPost__head img {
   width: 100px;
@@ -670,17 +700,6 @@ body{
 
 /* PARTIE ACCUEIL !!! */
 /*  */
-
-#hide {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 120rem;
-  background-color: #152545;
-  opacity: 70%;
-  display: none;
-}
-
 
 .accueil__post__show__element img{
   border: 3px solid red;
@@ -1060,16 +1079,16 @@ export default {
                                     <h3> <em>Repost ! (${userOfPost.prenom}  ${userOfPost.nom})</em> </h3>
 
                                     <div class="modify__title">
-                                      <label for="modifTitle${nbShare}"> Modifier le titre : </label>
-                                      <input type="text" id="modifTitle${nbShare}" class="modifyTitle" value="${data.title}">
+                                      <label for="modifTitleimg${nbShare}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitleimg${nbShare}" class="modifyTitle" value="${data.title}">
                                     </div>
 
                                     <img src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
 
                                     <div class="modify__content">
-                                      <label for="modifContent${nbShare}"> Modifier votre post :</label>
-                                      <textarea rows="10" cols="90" id="modifContent${nbShare}" class="modifyContent" >${data.content}</textarea>
+                                      <label for="modifContentimg${nbShare}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContentimg${nbShare}" class="modifyContent" >${data.content}</textarea>
                                     </div>
 
                                     <span class="options"> 
@@ -1086,9 +1105,9 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                      <label for="addComment${nbShare}">Écrire un commentaire :</label>
+                                      <label for="addCommentimg${nbShare}">Écrire un commentaire :</label>
                                       <span>
-                                        <textarea rows="3" cols="90" id="addComment${nbShare}" name="addComment${nbShare}" class="newCommentContent"></textarea>
+                                        <textarea rows="3" cols="90" id="addCommentimg${nbShare}" name="addComment${nbShare}" class="newCommentContent"></textarea>
                                         <i class="fas fa-caret-square-right" id="${id}"></i>
                                       </span>
                                     </div>
@@ -1165,16 +1184,16 @@ export default {
                                     <h2 class="actual__title">${data.title}</h1>
 
                                     <div class="modify__title">
-                                      <label for="modifTitleOriginal${nbOriginal}"> Modifier le titre : </label>
-                                      <input type="text" id="modifTitleOriginal${nbOriginal}" class="modifyTitle" value="${data.title}">
+                                      <label for="modifTitleOriginalImg${nbOriginal}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitleOriginalImg${nbOriginal}" class="modifyTitle" value="${data.title}">
                                     </div>
 
                                     <img class="postImages" src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
 
                                     <div class="modify__content">
-                                      <label for="modifContentOriginal${nbOriginal}"> Modifier votre post :</label>
-                                      <textarea rows="10" cols="90" id="modifContentOriginal${nbOriginal}" class="modifyContent" >${data.content}</textarea>
+                                      <label for="modifContentOriginalImg${nbOriginal}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContentOriginalImg${nbOriginal}" class="modifyContent" >${data.content}</textarea>
                                     </div>
 
                                     <span class="options"> 
@@ -1191,9 +1210,9 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                      <label for="addCommentOriginal${nbOriginal}">Écrire un commentaire :</label>
+                                      <label for="addCommentOriginalImg${nbOriginal}">Écrire un commentaire :</label>
                                       <span>
-                                        <textarea rows="3" cols="90" id="addCommentOriginal${nbOriginal}" class="newCommentContent" name="commentaires"></textarea>
+                                        <textarea rows="3" cols="90" id="addCommentOriginalImg${nbOriginal}" class="newCommentContent" name="commentaires"></textarea>
                                         <i class="fas fa-caret-square-right" id="${id}"></i>
                                       </span>
                                     </div>
