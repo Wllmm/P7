@@ -2,7 +2,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Lato:wght@300&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <header> <img src="../img/icon-left-font-monochrome-black.svg" alt=""></header>
+    <header> <img src="../img/icon-left-font-monochrome-black.svg" alt="Logo groupomania"></header>
 
 
     <div id='hide'></div>
@@ -93,7 +93,7 @@
                 <form action="post">
                     <label for="addPost">Créer un Post</label>
                     <input type="text" id="addPost">
-                    <button><i class="far fa-plus-square"></i></button>
+                    <i class="far fa-plus-square"></i>
                 </form>
             </div>
 
@@ -128,6 +128,9 @@
 }
 .fa-trash:hover{
   color: red;
+}
+.fa-share:hover{
+  color: rgb(177, 177, 7);
 }
 .new__comment {
   border: 1px solid black;
@@ -176,11 +179,11 @@
   padding: 0.5rem;
   background-color: #eaeaea;
 }
-.accueil__post__show__element__content__text h4 {
+.accueil__post__show__element__content__text h1 {
   margin-top: 0;
   font-size: 120%;
 }
-.accueil__post__show__element__content__text h1 {
+.accueil__post__show__element__content__text h2 {
   margin-bottom: 0;
   padding: 0 1rem 0 1rem;
   width: fit-content;
@@ -190,6 +193,7 @@
 .accueil__post__show__element__content__text h3 {
   margin-top: 0.5rem;
   font-size: 100%;
+  padding: 0 1rem 0 1rem;
 }
 .accueil__post__show__element__content__text img {
   width: 100%;
@@ -216,8 +220,9 @@
 .accueil__post__show__element__content__comment__add {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 2px solid rgb(183, 180, 180);
   padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 .accueil__post__show__element__content__comment__add label {
   margin-bottom: 1rem;
@@ -238,7 +243,49 @@
   width: 50%;
   height: 2rem;
 }
+.modify__title {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.modify__title label {
+  margin-bottom: 0.5rem;
+  font-size: 140%;
+  font-weight: bold;
+  color: #d0575f;
+}
+.modify__title input {
+  font-size: 100%;
+  width: 60%;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
 
+.modify__content {
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.modify__content label {
+  font-size: 140%;
+  color: #d0575f;
+  font-weight: bold;
+  margin: 1rem 0.5rem 0.5rem 0.5rem;
+}
+.modify__content textarea {
+  outline: none;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  margin-top: 1rem;
+  resize: none;
+  width: 80%;
+  border: none;
+  border-radius: 0.5rem;
+}
 
 @media screen and (max-width: 768px) {
   .new__comment {
@@ -688,8 +735,7 @@ header img {
   justify-content: space-around;
   margin: 0 5% 0 0;
 }
-.accueil__post__add form button {
-  all: unset;
+.accueil__post__add form i {
   font-size: 150%;
   color: white;
 }
@@ -709,8 +755,7 @@ header img {
   flex-direction: column;
   align-items: center;
   background-color: #d0575f;
-  padding: 0.5 1rem 0.5rem 1rem;
-  padding: 1rem;
+  padding: 0 0.5rem 0 0.5rem;
   cursor: pointer;
 }
 .accueil__profil #accueil_profil__active {
@@ -727,7 +772,7 @@ header img {
 }
 .accueil__profil h1 {
   font-weight: bold;
-  font-size: 150%;
+  font-size: 120%;
   color: #152545;
 }
 }
@@ -800,7 +845,7 @@ header img {
     flex-direction: column;
     align-items: center;
     background-color: #d0575f;
-    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+  padding: 0 0.5rem 0 0.5rem;
     cursor: pointer;
   }
   .accueil__profil #accueil_profil__active {
@@ -817,7 +862,7 @@ header img {
   }
   .accueil__profil h1 {
     font-weight: bold;
-    font-size: 100%;
+    font-size: 80%;
     color: #152545;
   }
 }
@@ -880,6 +925,7 @@ export default {
     data(){
       return { 
         file:"",
+        show: false,
         message:"",
       }
     },
@@ -938,32 +984,42 @@ export default {
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
+                  let nbOriginal = 0
+                  let nbShare = 0
+
+                  // Si c'est un repost
                   if (data.reposted === true){
                     // console.log(data)
                     let  userWhoRepost = allUser.data.find(el => el.id == data.userId)
                     let userOfPost = allUser.data.find(el => el.id == data.initialUser)
-                    // console.log(userOfPost)
+                    // console.log(data)
                     // console.log(userWhoRepost)
+                    // console.log(userOfPost)
 
-                    focus.innerHTML += 
+                    nbShare += 1
+                    console.log(data.picturePath)
+                    if(data.picturePath === null){
+                      // console.log("Pas d'image")
+                      focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
                             <img src="http://localhost:5000/uploads/${userWhoRepost.picture}" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
-                                    <h4> ${userWhoRepost.prenom}  ${userWhoRepost.nom} </h4>
-                                    <h1 class="actual__title">${data.title}</h1>
-                                    <h3> <em>respost de ${userOfPost.prenom}   ${userOfPost.nom}</em> </h3>
+                                    <h1> ${userWhoRepost.prenom}  ${userWhoRepost.nom} </h4>
+                                    <h2 class="actual__title">${data.title}</h1>
+                                    <h3> <em>Repost ! (${userOfPost.prenom}  ${userOfPost.nom})</em> </h3>
+
                                     <div class="modify__title">
-                                      <label for="addTitle"> Modifier le titre : </label>
-                                      <input type="text" class="modifyTitle" value="${data.title}">
+                                      <label for="modifTitle${nbShare}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitle${nbShare}" class="modifyTitle" value="${data.title}">
                                     </div>
 
-                                    <img src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
+
                                     <div class="modify__content">
-                                      <label for="modifyContent"> Modifier votre post :</label>
-                                      <textarea rows="10" cols="90" class="modifyContent" >${data.content}</textarea>
+                                      <label for="modifContent${nbShare}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContent${nbShare}" class="modifyContent" >${data.content}</textarea>
                                     </div>
 
                                     <span class="options"> 
@@ -980,9 +1036,9 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                      <label>Écrire un commentaire :</label>
+                                      <label for="addComment${nbShare}">Écrire un commentaire :</label>
                                       <span>
-                                        <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                        <textarea rows="3" cols="90" id="addComment${nbShare}" name="addComment${nbShare}" class="newCommentContent"></textarea>
                                         <i class="fas fa-caret-square-right" id="${id}"></i>
                                       </span>
                                     </div>
@@ -991,30 +1047,85 @@ export default {
                             </div>
                         </div>
                       </div>`;
+                    }
+                    else {
+                      focus.innerHTML += 
+                      `<div class="accueil__post__show">
+                        <div class="accueil__post__show__element"> 
+                            <img src="http://localhost:5000/uploads/${userWhoRepost.picture}" alt="">
+                            <div class="accueil__post__show__element__content">
+                                <div class="accueil__post__show__element__content__text">
+                                    <h1> ${userWhoRepost.prenom}  ${userWhoRepost.nom} </h4>
+                                    <h2 class="actual__title">${data.title}</h1>
+                                    <h3> <em>Repost ! (${userOfPost.prenom}  ${userOfPost.nom})</em> </h3>
+
+                                    <div class="modify__title">
+                                      <label for="modifTitle${nbShare}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitle${nbShare}" class="modifyTitle" value="${data.title}">
+                                    </div>
+
+                                    <img src="http://localhost:5000/uploads/${data.picturePath}" alt="">
+                                    <p class="actual__content">${data.content}</p>
+
+                                    <div class="modify__content">
+                                      <label for="modifContent${nbShare}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContent${nbShare}" class="modifyContent" >${data.content}</textarea>
+                                    </div>
+
+                                    <span class="options"> 
+                                      <button class="share"> <i class="fas fa-share"></i> </button> 
+
+                                      <button class="modify"> <i class="fas fa-pen-alt"></i> </button>  
+                                      <button class="delete"> <i class="fas fa-trash"></i> </button> 
+
+                                      
+                                      <button class='cancelModif'> <i class="fas fa-times"></i> </button>
+                                      <button class='acceptModif'> <i class="fas fa-check"></i> </button>
+                                    </span>
+                                </div>
+                                <div class="accueil__post__show__element__content__comment">
+                                    <h3>Commentaires </h3>
+                                    <div class="accueil__post__show__element__content__comment__add">
+                                      <label for="addComment${nbShare}">Écrire un commentaire :</label>
+                                      <span>
+                                        <textarea rows="3" cols="90" id="addComment${nbShare}" name="addComment${nbShare}" class="newCommentContent"></textarea>
+                                        <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      </span>
+                                    </div>
+                                    <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>`;
+                    }
+                  
 
                   }else {
-                    console.log(data)
+                    // console.log(data)
                     let userOfPost = allUser.data.find(el => el.id == data.userId)
                     // console.log(userOfPost)
-
-                    focus.innerHTML += 
+                    nbOriginal += 1
+                    
+                    if(data.picturePath === null){
+                      focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
                             <img src="http://localhost:5000/uploads/${userOfPost.picture}" alt="">
                             <div class="accueil__post__show__element__content">
                                 <div class="accueil__post__show__element__content__text">
-                                    <h4> ${userOfPost.prenom}  ${userOfPost.nom} </h4>
-                                    <h1 class="actual__title">${data.title}</h1>
+                                    <h1> ${userOfPost.prenom}  ${userOfPost.nom} </h4>
+                                    <h2 class="actual__title">${data.title}</h1>
+
                                     <div class="modify__title">
-                                      <label for="addTitle"> Modifier le titre : </label>
-                                      <input type="text" class="modifyTitle" value="${data.title}">
+                                      <label for="modifTitleOriginal${nbOriginal}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitleOriginal${nbOriginal}" class="modifyTitle" value="${data.title}">
                                     </div>
 
-                                    <img class="postImages" src="http://localhost:5000/uploads/${data.picturePath}" alt="">
                                     <p class="actual__content">${data.content}</p>
+
                                     <div class="modify__content">
-                                      <label for="modifyContent"> Modifier votre post :</label>
-                                      <textarea rows="10" cols="90" class="modifyContent" >${data.content}</textarea>
+                                      <label for="modifContentOriginal${nbOriginal}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContentOriginal${nbOriginal}" class="modifyContent" >${data.content}</textarea>
                                     </div>
 
                                     <span class="options"> 
@@ -1031,9 +1142,9 @@ export default {
                                 <div class="accueil__post__show__element__content__comment">
                                     <h3>Commentaires </h3>
                                     <div class="accueil__post__show__element__content__comment__add">
-                                      <label>Écrire un commentaire :</label>
+                                      <label for="addCommentOriginal${nbOriginal}">Écrire un commentaire :</label>
                                       <span>
-                                        <textarea rows="3" cols="90" class="newCommentContent"></textarea>
+                                        <textarea rows="3" cols="90" id="addCommentOriginal${nbOriginal}" class="newCommentContent" name="commentaires"></textarea>
                                         <i class="fas fa-caret-square-right" id="${id}"></i>
                                       </span>
                                     </div>
@@ -1042,6 +1153,57 @@ export default {
                             </div>
                         </div>
                       </div>`;
+                    }
+                    else {
+                      focus.innerHTML += 
+                      `<div class="accueil__post__show">
+                        <div class="accueil__post__show__element"> 
+                            <img src="http://localhost:5000/uploads/${userOfPost.picture}" alt="">
+                            <div class="accueil__post__show__element__content">
+                                <div class="accueil__post__show__element__content__text">
+                                    <h1> ${userOfPost.prenom}  ${userOfPost.nom} </h4>
+                                    <h2 class="actual__title">${data.title}</h1>
+
+                                    <div class="modify__title">
+                                      <label for="modifTitleOriginal${nbOriginal}"> Modifier le titre : </label>
+                                      <input type="text" id="modifTitleOriginal${nbOriginal}" class="modifyTitle" value="${data.title}">
+                                    </div>
+
+                                    <img class="postImages" src="http://localhost:5000/uploads/${data.picturePath}" alt="">
+                                    <p class="actual__content">${data.content}</p>
+
+                                    <div class="modify__content">
+                                      <label for="modifContentOriginal${nbOriginal}"> Modifier votre post :</label>
+                                      <textarea rows="10" cols="90" id="modifContentOriginal${nbOriginal}" class="modifyContent" >${data.content}</textarea>
+                                    </div>
+
+                                    <span class="options"> 
+                                      <button class="share"> <i class="fas fa-share"></i> </button> 
+
+                                      <button class="modify"> <i class="fas fa-pen-alt"></i> </button>  
+                                      <button class="delete"> <i class="fas fa-trash"></i> </button> 
+
+                                      
+                                      <button class='cancelModif'> <i class="fas fa-times"></i> </button>
+                                      <button class='acceptModif'> <i class="fas fa-check"></i> </button>
+                                    </span>
+                                </div>
+                                <div class="accueil__post__show__element__content__comment">
+                                    <h3>Commentaires </h3>
+                                    <div class="accueil__post__show__element__content__comment__add">
+                                      <label for="addCommentOriginal${nbOriginal}">Écrire un commentaire :</label>
+                                      <span>
+                                        <textarea rows="3" cols="90" id="addCommentOriginal${nbOriginal}" class="newCommentContent" name="commentaires"></textarea>
+                                        <i class="fas fa-caret-square-right" id="${id}"></i>
+                                      </span>
+                                    </div>
+                                    <div class="accueil__post__show__element__content__comment__nb" id="comment${id}"></div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>`;
+                    }
+                    
                   }
 
               } 
@@ -1421,28 +1583,6 @@ export default {
            
           })
         },
-        // post(){
-        //   console.log("Aussi j'envoie les données du post")
-        //   let userId = localStorage.getItem('ID')
-        //   let newPost = { "userId": userId, "title": `${newPostTitle.value}`, "content": `${newPostContent.value}` }
-        //   let Token = localStorage.getItem('Token')
-        //   // console.log(document.getElementById('image_input').value)
-        //   fetch("http://localhost:5000/api/posts", {
-        //     method: 'POST',
-        //     body : JSON.stringify(newPost),
-        //     headers: {
-        //         "Content-type": "application/json",
-        //         Authorization : `Bearer ${JSON.parse(Token)}`
-        //     },
-        //   })
-        //   .then((res) => res.json())
-        //   .then((res) => {
-        //     console.log(res)
-        //   })
-
-        // setTimeout("location.reload(true);",400)
-
-        // },
         profilUser(){
           let profil = document.getElementsByClassName("profil")
           let hide = document.getElementById('hide')
@@ -1582,21 +1722,41 @@ export default {
           let Token = localStorage.getItem('Token')
           console.log(newPost)
 
-
-          const formData = new FormData();
-          formData.append('file',this.file);
-          formData.append('body', JSON.stringify(newPost));
-          try{
-            await axios.post(`http://localhost:5000/api/posts`, formData
-            ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
-
-            this.message = 'Modifiée !!'
-            location.reload()
+          if(this.file === ""){
+            console.log("Pas de photo")
+            
+            fetch("http://localhost:5000/api/posts", {
+              method: 'POST',
+              body : JSON.stringify(newPost),
+              headers: {
+                  "Content-type": "application/json",
+                  Authorization : `Bearer ${JSON.parse(Token)}`
+              },
+            })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res)
+              location.reload()
+            })
           }
-          catch(err){
-            console.log(err);
-            this.message = err.response.data.error
+          else {
+            const formData = new FormData();
+            formData.append('file',this.file);
+            formData.append('body', JSON.stringify(newPost));
+            try{
+              await axios.post(`http://localhost:5000/api/posts`, formData
+              ,{headers : { Authorization : `Bearer ${JSON.parse(Token)}`}});
+
+              this.message = 'Modifiée !!'
+              location.reload()
+            }
+            catch(err){
+              console.log(err);
+              this.message = err.response.data.error
+            }
           }
+
+          
         }
     }
 }
