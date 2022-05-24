@@ -76,7 +76,7 @@
                 <br><br>
 
               <div class="button">
-                <button>Valider le changement de photo </button>
+                <button>Poster ! </button>
               </div>
 
           </form>
@@ -1673,30 +1673,31 @@ export default {
           // Affichage des post 
             // 
             // 
+            let nbOriginal = 0
+            let nbShare = 0
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
-                  let nbOriginal = 0
-                  let nbShare = 0
 
                   // Si c'est un repost
                   if (data.reposted === true){
                     let  userWhoRepost = allUser.data.find(el => el.id == data.userId)
                     let userOfPost = allUser.data.find(el => el.id == data.initialUser)
-                    // console.log(data)
-                    // console.log(userWhoRepost)
                     if(userWhoRepost === undefined){
                       userWhoRepost = { picture: "default.png", prenom: "L'utilisateur qui à reposter à supprimer son compte.", nom : "" }
                     }
                     if(userOfPost === undefined){
                       userOfPost = { picture: "default.png", prenom: "L'utilisateur à la base du post à supprimer son compte.", nom : "" }
                     }
-                    // console.log(userOfPost)
-
                     nbShare += 1
+                    // console.log(data)
+                    // console.log(userWhoRepost)
+                    // console.log(userOfPost)
                     // console.log(data.picturePath)
+
+                    // Si il n'y a pas d'image :
                     if(data.picturePath === null){
-                      // console.log("Pas d'image")
+
                       focus.innerHTML += 
                       `<div class="accueil__post__show">
                         <div class="accueil__post__show__element"> 
@@ -1745,6 +1746,7 @@ export default {
                         </div>
                       </div>`;
                     }
+                    // S'il y a une image : 
                     else {
                       focus.innerHTML += 
                       `<div class="accueil__post__show">
