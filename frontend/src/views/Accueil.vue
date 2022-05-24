@@ -2091,7 +2091,7 @@ export default {
 
 
 
-          // LIKE
+          // Options
             // 
             // 
               let userId = localStorage.getItem('ID')
@@ -2269,7 +2269,7 @@ export default {
               }
               // 
               // 
-            // FIN LIKE 
+            // FIN Options
 
 
 
@@ -2423,8 +2423,11 @@ export default {
           })
         },
         disconnect(){
-            localStorage.clear('Token');
-            location.reload();
+          let profil = document.getElementById('profil')
+          profil.style.display = "none"
+          localStorage.clear('Token');
+          // setTimeout("location.reload(true);",500)
+          window.location.href = "/"
         },
         onSelect(){
           const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
