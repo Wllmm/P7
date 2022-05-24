@@ -1686,6 +1686,9 @@ export default {
                     let userOfPost = allUser.data.find(el => el.id == data.initialUser)
                     // console.log(data)
                     // console.log(userWhoRepost)
+                    if(userWhoRepost === undefined){
+                      userWhoRepost = { picture: "default.png", prenom: "L'utilisateur qui à reposter à supprimer son compte.", nom : "" }
+                    }
                     if(userOfPost === undefined){
                       userOfPost = { picture: "default.png", prenom: "L'utilisateur à la base du post à supprimer son compte.", nom : "" }
                     }
@@ -1965,6 +1968,10 @@ export default {
                           // console.log(comment.userId)
                           // console.log(users.data)
                           let commentUser = users.data.find(el => el.id == comment.userId)
+                          console.log(commentUser)
+                          if(commentUser === undefined){
+                            commentUser = { prenom:"L'utilisateur qui avait commenté à supprimer son compte.", nom:"" }
+                          }
 
                           commentAdd.innerHTML += 
                           `<div class='new__comment'>
