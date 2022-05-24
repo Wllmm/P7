@@ -53,7 +53,7 @@
           <form id="createPost" @submit.prevent="onSubmitPost" enctype="multipart/form-data">
 
               <div class="createPost__head">
-                <img class="" src="../img/portrait-0360w.jpg" alt="">
+                <img class="imageProfil" src="localhost:5000/uploads/" alt="">
 
                 <div class="createPost__head__title">
                     <label for="newPostTitle"> Titre : </label>
@@ -1640,15 +1640,12 @@ export default {
         })
         .then((res) => res.json())
         .then((res) => {
-          
-        let profilImage = document.getElementsByClassName("imageProfil")
-        let path = "http://localhost:5000/uploads/" + res.data.picturePath
+          let profilImage = document.getElementsByClassName("imageProfil")
+          let path = "http://localhost:5000/uploads/" + res.data.picturePath
 
-        for(let profil of profilImage){
-          profil.src=`${path}`
-        }
-
-
+          for(let profil of profilImage){
+            profil.src=`${path}`
+          }
         })
 
 

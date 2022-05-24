@@ -34,7 +34,8 @@ module.exports = (app) => {
         User.findByPk(req.params.id)
         .then((res) => {
           console.log(res.dataValues.picturePath)
-          if (res.dataValues.picturePath === null){
+          if (res.dataValues.picturePath === "default.png"){
+            return
           }else { fs.unlinkSync(`uploads/${res.dataValues.picturePath}`) }
         })
 
