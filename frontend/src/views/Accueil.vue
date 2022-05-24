@@ -138,6 +138,16 @@ body {
 
 }
 
+#noPost {
+display: flex;
+justify-content: center;
+margin-top: 2rem;
+border: 1px solid black;
+border-radius: 0.5rem;
+color: red;
+font-weight: bold;
+padding: 0.5rem 0 0.5rem 0;
+}
 
 .fa-times:hover{
   color: red;
@@ -435,7 +445,6 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-/* Image dans la modif profil */
 .fa-share:hover {
   color: blue;
 }
@@ -1675,6 +1684,10 @@ export default {
             // 
             let nbOriginal = 0
             let nbShare = 0
+            if (res.data.length === 0 ){
+              console.log("Pas de post")
+                focus.innerHTML = `<h1 id="noPost">Aucun post pour l'instant.</h1>`
+            }
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
