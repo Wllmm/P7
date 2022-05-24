@@ -32,14 +32,14 @@
 
             <div class="email">
                 <h2 id="profilEmail"> Nom d'utilisateur </h2>
-                <label for="newEmail"> Changer l'addresse email : </label>
+                <label for="newEmail" id="emailLabel"> Changer l'addresse email : </label>
                 <input type="text" id="newEmail">
                 <i class="fas fa-magic" id="emailValid"></i>
 
             </div>
             <div class="password">
                 <h2 id="profilPassword"> Modifier le mot de passe </h2>
-                <label for="newPassword"> Changer le mot de passe : </label>
+                <label for="newPassword" id="passwordLabel"> Changer le mot de passe : </label>
                 <input type="text" id="newPassword">
                 <i class="fas fa-magic" id="passwordValid"></i>
             </div>
@@ -436,7 +436,6 @@ body {
 }
 
 /* Image dans la modif profil */
-
 .fa-share:hover {
   color: blue;
 }
@@ -1968,7 +1967,6 @@ export default {
                           // console.log(comment.userId)
                           // console.log(users.data)
                           let commentUser = users.data.find(el => el.id == comment.userId)
-                          console.log(commentUser)
                           if(commentUser === undefined){
                             commentUser = { prenom:"L'utilisateur qui avait commenté à supprimer son compte.", nom:"" }
                           }
@@ -2305,6 +2303,31 @@ export default {
           let emailCheck = false;
           let passwordCheck = false;
 
+          newPassword.onkeyup = () =>{
+            passwordCheck = regPassword.test(newPassword.value);
+
+            if (passwordCheck === true){
+              document.getElementById("passwordLabel")
+              .innerHTML = `Mot de passe :  <i class="fas fa-check"></i>  `
+            }else{
+              document.getElementById("passwordLabel")
+              .innerHTML = `Mot de passe :  <i class="fas fa-times"></i>  `
+
+            }
+          }
+          newEmail.onkeyup = () =>{
+            emailCheck = regEmail.test(newEmail.value);
+            console.log(emailCheck)
+            
+
+            if (emailCheck === true){
+              document.getElementById('emailLabel')
+              .innerHTML = `Email :  <i class="fas fa-check"></i>  `
+            }else{
+              document.getElementById('emailLabel')
+              .innerHTML = `Email :  <i class="fas fa-times"></i>  `
+            }
+          }
 
           putEmail.onclick = () => {
             console.log(newEmail.value)
