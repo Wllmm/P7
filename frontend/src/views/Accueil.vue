@@ -2350,7 +2350,9 @@ export default {
             })
             }
             else {
-              alert("Email non valide afficher une plus belle erreur")
+              let email = document.getElementById('emailLabel')
+              email.style.color = "red"
+              email.style.fontWeight = "bold"
             }
           }
           putPassword.onclick = () => {
@@ -2373,7 +2375,10 @@ export default {
             })
             }
             else {
-              alert("Mot de passe non valide afficher une plus belle erreur")
+              let password = document.getElementById('passwordLabel')
+              password.style.color = "red"
+              password.style.fontWeight = "bold"
+
             }
           }
 
