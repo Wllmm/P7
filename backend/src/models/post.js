@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       content: {
-        type: DataTypes.CHAR,
+        type: DataTypes.TEXT('long'),
         allowNull: false
       },
       reposted: {

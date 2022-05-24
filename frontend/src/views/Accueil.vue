@@ -65,7 +65,7 @@
               
               <div class="createPost__content">
                   <label for="newPostContent"> Votre texte ici :</label>
-                  <textarea rows="10" cols="90" id="newPostContent"></textarea>
+                  <textarea rows="10" cols="90" id="newPostContent" maxlength="1000"></textarea>
               </div>
 
               <div class="createPost__files">
@@ -1682,15 +1682,17 @@ export default {
 
                   // Si c'est un repost
                   if (data.reposted === true){
-                    // console.log(data)
                     let  userWhoRepost = allUser.data.find(el => el.id == data.userId)
                     let userOfPost = allUser.data.find(el => el.id == data.initialUser)
                     // console.log(data)
                     // console.log(userWhoRepost)
+                    if(userOfPost === undefined){
+                      userOfPost = { picture: "default.png", prenom: "L'utilisateur à la base du post à supprimer son compte.", nom : "" }
+                    }
                     // console.log(userOfPost)
 
                     nbShare += 1
-                    console.log(data.picturePath)
+                    // console.log(data.picturePath)
                     if(data.picturePath === null){
                       // console.log("Pas d'image")
                       focus.innerHTML += 
@@ -1792,11 +1794,14 @@ export default {
                       </div>`;
                     }
                   
-
+                  // Si c'est le post original
                   }else {
                     // console.log(data)
                     let userOfPost = allUser.data.find(el => el.id == data.userId)
                     // console.log(userOfPost)
+                    if(userOfPost === undefined){
+                      userOfPost = { picture: "default.png", prenom: "L'utilisateur à supprimer son compte.", nom : "" }
+                    }
                     nbOriginal += 1
                     
                     if(data.picturePath === null){
@@ -2417,7 +2422,8 @@ export default {
 
           if(this.file === ""){
             console.log("Pas de photo")
-            
+            console.log(newPost)
+
             fetch("http://localhost:5000/api/posts", {
               method: 'POST',
               body : JSON.stringify(newPost),
