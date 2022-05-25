@@ -22,12 +22,16 @@
                 <div class="home__form__input">
                     <label id="labelEmail" for="email">            Email  </label>
                     <input type="email" name="email" id="email">
+                     <i class="fas fa-check" id="emailTrue"></i>
+                     <i class="fas fa-times" id="emailFalse"></i>
                     <p id="errorEmail"></p>
                 </div>
 
                 <div class="home__form__input">
                     <label id="labelPassword" for="password" >Mot de passe  </label>
                     <input type="password" name="password" id="password">
+                     <i class="fas fa-check" id="passwordTrue"></i>
+                     <i class="fas fa-times" id="passwordFalse"></i>
                     <p id="errorPassword"></p>
                 </div>
                 
@@ -325,18 +329,33 @@ export default {
         let emailCheck = false;
         let passwordCheck = false;
 
+        document.getElementById('passwordTrue').style.visibility = "hidden"
+        document.getElementById("passwordFalse").style.visibility = "hidden"
+
+        document.getElementById('emailTrue').style.visibility = "hidden"
+        document.getElementById("emailFalse").style.visibility = "hidden"
+
         
         password.onkeyup = () =>{
           passwordCheck = regPassword.test(password.value);
 
           if (passwordCheck === true){
-            document.getElementById("labelPassword")
-            .innerHTML = `Mot de passe  <i class="fas fa-check"></i>  `
             document.getElementById("errorPassword")
             .innerHTML = "";
+
+            document.getElementById('passwordTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("passwordFalse")
+            .style.visibility = "hidden"
+
           }else{
-            document.getElementById("labelPassword")
-            .innerHTML = `Mot de passe  <i class="fas fa-times"></i>  `
+            document.getElementById("passwordFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('passwordTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorPassword")
             .innerHTML = "Le mot de pass doit contenir : Maj, Min, Chiffre, Caractère spécial, Min 8 caractères .";
 
@@ -346,13 +365,21 @@ export default {
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
-            document.getElementById('labelEmail')
-            .innerHTML = `             Email  <i class="fas fa-check"></i>  `
-            document.getElementById("errorEmail")
+            document.getElementById("errorPassword")
             .innerHTML = "";
+
+            document.getElementById('emailTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("emailFalse")
+            .style.visibility = "hidden"
           }else{
-            document.getElementById('labelEmail')
-            .innerHTML = `             Email  <i class="fas fa-times"></i>  `
+            document.getElementById("emailFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('emailTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorEmail")
             .innerHTML = "L'adresse email saisie n'est pas valide.";
           }
@@ -379,9 +406,14 @@ export default {
             .then((res) => res.json())
             .then((res) => {
                 console.log(res);
+                if(res.message === "L'utilisateur demandé n'existe pas."){
+                   document.getElementById("error")
+                  .innerHTML = "La combinaison du mot de passe et de l'adresse mail ne trouve aucun compte."
+                  return
+                }
                 if (res.message === "Le mot de passe est incorrect."){
                   document.getElementById("error")
-                  .innerHTML = "Le mot de passe est incorrect."
+                  .innerHTML = "La combinaison du mot de passe et de l'adresse mail ne trouve aucun compte."
                 }else {
                   let token = res.token;
                   console.log(token)
