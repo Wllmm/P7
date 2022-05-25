@@ -375,7 +375,7 @@ export default {
           prenomCheck = regTxt.test(prenom.value);
 
           if (prenomCheck === true){
-             document.getElementById("errorPassword")
+             document.getElementById("errorPrenom")
             .innerHTML = "";
 
             document.getElementById('prenomTrue')
@@ -398,7 +398,7 @@ export default {
           nomCheck = regTxt.test(nom.value);
 
           if (nomCheck === true){
-             document.getElementById("errorPassword")
+             document.getElementById("errorNom")
             .innerHTML = "";
 
             document.getElementById('nomTrue')
@@ -471,7 +471,7 @@ export default {
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
-            document.getElementById("errorPassword")
+            document.getElementById("errorEmail")
             .innerHTML = "";
 
             document.getElementById('emailTrue')

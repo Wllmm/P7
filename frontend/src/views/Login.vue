@@ -365,7 +365,7 @@ export default {
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
-            document.getElementById("errorPassword")
+            document.getElementById("errorEmail")
             .innerHTML = "";
 
             document.getElementById('emailTrue')

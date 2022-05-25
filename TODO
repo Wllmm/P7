@@ -3,10 +3,3 @@ Problème :
 
 Reste a faire : 
 
-- dotenv 
-
-- Remplir Read ME 
-
-- Afficher une ereur lors de la connexion (si mdp ou email faux même erreur + si pas reussi de connexion)
-
-- Affichage formulaire

@@ -2,13 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize')
 const UserModel = require('../models/user')
 const PostModel = require('../models/post')
 const CommentModel = require('../models/comment')
-// const TestModel = require('../models/test')
-
-
+require("dotenv").config()
 
 const bcrypt = require ('bcrypt')
   
-const sequelize = new Sequelize('groupomania', 'root', '', {
+const sequelize = new Sequelize('groupomania', `${process.env.USERNAME_SQL}`,  `${process.env.PASSWORD_SQL}`, {
   host: 'localhost',
   dialect: 'mariadb',
   dialectOptions: {
@@ -21,7 +19,6 @@ const User = UserModel(sequelize, DataTypes)
 const Post = PostModel(sequelize, DataTypes)
 const Comment = CommentModel(sequelize, DataTypes)
 // Copie Commentaires
-// const Test = TestModel(sequelize, DataTypes)
 
 Post.hasMany(Comment, {foreignKey: 'postId'})
 Comment.belongsTo(Post, {foreignKey: 'postId'})
