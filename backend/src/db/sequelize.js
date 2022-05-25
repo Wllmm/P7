@@ -25,7 +25,7 @@ Comment.belongsTo(Post, {foreignKey: 'postId'})
 
 
 const initDb = () => {
-  return sequelize.sync({force: false}).then(_ => {
+  return sequelize.sync({force: true}).then(_ => {
     console.log('La base de donnée a bien été initialisée !')    
 
   })
