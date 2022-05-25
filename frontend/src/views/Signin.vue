@@ -20,32 +20,42 @@
               <form>
   
                 <div class="home__form__input">
-                      <label id="labelPrenom" for="prenom" >        Prénom   </label>
+                      <label id="labelPrenom" for="prenom" >                 Prénom   </label>
                       <input type="text" name="prenom" id="prenom" required="required">
+                       <i class="fas fa-check" id="prenomTrue"></i>
+                       <i class="fas fa-times" id="prenomFalse"></i>
                       <p id="errorPrenom"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelNom" for="nom">             Nom   </label>
+                      <label id="labelNom" for="nom">                      Nom   </label>
                       <input type="text" name="nom" id="nom" required="required">
+                       <i class="fas fa-check" id="nomTrue"></i>
+                       <i class="fas fa-times" id="nomFalse"></i>
                       <p id="errorNom"></p>
                   </div>
   
                   <div class="home__form__input">
                       <label id="labelDate" for="date" >Date de naissance   </label>
                       <input type="date" name="date" id="date" required="required">
+                       <i class="fas fa-check" id="dateTrue"></i>
+                       <i class="fas fa-times" id="dateFalse"></i>
                       <p id="errorDate"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelEmail" for="email">            Email   </label>
+                      <label id="labelEmail" for="email">                     Email   </label>
                       <input type="email" name="email" id="email" required="required">
+                       <i class="fas fa-check" id="emailTrue"></i>
+                       <i class="fas fa-times" id="emailFalse"></i>
                       <p id="errorEmail"></p>
                   </div>
   
                   <div class="home__form__input">
-                      <label id="labelPassword" for="password" >Mot de passe   </label>
+                      <label id="labelPassword" for="password" >         Mot de passe   </label>
                       <input type="password" name="password" id="password" required="required">
+                       <i class="fas fa-check" id="passwordTrue"></i>
+                       <i class="fas fa-times" id="passwordFalse"></i>
                       <p id="errorPassword"></p>
                   </div>
 
@@ -80,6 +90,7 @@ header img {
 }
 .fa-times {
   color: red;
+  margin-left: -4%;
 }
 
 #error{
@@ -342,32 +353,67 @@ export default {
 
         let error = document.getElementById('error')
 
+        document.getElementById('passwordTrue').style.visibility = "hidden"
+        document.getElementById("passwordFalse").style.visibility = "hidden"
+
+        document.getElementById('prenomTrue').style.visibility = "hidden"
+        document.getElementById("prenomFalse").style.visibility = "hidden"
+
+        document.getElementById('nomTrue').style.visibility = "hidden"
+        document.getElementById("nomFalse").style.visibility = "hidden"
+
+        document.getElementById('dateTrue').style.visibility = "hidden"
+        document.getElementById("dateFalse").style.visibility = "hidden"
+
+
+        document.getElementById('emailTrue').style.visibility = "hidden"
+        document.getElementById("emailFalse").style.visibility = "hidden"
+
+
+
         prenom.onkeyup = () =>{
           prenomCheck = regTxt.test(prenom.value);
 
           if (prenomCheck === true){
-            document.getElementById('labelPrenom')
-            .innerHTML = `        Prénom  <i class="fas fa-check"></i>  `
-            document.getElementById("errorPrenom")
-            .innerHTML = ""
+             document.getElementById("errorPassword")
+            .innerHTML = "";
+
+            document.getElementById('prenomTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("prenomFalse")
+            .style.visibility = "hidden"
           }else{
-            document.getElementById('labelPrenom')
-            .innerHTML = `        Prénom  <i class="fas fa-times"></i>  `
+           document.getElementById("prenomFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('prenomTrue')
+            .style.visibility = "hidden"
+            
             document.getElementById("errorPrenom")
-            .innerHTML = "Le prenom ne doit contenir que des lettres."
+            .innerHTML = "Le prénom ne doit contenir que des lettres."
           }
         }
         nom.onkeyup = () =>{
           nomCheck = regTxt.test(nom.value);
 
           if (nomCheck === true){
-            document.getElementById('labelNom')
-            .innerHTML = `             Nom  <i class="fas fa-check"></i>  `
-            document.getElementById("errorNom")
+             document.getElementById("errorPassword")
             .innerHTML = "";
+
+            document.getElementById('nomTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("nomFalse")
+            .style.visibility = "hidden"
+
           }else{
-            document.getElementById('labelNom')
-            .innerHTML = `             Nom  <i class="fas fa-times"></i>  `
+            document.getElementById("nomFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('nomTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorNom")
             .innerHTML = "Le nom ne doit contenir que des lettres.";
           }
@@ -376,13 +422,22 @@ export default {
           dateCheck = regDate.test(date.value);
 
           if (dateCheck === true){
-            document.getElementById('labelDate')
-            .innerHTML = `Date de naissance  <i class="fas fa-check"></i>  `
-            document.getElementById("errorDate")
+             document.getElementById("errorDate")
             .innerHTML = "";
+
+            document.getElementById('dateTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("dateFalse")
+            .style.visibility = "hidden"
+
           }else{
-            document.getElementById('labelDate')
-            .innerHTML = `Date de naissance  <i class="fas fa-times"></i>  `
+           document.getElementById("dateFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('dateTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorDate")
             .innerHTML = "La date n'est pas remplie correctement.";
           }
@@ -391,13 +446,22 @@ export default {
           passwordCheck = regPassword.test(password.value);
 
           if (passwordCheck === true){
-            document.getElementById("labelPassword")
-            .innerHTML = `Mot de passe  <i class="fas fa-check"></i>  `
             document.getElementById("errorPassword")
             .innerHTML = "";
+
+            document.getElementById('passwordTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("passwordFalse")
+            .style.visibility = "hidden"
+
           }else{
-            document.getElementById("labelPassword")
-            .innerHTML = `Mot de passe  <i class="fas fa-times"></i>  `
+            document.getElementById("passwordFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('passwordTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorPassword")
             .innerHTML = "Le mot de pass doit contenir : Maj, Min, Chiffre, Caractère spécial, Min 8 caractères .";
 
@@ -407,13 +471,21 @@ export default {
           emailCheck = regEmail.test(email.value);
 
           if (emailCheck === true){
-            document.getElementById('labelEmail')
-            .innerHTML = `             Email  <i class="fas fa-check"></i>  `
-            document.getElementById("errorEmail")
+            document.getElementById("errorPassword")
             .innerHTML = "";
+
+            document.getElementById('emailTrue')
+            .style.visibility = "visible"
+
+            document.getElementById("emailFalse")
+            .style.visibility = "hidden"
           }else{
-            document.getElementById('labelEmail')
-            .innerHTML = `             Email  <i class="fas fa-times"></i>  `
+            document.getElementById("emailFalse")
+            .style.visibility = "visible"
+
+            document.getElementById('emailTrue')
+            .style.visibility = "hidden"
+
             document.getElementById("errorEmail")
             .innerHTML = "L'adresse email saisie n'est pas valide.";
           }

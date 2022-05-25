@@ -1,29 +1,12 @@
-Backend : 
-- Connexion / Déconnexion / Inscription/ Création, Suppression  de POSTS et commentaires/ Ajout, suppression, modification d'images  -- OK
-
-
-Frontend : 
-- Previsu Connexion / Inscription/ Création de posts -- OK
-
-
 Problème : 
 
 
 Reste a faire : 
 
-- Commentaire, afficher dans l'ordre de création
-- Peut-être suppression des post à la suppression du compte car sinon log une erreur (ou alors afficher utilisateur désinscrit)
+- dotenv 
 
+- Remplir Read ME 
 
-Facile : ____________
-- dotenv
+- Afficher une ereur lors de la connexion (si mdp ou email faux même erreur + si pas reussi de connexion)
 
-Moyen : ____________
-
-
-Final : ____________
-- Refonte graphique globale (signin et login ok)
-- Affichage des erreurs globale meilleurs (pareil)
-
-
-
+- Affichage formulaire
