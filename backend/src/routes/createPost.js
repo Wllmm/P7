@@ -7,10 +7,6 @@ const fs = require('fs')
 module.exports = (app) => {
   app.post('/api/posts', auth, multer, (req, res) => {
 
-    // console.log(req.file)
-    // console.log(req.body)
-    // console.log(req.body.reposted)
-
     if(req.file !== undefined){
 
       let newPost = JSON.parse(req.body.body)

@@ -45,7 +45,6 @@
 
 </template>
 
-
 <style>
 *{
   font-family: "Lato", sans-serif;

@@ -1969,77 +1969,162 @@ export default {
                   // console.log(comments.data)
 
                   // Dans les posts :
-                  for (let data of res.data){
-                    // console.log(data)
-                    let commentAdd = document.getElementById(`comment${data.id}`)
+                let nb = 0
+                let notAllowed = [{nb : 0}]
+                let allowed = [{nb : 0}]
+                let Id= localStorage.getItem("ID")
+                 fetch(`http://localhost:5000/api/user/${Id}`, {
+                            headers: {
+                                Authorization : `Bearer ${JSON.parse(Token)}` 
+                              },
+                          })
+                          .then((res) => res.json())
+                          .then((user) => {
 
-                    // Dans les commentaires : 
-                     for (let comment of comments.data){
-                      //  console.log(comment)
-                        if (comment.postId === data.id){
+                            for (let data of res.data){
+                            // console.log(data)
+                            let commentAdd = document.getElementById(`comment${data.id}`)
 
-                          // console.log(comment.userId)
-                          // console.log(users.data)
-                          let commentUser = users.data.find(el => el.id == comment.userId)
-                          if(commentUser === undefined){
-                            commentUser = { prenom:"L'utilisateur qui avait commenté à supprimer son compte.", nom:"" }
+                            // Dans les commentaires : 
+                            for (let comment of comments.data){
+                              //  console.log(comment)
+                                
+                                if (comment.postId === data.id){
+                                  // console.log(comment)
+                                  // console.log(users.data)
+                                  let commentUser = users.data.find(el => el.id == comment.userId)
+                                  // console.log(commentUser)
+
+                                  if(commentUser === undefined){
+                                    commentUser = { prenom:"L'utilisateur à supprimer son compte.", nom:"" }
+                                  }
+                                  
+                                  
+                                    // console.log(user.data)
+                                    // console.log(comment)
+                                    nb += 1
+
+                                    if (user.data.idAdmin === true) {
+                                        commentAdd.innerHTML += 
+                                      `<div class='new__comment'>
+                                        <h4> ${commentUser.prenom}   ${commentUser.nom} </h4>
+                                        <p>${comment.content}</p>
+                                        <button  class="deleteComment"> <i class="fas fa-trash"></i> </button> 
+                                      </div>`
+                                      allowed.push({nb})
+                                    }  
+                                    else {
+                                      // Affichage du commentaire avec possiblité de supprimé
+                                      if(Id == comment.userId){
+                                        commentAdd.innerHTML += 
+                                        `<div class='new__comment'>
+                                            <h4> ${commentUser.prenom}   ${commentUser.nom} </h4>
+                                            <p>${comment.content}</p>
+                                            <button  class="deleteComment"> <i class="fas fa-trash"></i> </button> 
+                                          </div>`
+                                          allowed.push({nb})
+                                      }
+                                      // Affichage du commentaire sans possibilité de supprimé
+                                      else {
+                                        commentAdd.innerHTML += 
+                                      `<div class='new__comment'>
+                                          <h4> ${commentUser.prenom}   ${commentUser.nom} </h4>
+                                          <p>${comment.content}</p> 
+                                          <button  class="deleteComment"> <i class="fas fa-trash"></i> </button> 
+                                        </div>`
+                                        notAllowed.push({nb})
+                                      }
+                                    }
+                                              
+                                }
+                              } 
+                          } 
+                          // console.log(notAllowed)
+                          for (let i in notAllowed){
+                            
+                            if(notAllowed[i].nb === 0){
+                            }
+                            else {
+                              // console.log(notAllowed[i])
+                              let test = document.getElementsByClassName("deleteComment")                              
+                              test[notAllowed[i].nb -1].style.display = "none"
+
+                              // test[notAllowed[i].nb -1].onclick = () => {
+                              //   console.log("C'est bon")
+                              // }
+                            }
                           }
+                          for (let i in allowed){
+                            if(allowed[i].nb === 0){
+                            }
+                            else {
+                              // console.log(allowed[i])
 
-                          commentAdd.innerHTML += 
-                          `<div class='new__comment'>
-                              <h4> ${commentUser.prenom}   ${commentUser.nom} </h4>
-                              <p>${comment.content}</p>
-                              <button class="deleteComment"> <i class="fas fa-trash"></i> </button> 
-                            </div>`
-                        }
-                      } 
-                  }
+                              let test = document.getElementsByClassName("deleteComment")                              
+                              test[allowed[i].nb -1].onclick = () => {
+                                console.log(comments.data[allowed[i].nb-1])
+                                let deletedComment = comments.data[allowed[i].nb-1]
+                                console.log(deletedComment)
 
-                  let commentId = document.getElementsByClassName('deleteComment')
-                  // console.log(commentId)
-                     
-                  for (let i in comments.data){
-                    commentId[i].onclick = () => {
-                      // console.log(comments.data[i].id)
-                      fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            Authorization : `Bearer ${JSON.parse(Token)}` 
-                        },
-                      })
-                      .then((res) => res.json())
-                      .then((res) => {
-                        setTimeout("location.reload(true);",400)
-                      })
+                                fetch(`http://localhost:5000/api/comments/${deletedComment.id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    Authorization : `Bearer ${JSON.parse(Token)}` 
+                                },
+                                })
+                                .then((res) => res.json())
+                                .then((res) => {
+                                  setTimeout("location.reload(true);",400)
+                                })
+                              }
+                            }
+                          }
+                        })
+                 
+  
+
+                  // for (let i in comments.data){
+                  //   commentId[i].onclick = () => {
+                  //     // console.log(comments.data[i].id)
+                  //     fetch(`http://localhost:5000/api/comments/${comments.data[i].id}`, {
+                  //       method: 'DELETE',
+                  //       headers: {
+                  //           Authorization : `Bearer ${JSON.parse(Token)}` 
+                  //       },
+                  //     })
+                  //     .then((res) => res.json())
+                  //     .then((res) => {
+                  //       setTimeout("location.reload(true);",400)
+                  //     })
                       
-                    }
-                  }
+                  //   }
+                  // }
 
-                  // Affichage de la possibilité de supprimé le commentaire
+                  // // Affichage de la possibilité de supprimé le commentaire
                 
-                  for (let i in comments.data){
-                    // console.log(comments.data[i])
+                  // for (let i in comments.data){
+                  //   // console.log(comments.data[i])
 
-                      fetch(`http://localhost:5000/api/user/${id}`, {
-                        headers: {
-                            Authorization : `Bearer ${JSON.parse(Token)}` 
-                          },
-                      })
-                      .then((res) => res.json())
-                      .then((user) => { 
+                  //     fetch(`http://localhost:5000/api/user/${id}`, {
+                  //       headers: {
+                  //           Authorization : `Bearer ${JSON.parse(Token)}` 
+                  //         },
+                  //     })
+                  //     .then((res) => res.json())
+                  //     .then((user) => { 
 
-                        // console.log(comments.data[i])
-                        if (user.data.idAdmin === true) {
-                          return
-                        }                    
-                        if (comments.data[i].userId == user.data.id){
+                  //       // console.log(comments.data[i])
+                  //       if (user.data.idAdmin === true) {
+                  //         return
+                  //       }                    
+                  //       if (comments.data[i].userId == user.data.id){
                           
-                        }
-                        else {
-                          commentId[i].style.display = "none" 
-                        }
-                      }) 
-                    }
+                  //       }
+                  //       else {
+                  //         commentId[i].style.display = "none" 
+                  //       }
+                  //     }) 
+                  //   }
                     // Fin affichage suppression commentaires
 
                 })

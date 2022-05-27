@@ -28,18 +28,6 @@ app.use((req, res, next) => {
   // MULTER
   app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-  app.use((err, req, res, next) => {
-    if (err.code === "INCORRECT_FILETYPE") {
-      res.status(422).json({ error: 'Only images are allowed' });
-      return;
-    }
-    if (err.code === "LIMIT_FILE_SIZE") {
-      res.status(422).json({ error: 'Allow file size is 500KB' });
-      return;
-    }
-  });
-
   // FIN MULTER
 // 
 

@@ -2,6 +2,7 @@ const { Post } = require('../db/sequelize')
 const auth = require('../auth/auth')
 const user = require('../models/user')
 const { User } = require('../db/sequelize')
+const fs = require('fs')
 
 
 const jwt = require('jsonwebtoken')
@@ -25,7 +26,8 @@ module.exports = (app) => {
            Post.findByPk(req.params.id)
            .then(post => {
             const postDeleted = post;
-
+            
+            console.log(post.dataValues.picturePath)
               Post.destroy({
                 where: { id: post.id }
               })

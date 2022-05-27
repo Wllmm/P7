@@ -18,7 +18,7 @@ const sequelize = new Sequelize('groupomania', `${process.env.USERNAME_SQL}`,  `
 const User = UserModel(sequelize, DataTypes)
 const Post = PostModel(sequelize, DataTypes)
 const Comment = CommentModel(sequelize, DataTypes)
-// Copie Commentaires
+
 
 Post.hasMany(Comment, {foreignKey: 'postId'})
 Comment.belongsTo(Post, {foreignKey: 'postId'})
