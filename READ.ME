@@ -5,4 +5,11 @@ To start the project you need to :
 cd backend --> npm install --> npm start
 cb frontend --> npm install --> npm run serve
 
+Il faudra aussi créer un fichier .env (sécurité pour ne pas montrer les données sensibles) avec les variables qui suivent :
+(Un utilisateur avec les bons droits doit être créer sur votre phpMyAdmin.)
+
+- USERNAME_SQL = "Le nom d'utilisateur"
+- PASSWORD_SQL = "LE PASSWORD CHOISI"
+- JWT_KEY = "LA PHRASE SECRETE QUE VOUS DÉCIDER"
+
 Il faudra aussi un logiciel pour lancer le serve MySql en local (pour ma part j'utilise xampp qui me permet de démarrer mon projet sur le port 3306)

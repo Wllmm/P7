@@ -1687,6 +1687,21 @@ export default {
               console.log("Pas de post")
                 focus.innerHTML = `<h1 id="noPost">Aucun post pour l'instant.</h1>`
             }
+            
+            // Tri des posts par dates
+            res.data.sort(function (a, b) {
+                var key1 = a.createdAt;
+                var key2 = b.createdAt;
+
+                if (key1 > key2) {
+                    return -1;
+                } else if (key1 == key2) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            });
+
               for (let data of res.data){
                   let userId = localStorage.getItem('ID');
                   let id = data.id
@@ -1702,11 +1717,6 @@ export default {
                       userOfPost = { picture: "default.png", prenom: "L'utilisateur à la base du post à supprimer son compte.", nom : "" }
                     }
                     nbShare += 1
-                    // console.log(data)
-                    // console.log(userWhoRepost)
-                    // console.log(userOfPost)
-                    // console.log(data.picturePath)
-
                     // Si il n'y a pas d'image :
                     if(data.picturePath === null){
 
